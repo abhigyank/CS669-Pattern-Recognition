@@ -1,7 +1,9 @@
 import numpy as np
 import random
 import matplotlib.pyplot as plt
-x=np.linspace(-20,20)
+plt.figure(figsize=(10,10))
+x=np.linspace(-10,20)
+plt.axis('equal')
 def plot(Class_train,color):
 	A=[]
 	B=[]
@@ -10,8 +12,14 @@ def plot(Class_train,color):
 		B.append(i[1])
 	plt.plot(A,B,color)
 def plot_lines(des):
-	for i in des:
-		plt.plot(x,(-1*i[2]-1*i[1]*x)/i[0])
+	for i in range(3):
+		if i!=2:
+			label="Des B/W Classes "+str(i+1)+" and "+str(i+2)
+			plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)
+		else:
+			t=np.linspace(5.4,7)
+			label="Des B/W Classes "+str(3)+" and "+str(1)
+			plt.plot(t,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*t)),label=label)		
 def get_data(file):
 	train=[]
 	test=[]

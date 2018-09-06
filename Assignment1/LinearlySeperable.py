@@ -4,12 +4,15 @@ class Model():
 	mew=[]
 	des=[[0,0,0],[0,0,0],[0,0,0]]
 	def __init__(self, Class1_train,Class2_train,Class3_train):
+		Class1_train_Matrix=sf.get_Matrix(Class1_train)
+		Class2_train_Matrix=sf.get_Matrix(Class2_train)
+		Class3_train_Matrix=sf.get_Matrix(Class3_train)
 		self.mew.append(sf.Mean(Class1_train))
 		self.mew.append(sf.Mean(Class2_train))
 		self.mew.append(sf.Mean(Class3_train))
 		for i in range(2):
 			for j in range(2):
-				self.Matrix[i][j]=Class1_train[i][j]+Class2_train[i][j]+Class3_train[i][j]
+				self.Matrix[i][j]=Class1_train_Matrix[i][j]+Class2_train_Matrix[i][j]+Class3_train_Matrix[i][j]
 		for i in range(2):
 			for j in range(2):
 				self.Matrix[i][j]=self.Matrix[i][j]/3
