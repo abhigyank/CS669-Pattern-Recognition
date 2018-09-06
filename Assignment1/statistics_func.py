@@ -1,25 +1,43 @@
 import numpy as np
 import random
 import matplotlib.pyplot as plt
+import math
 plt.figure(figsize=(10,10))
-x=np.linspace(-10,20)
+x=np.linspace(-30,30) 
 plt.axis('equal')
-def plot(Class_train,color):
+def plot(Class_train,color,label=True):
 	A=[]
 	B=[]
 	for i in Class_train:
 		A.append(i[0])
 		B.append(i[1])
 	plt.plot(A,B,color)
-def plot_lines(des):
-	for i in range(3):
-		if i!=2:
-			label="Des B/W Classes "+str(i+1)+" and "+str(i+2)
-			plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)
-		else:
-			t=np.linspace(5.4,7)
-			label="Des B/W Classes "+str(3)+" and "+str(1)
-			plt.plot(t,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*t)),label=label)		
+def plot_lines(des,flag=False,start=0,end=0,index=0):
+	if flag==False:
+		for i in range(len(des)):
+			if(i!=(len(des)-1)):
+				label="Des B/W Classes "+str(i+1)+" and "+str(i+2)
+				plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)
+			else:
+				label="Des B/W Classes "+str(i+1)+" and "+str(0)	
+				plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)		
+	# else:
+	# 	t=np.linspace(start,end)
+	# 	for i in range(len(des)):
+	# 		if(i!=index and (i!=len(des)-1)):
+	# 			label="Des B/W Classes "+str(i+1)+" and "+str(i+2)
+	# 			plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)
+	# 		elif (i==index):
+	# 			if(i!=len(des)):
+	# 				label="Des B/W Classes "+str(i+1)+" and "+str(i+2)
+	# 				plt.plot(t,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*t)),label=label)
+	# 			else:
+	# 				label="Des B/W Classes "+str(i+1)+" and "+str(0)
+	# 				plt.plot(t,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*t)),label=label)
+	# 		else:
+	# 			label="Des B/W Classes "+str(i+1)+" and "+str(0)	
+	# 			plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)
+
 def get_data(file):
 	train=[]
 	test=[]
@@ -54,7 +72,6 @@ def print_Matrix(Matrix):
 		for j in range(len(Matrix)):
 			print Matrix[i][j],
 		print ""
-	print ""
 def get_Matrix(Class_train):
 	A=[[0,0],[0,0]]
 	mew=Mean(Class_train)
@@ -62,8 +79,19 @@ def get_Matrix(Class_train):
 		for j in range(len(Class_train[0])):
 			A[i][j]=get_Cov(Class_train,mew[i],mew[j],i,j)
 	return A
-def dot_product(A):
+def dot_product(A,B):
 	val=0
 	for i in range(len(A)):
-		val=val+(A[i]*A[i])
+		val=val+(A[i]*B[i])
 	return val
+def get_Inverse(Matrix):
+	Inv=Matrix
+	temp1=-1*Matrix[0][0]
+	temp2=-1*Matrix[1][1]
+	Inv[0][0]=temp2
+	Inv[1][1]=temp1
+	det=(Matrix[0][0]*Matrix[1][1])-(Matrix[1][0]*Matrix[0][1])
+	for i in range(2):
+		for j in range(2):
+			Inv[i][j]=Inv[i][j]/det
+	return Inv
