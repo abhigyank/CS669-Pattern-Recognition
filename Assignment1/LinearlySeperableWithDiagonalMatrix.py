@@ -34,12 +34,13 @@ class Model():
 	def get_lines(self):
 		for i in range(2):
 			for j in range(2):
-				self.des[i][j]=2*(self.mew[i][j]-self.mew[i+1][j])/self.Matrix[0][0]
-			self.des[i][2]=(sf.dot_product(self.mew[i+1],self.mew[i+1])-sf.dot_product(self.mew[i],self.mew[i]))/self.Matrix[0][0]+2*self.var*math.log((float)(len(self.DATA[i]))/(float)(len(self.DATA[i+1])))
-			print math.log((float)(len(self.DATA[i]))/(float)(len(self.DATA[i+1])))*self.var 
-		self.des[2][0]=2*(self.mew[2][0]-self.mew[0][0])
-		self.des[2][1]=2*(self.mew[2][1]-self.mew[0][1])
-		self.des[2][2]=sf.dot_product(self.mew[0],self.mew[0])-sf.dot_product(self.mew[2],self.mew[2])+2*self.var*math.log(len(self.DATA[2])/len(self.DATA[0]))
+				self.des[i][j]=(self.mew[i][j]-self.mew[i+1][j])/self.var
+			self.des[i][2]=((sf.dot_product(self.mew[i+1],self.mew[i+1])-sf.dot_product(self.mew[i],self.mew[i]))/(2*self.var))+math.log((float)(len(self.DATA[i]))/(float)(len(self.DATA[i+1])))
+			print self.des[i]
+		self.des[2][0]=(self.mew[2][0]-self.mew[0][0])/self.var
+		self.des[2][1]=(self.mew[2][1]-self.mew[0][1])/self.var
+		self.des[2][2]=((sf.dot_product(self.mew[0],self.mew[0])-sf.dot_product(self.mew[2],self.mew[2]))/(2*self.var))+math.log(len(self.DATA[2])/len(self.DATA[0]))
+		print self.des[2]
 	def plot_model(self):
 		sf.plot_lines(self.des)
 	

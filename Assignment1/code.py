@@ -15,6 +15,8 @@ sf.plot([sf.Mean(Class3_train)],'ko')
 DATASET=[Class1_train,Class2_train,Class3_train]
 if sys.argv[1]=='1':
 	model=LinearlySeperableWithDiagonalMatrix.Model(DATASET)
+	#model.print_Matrix()
+	print model.mew
 	model.get_lines()
 	model.plot_model()
 if sys.argv[1]=='2':
