@@ -30,17 +30,17 @@ class Model():
 			X[i]=(self.mew[1][i]-self.mew[0][i])
 		self.des[0][0]=2*(X[0]*Inv[0][0]+X[1]*Inv[0][1])
 		self.des[0][1]=2*(X[0]*Inv[1][0]+X[1]*Inv[1][1])
-		self.des[0][2]=-2*math.log(len(self.DATA[0])/len(self.DATA[1]))+(self.mew[0][0]*(self.mew[0][0]*Inv[0][0]+self.mew[0][1]*Inv[0][1])+self.mew[0][1]*(self.mew[0][0]*Inv[0][1]+self.mew[0][1]*Inv[1][1]))-(self.mew[1][0]*(self.mew[1][0]*Inv[0][0]+self.mew[1][1]*Inv[0][1])+self.mew[1][1]*(self.mew[1][0]*Inv[0][1]+self.mew[1][1]*Inv[1][1]))
+		self.des[0][2]=-2*math.log((float)(len(self.DATA[0]))/(float)(len(self.DATA[1])))+(self.mew[0][0]*(self.mew[0][0]*Inv[0][0]+self.mew[0][1]*Inv[0][1])+self.mew[0][1]*(self.mew[0][0]*Inv[0][1]+self.mew[0][1]*Inv[1][1]))-(self.mew[1][0]*(self.mew[1][0]*Inv[0][0]+self.mew[1][1]*Inv[0][1])+self.mew[1][1]*(self.mew[1][0]*Inv[0][1]+self.mew[1][1]*Inv[1][1]))
 		for i in range(len(self.mew[1])):
 			X[i]=(self.mew[2][i]-self.mew[1][i])
 		self.des[1][0]=2*(X[0]*Inv[0][0]+X[1]*Inv[0][1])
 		self.des[1][1]=2*(X[0]*Inv[1][0]+X[1]*Inv[1][1])
-		self.des[1][2]=-2*math.log(len(self.DATA[1])/len(self.DATA[2]))+(self.mew[1][0]*(self.mew[1][0]*Inv[1][0]+self.mew[1][1]*Inv[0][1])+self.mew[1][1]*(self.mew[1][0]*Inv[0][1]+self.mew[1][1]*Inv[1][1]))-(self.mew[2][0]*(self.mew[2][0]*Inv[0][0]+self.mew[2][1]*Inv[0][1])+self.mew[2][1]*(self.mew[2][0]*Inv[0][1]+self.mew[2][1]*Inv[1][1]))
+		self.des[1][2]=-2*math.log((float)(len(self.DATA[1]))/(float)(len(self.DATA[2])))+(self.mew[1][0]*(self.mew[1][0]*Inv[1][0]+self.mew[1][1]*Inv[0][1])+self.mew[1][1]*(self.mew[1][0]*Inv[0][1]+self.mew[1][1]*Inv[1][1]))-(self.mew[2][0]*(self.mew[2][0]*Inv[0][0]+self.mew[2][1]*Inv[0][1])+self.mew[2][1]*(self.mew[2][0]*Inv[0][1]+self.mew[2][1]*Inv[1][1]))
 		for i in range(len(self.mew[2])):
 			X[i]=(self.mew[0][i]-self.mew[2][i])
 		self.des[2][0]=2*(X[0]*Inv[0][0]+X[1]*Inv[0][1])
 		self.des[2][1]=2*(X[0]*Inv[1][0]+X[1]*Inv[1][1])
-		self.des[2][2]=-2*math.log(len(self.DATA[2])/len(self.DATA[0]))+(self.mew[2][0]*(self.mew[2][0]*Inv[0][0]+self.mew[2][1]*Inv[0][1])+self.mew[2][1]*(self.mew[2][0]*Inv[0][1]+self.mew[2][1]*Inv[1][1]))-(self.mew[0][0]*(self.mew[0][0]*Inv[0][0]+self.mew[0][1]*Inv[0][1])+self.mew[0][1]*(self.mew[0][0]*Inv[0][1]+self.mew[0][1]*Inv[1][1]))
+		self.des[2][2]=-2*math.log((float)(len(self.DATA[2]))/(float)(len(self.DATA[0])))+(self.mew[2][0]*(self.mew[2][0]*Inv[0][0]+self.mew[2][1]*Inv[0][1])+self.mew[2][1]*(self.mew[2][0]*Inv[0][1]+self.mew[2][1]*Inv[1][1]))-(self.mew[0][0]*(self.mew[0][0]*Inv[0][0]+self.mew[0][1]*Inv[0][1])+self.mew[0][1]*(self.mew[0][0]*Inv[0][1]+self.mew[0][1]*Inv[1][1]))
 	def plot_model(self):
 		# sf.plot_lines(self.des,True,0,8,2)
 		sf.plot_lines(self.des)
