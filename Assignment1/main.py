@@ -2,6 +2,7 @@ from __future__ import print_function
 import sys
 import LinearlySeperableWithDiagonalMatrix
 import LinearlySeperableWithNonDiagonalMatrix
+import ArbitraryMatrix
 import statistics_func as sf	
 import matplotlib.pyplot as plt
 
@@ -29,6 +30,10 @@ if sys.argv[1]=='1':
 	model.plot_model()
 if sys.argv[1]=='2':
 	model=LinearlySeperableWithNonDiagonalMatrix.Model(DATASET)
+	model.get_lines()
+	model.plot_model()
+if sys.argv[1]=='3':
+	model=ArbitraryMatrix.Model(DATASET)
 	model.get_lines()
 	model.plot_model()
 plt.legend()

@@ -2,10 +2,24 @@ from __future__ import print_function
 import numpy as np
 import random
 import matplotlib.pyplot as plt
+import matplotlib.lines as mlines
 import math
-plt.figure(figsize=(10,10))
+from sympy import plot_implicit
+from sympy import *
+# plt.figure(figsize=(10,10))
+fig, (ax) = plt.subplots(ncols=1)
 x=np.linspace(-30,30) 
 plt.axis('equal')
+
+def move_sympyplot_to_axes(p, ax):
+    backend = p.backend(p)
+    backend.ax = ax
+    backend.process_series()
+    backend.ax.spines['right'].set_color('none')
+    backend.ax.spines['bottom'].set_position('zero')
+    backend.ax.spines['top'].set_color('none')
+    plt.close(backend.fig)
+
 def plot(Class_train,color,label=True):
 	A=[]
 	B=[]
@@ -21,7 +35,7 @@ def plot_lines(des,flag=False,start=0,end=0,index=0):
 				plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)
 			else:
 				label="Des B/W Classes "+str(i+1)+" and "+str(0)	
-				plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)		
+				plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)			
 	# else:
 	# 	t=np.linspace(start,end)
 	# 	for i in range(len(des)):
@@ -38,7 +52,27 @@ def plot_lines(des,flag=False,start=0,end=0,index=0):
 	# 		else:
 	# 			label="Des B/W Classes "+str(i+1)+" and "+str(0)	
 	# 			plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)
-
+def plot_quadritic(des,flag=False,start=0,end=0,index=0):
+	x, y = symbols('x y')
+	p = []
+	color = ['r','b','g']
+	for i in range(len(des)):
+		if(i!=(len(des)-1)):
+		# if(i==1):
+			# print (des[i])
+			p1 = plot_implicit(Eq(des[i][0]*x**2 + des[i][1]*y**2 + des[i][2]*x*y + des[i][3]*x + des[i][4]*y + des[i][5], 0),(x, -10, 25),(y, -10, 25), show=False, line_color=color[i], legend=True)
+			p.append(p1)
+		else:
+			p1 = plot_implicit(Eq(des[i][0]*x**2 + des[i][1]*y**2 + des[i][2]*x*y + des[i][3]*x + des[i][4]*y + des[i][5], 0), (x, -10, 25),(y, -10, 25), show=False, line_color=color[i])
+			p1.append(p[0][0])
+			p1.append(p[1][0])
+	move_sympyplot_to_axes(p1, ax)
+	red_line = mlines.Line2D([], [], color='red',label='Des B/W Classes 1 and 2')
+	blue_line = mlines.Line2D([], [], color='blue',label='Des B/W Classes 2 and 3')
+	green_line = mlines.Line2D([], [], color='green',label='Des B/W Classes 1 and 3')
+	plt.legend(handles=[blue_line,green_line,red_line])
+	plt.show()
+	# p1.show()
 def get_data(file):
 	train=[]
 	test=[]
