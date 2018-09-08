@@ -1,8 +1,9 @@
+from __future__ import print_function		
 import sys
 import LinearlySeperableWithDiagonalMatrix
 import LinearlySeperableWithNonDiagonalMatrix
 import statistics_func as sf	
-import matplotlib.pyplot as plt		
+import matplotlib.pyplot as plt
 Class1_train,Class1_test=sf.get_data("Data2/Class1.txt")
 Class2_train,Class2_test=sf.get_data("Data2/Class2.txt")
 Class3_train,Class3_test=sf.get_data("Data2/Class3.txt")
@@ -16,7 +17,7 @@ DATASET=[Class1_train,Class2_train,Class3_train]
 if sys.argv[1]=='1':
 	model=LinearlySeperableWithDiagonalMatrix.Model(DATASET)
 	#model.print_Matrix()
-	print model.mew
+	print (model.mew)
 	model.get_lines()
 	model.plot_model()
 if sys.argv[1]=='2':

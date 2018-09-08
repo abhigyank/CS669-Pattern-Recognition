@@ -1,3 +1,4 @@
+from __future__ import print_function
 import statistics_func as sf
 import math
 class Model():
@@ -21,8 +22,8 @@ class Model():
 	def print_Matrix(self):
 		for i in range(2):
 			for j in range(2):
-				print self.Matrix[i][j],
-			print ""
+				print (self.Matrix[i][j], end= ' ')
+			print ("")
 	def get_lines(self):
 		Inv=sf.get_Inverse(self.Matrix)
 		X=[0,0]

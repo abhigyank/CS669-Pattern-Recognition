@@ -1,3 +1,4 @@
+from __future__ import print_function
 import statistics_func as sf
 import math
 class Model():
@@ -29,18 +30,18 @@ class Model():
 	def print_Matrix(self):
 		for i in range(2):
 			for j in range(2):
-				print self.Matrix[i][j],
-			print ""
+				print (self.Matrix[i][j],end=' ')
+			print ("")
 	def get_lines(self):
 		for i in range(2):
 			for j in range(2):
 				self.des[i][j]=(self.mew[i][j]-self.mew[i+1][j])/self.var
 			self.des[i][2]=((sf.dot_product(self.mew[i+1],self.mew[i+1])-sf.dot_product(self.mew[i],self.mew[i]))/(2*self.var))+math.log((float)(len(self.DATA[i]))/(float)(len(self.DATA[i+1])))
-			print self.des[i]
+			print (self.des[i])
 		self.des[2][0]=(self.mew[2][0]-self.mew[0][0])/self.var
 		self.des[2][1]=(self.mew[2][1]-self.mew[0][1])/self.var
 		self.des[2][2]=((sf.dot_product(self.mew[0],self.mew[0])-sf.dot_product(self.mew[2],self.mew[2]))/(2*self.var))+math.log(len(self.DATA[2])/len(self.DATA[0]))
-		print self.des[2]
+		print (self.des[2])
 	def plot_model(self):
 		sf.plot_lines(self.des)
 	

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import numpy as np
 import random
 import matplotlib.pyplot as plt
@@ -46,7 +47,7 @@ def get_data(file):
 	for line in fo:
 		a,b=line.split()
 		X.append([float(a),float(b)])
-	random.shuffle(X) #randomly divide the dataset into 75% training and 25%test
+	# random.shuffle(X) #randomly divide the dataset into 75% training and 25%test
 	train=X[:int(len(X)*(0.75))]
 	test=X[int(len(X)*0.75):]
 	fo.close()
@@ -70,8 +71,8 @@ def Mean(Class_train):
 def print_Matrix(Matrix):
 	for i in range(len(Matrix)):
 		for j in range(len(Matrix)):
-			print Matrix[i][j],
-		print ""
+			print (Matrix[i][j], end=' ')
+		print ("")
 def get_Matrix(Class_train):
 	A=[[0,0],[0,0]]
 	mew=Mean(Class_train)
