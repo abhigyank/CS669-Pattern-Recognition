@@ -96,3 +96,5 @@ def get_Inverse(Matrix):
 		for j in range(2):
 			Inv[i][j]=Inv[i][j]/det
 	return Inv
+def get_Product(A,B):
+	return A[0]*A[0]*B[0][0]+(B[1][0]+B[0][1])*A[0]*A[1]+B[1][1]*A[1]*A[1]
