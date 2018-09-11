@@ -44,4 +44,28 @@ class Model():
 		print (self.des[2])
 	def plot_model(self):
 		sf.plot_lines(self.des)
-	
+	def get_ConfMatrix(self,TESTSET):
+		CONF=[[0,0,0],[0,0,0],[0,0,0]]
+		for i in range(len(TESTSET)):
+			for j in range(len(TESTSET[i])):
+				temp=[0,0,0]
+				if((self.des[0][0]*TESTSET[i][j][0]+self.des[0][1]*TESTSET[i][j][1]+self.des[0][2])<0):
+					temp[1]=temp[1]+1
+				else:
+					temp[0]=temp[0]+1
+				if((self.des[1][0]*TESTSET[i][j][0]+self.des[1][1]*TESTSET[i][j][1]+self.des[1][2])<0):
+					temp[2]=temp[2]+1
+				else:
+					temp[1]=temp[1]+1
+				if((self.des[2][0]*TESTSET[i][j][0]+self.des[2][1]*TESTSET[i][j][1]+self.des[2][2])<0):
+					temp[0]=temp[0]+1
+				else:
+					temp[2]=temp[2]+1
+				index=-1
+				Max=-1
+				for l in range(3):
+					if(temp[l]>Max):
+						index=l
+						Max=temp[l]
+				CONF[i][index]=CONF[i][index]+1
+		print(CONF)
