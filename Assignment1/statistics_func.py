@@ -34,6 +34,14 @@ def plot_lines(des,flag=False,start=0,end=0,index=0):
 			else:
 				label="Des B/W Classes "+str(i+1)+" and "+str(0)	
 				plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)	
+
+def plot_fourth(class1, class2, class3):
+	# print (np.asarray(class3))
+	plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='indigo',alpha=0.5)
+	plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='green',alpha=0.5)
+	plt.scatter(np.asarray(class3)[:,0],np.asarray(class3)[:,1],color='b',alpha=0.5)
+	plt.show()
+
 def plot_quadritic(des,flag=False,start=0,end=0,index=0):
 	x, y = symbols('x y')
 	p = []

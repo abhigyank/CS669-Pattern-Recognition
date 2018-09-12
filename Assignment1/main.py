@@ -44,7 +44,7 @@ if sys.argv[1]=='3':
 	model.get_ConfMatrix(TESTSET)
 if sys.argv[1]=='4':
 	model=ArbitraryMatrix.Model(DATASET)
-	model.get_lines()
+	model.get_lines(int(sys.argv[2]))
 	model.plot_model()
 	model.get_ConfMatrix(TESTSET)
 plt.legend()
