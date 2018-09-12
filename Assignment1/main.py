@@ -47,6 +47,7 @@ if sys.argv[1]=='4':
 	model=ArbitraryMatrix.Model(DATASET)
 	model.get_lines(int(sys.argv[2]))
 	model.plot_model()
+	model.get_pair(int(sys.argv[2]), DATASET)
 	model.get_ConfMatrix(TESTSET)
 sf.plot(Class1_train,'mo')
 sf.plot(Class2_train,'yo')
