@@ -1,7 +1,7 @@
 from __future__ import print_function		
 import sys
 import LinearlySeperableWithDiagonalMatrix
-import LinearlySeperableWithDiagonalSeparateMatrix
+import DiagonalSeparateMatrix
 import LinearlySeperableWithNonDiagonalMatrix
 import ArbitraryMatrix
 import statistics_func as sf	
@@ -38,8 +38,8 @@ if sys.argv[1]=='2':
 	model.plot_model()
 	model.get_ConfMatrix(TESTSET)
 if sys.argv[1]=='3':
-	model=LinearlySeperableWithDiagonalSeparateMatrix.Model(DATASET)
-	model.get_lines()
+	model=DiagonalSeparateMatrix.Model(DATASET)
+	model.get_lines(int(sys.argv[2]))
 	model.plot_model()
 	model.get_ConfMatrix(TESTSET)
 if sys.argv[1]=='4':
