@@ -22,6 +22,7 @@ if sys.argv[2]=='3':
 sf.plot(Class1_train,'mo')
 sf.plot(Class2_train,'yo')
 sf.plot(Class3_train,'co')
+
 sf.plot([sf.Mean(Class1_train)],'ko')
 sf.plot([sf.Mean(Class2_train)],'ko')
 sf.plot([sf.Mean(Class3_train)],'ko')

@@ -6,6 +6,9 @@ class Model():
 	Class1_train_Matrix=[[0,0],[0,0]]
 	Class2_train_Matrix=[[0,0],[0,0]]
 	Class3_train_Matrix=[[0,0],[0,0]]
+	Class1_test_Matrix=[[0,0],[0,0]]
+	Class2_test_Matrix=[[0,0],[0,0]]
+	Class3_test_Matrix=[[0,0],[0,0]]
 	mew=[]
 	des=[[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]]
 	DATA=[]
@@ -112,26 +115,27 @@ class Model():
 
 	def get_ConfMatrix(self,TESTSET):
 		CONF=[[0,0,0],[0,0,0],[0,0,0]]
+		self.Class1_test_Matrix=sf.get_Matrix(TESTSET[0])
+		self.Class2_test_Matrix=sf.get_Matrix(TESTSET[1])
+		self.Class3_test_Matrix=sf.get_Matrix(TESTSET[2])
+		self.mew = []
+		for i in range(len(TESTSET)):
+			self.mew.append(sf.Mean(TESTSET[i]))
+
+		inv_class1=sf.get_Inverse(self.Class1_test_Matrix)
+		inv_class2=sf.get_Inverse(self.Class2_test_Matrix)
+		inv_class3=sf.get_Inverse(self.Class3_test_Matrix)
+
 		for i in range(len(TESTSET)):
 			for j in range(len(TESTSET[i])):
 				temp=[0,0,0]
-				if((self.des[0][0]*TESTSET[i][j][0]*TESTSET[i][j][0]+self.des[0][1]*TESTSET[i][j][1]*TESTSET[i][j][1]+self.des[0][2]*TESTSET[i][j][1]*TESTSET[i][j][0]+self.des[0][3]*TESTSET[i][j][0]+self.des[0][4]*TESTSET[i][j][1]+self.des[0][5])<0):
-					temp[1]=temp[1]+1
-				else:
-					temp[0]=temp[0]+1
-				if((self.des[1][0]*TESTSET[i][j][0]*TESTSET[i][j][0]+self.des[1][1]*TESTSET[i][j][1]*TESTSET[i][j][1]+self.des[1][2]*TESTSET[i][j][1]*TESTSET[i][j][0]+self.des[1][3]*TESTSET[i][j][0]+self.des[1][4]*TESTSET[i][j][1]+self.des[1][5])<0):
-					temp[2]=temp[2]+1
-				else:
-					temp[1]=temp[1]+1
-				if((self.des[2][0]*TESTSET[i][j][0]*TESTSET[i][j][0]+self.des[2][1]*TESTSET[i][j][1]*TESTSET[i][j][1]+self.des[2][2]*TESTSET[i][j][1]*TESTSET[i][j][0]+self.des[2][3]*TESTSET[i][j][0]+self.des[2][4]*TESTSET[i][j][1]+self.des[2][5])<0):
-					temp[0]=temp[0]+1
-				else:
-					temp[2]=temp[2]+1
-				index=-1
-				Max=-1
-				for l in range(3):
-					if(temp[l]>Max):
-						index=l
-						Max=temp[l]
-				CONF[i][index]=CONF[i][index]+1
+				val1 = self.getGx(TESTSET[i][j][0],TESTSET[i][j][1],inv_class1,self.mew[0], self.Class1_test_Matrix,len(TESTSET[0]))
+				val2 = self.getGx(TESTSET[i][j][0],TESTSET[i][j][1],inv_class2,self.mew[1], self.Class2_test_Matrix,len(TESTSET[1]))
+				val3 = self.getGx(TESTSET[i][j][0],TESTSET[i][j][1],inv_class3,self.mew[2], self.Class3_test_Matrix,len(TESTSET[2]))
+
+
+				if(max(val1,val2,val3)==val1): 	CONF[i][0]=CONF[i][0]+1
+				elif(max(val1,val2,val3)==val2): CONF[i][1]=CONF[i][1]+1
+				else: CONF[i][2]=CONF[i][2]+1
+
 		print(CONF)
