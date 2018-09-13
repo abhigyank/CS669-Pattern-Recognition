@@ -123,5 +123,9 @@ class Model():
 						Max=(self.g_x[k][0]*TESTSET[i][j][0])+(self.g_x[k][1]*TESTSET[i][j][1])+self.g_x[k][2]
 						index=k
 				CONF[i][index]=CONF[i][index]+1
-		print(CONF)
+		for i in range(3):
+			for j in range(3):
+				print(CONF[i][j], end=" ")
+			print("")
+		sf.get_Score(CONF)
 		

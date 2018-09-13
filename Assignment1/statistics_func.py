@@ -136,3 +136,36 @@ def plot_gx(g_x,RANGE,val):
 	plot(temp[0],'r')
 	plot(temp[1],'b')
 	plot(temp[2],'g')
+def get_Score(Conf_Matrix):
+	total=0.0
+	True_val=0.0
+	for i in range(3):
+		for j in range(3):
+			if(i==j):
+				True_val=True_val+Conf_Matrix[i][j]
+			total=total+Conf_Matrix[i][j]
+	Accuracy=True_val/total
+	Recall=[]
+	Precision=[]
+	for i in range(3):
+		Sum=0.0
+		for j in range(3):
+			Sum=Sum+Conf_Matrix[i][j]
+		Recall.append(Conf_Matrix[i][i]/Sum)
+	for i in range(3):
+		Sum=0.0
+		for j in range(3):
+			Sum=Sum+Conf_Matrix[j][i]
+		Precision.append(Conf_Matrix[i][i]/Sum)
+	print ("Accuracy of Classifier:- ",Accuracy)
+	for i in range(3):
+		print("Precision of Class",(i+1),":-",Precision[i])
+	for i in range(3):
+		print("Recall of Class",(i+1),":-",Recall[i])
+	Sum=0.0
+	for i in range(3):
+		print("F Measure of Class",(i+1),":-",(Recall[i]*Precision[i])/(Recall[i]+Precision[i]))
+		Sum=Sum+(Recall[i]*Precision[i])/(Recall[i]+Precision[i])
+	print("Mean Precision :-",(sum(Precision)/3))	
+	print("Mean Recall :-",(sum(Recall)/3))
+	print("Mean F Measure :-",(Sum)/3)

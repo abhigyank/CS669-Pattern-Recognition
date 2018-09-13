@@ -143,4 +143,8 @@ class Model():
 						index=l
 						Max=temp[l]
 				CONF[i][index]=CONF[i][index]+1
-		print(CONF)
+		for i in range(3):
+			for j in range(3):
+				print(CONF[i][j], end=" ")
+			print("")
+		sf.get_Score(CONF)

@@ -132,10 +132,11 @@ class Model():
 				val1 = self.getGx(TESTSET[i][j][0],TESTSET[i][j][1],inv_class1,self.mew[0], self.Class1_test_Matrix,len(TESTSET[0]))
 				val2 = self.getGx(TESTSET[i][j][0],TESTSET[i][j][1],inv_class2,self.mew[1], self.Class2_test_Matrix,len(TESTSET[1]))
 				val3 = self.getGx(TESTSET[i][j][0],TESTSET[i][j][1],inv_class3,self.mew[2], self.Class3_test_Matrix,len(TESTSET[2]))
-
-
 				if(max(val1,val2,val3)==val1): 	CONF[i][0]=CONF[i][0]+1
 				elif(max(val1,val2,val3)==val2): CONF[i][1]=CONF[i][1]+1
 				else: CONF[i][2]=CONF[i][2]+1
-
-		print(CONF)
+		for i in range(3):
+			for j in range(3):
+				print(CONF[i][j], end=" ")
+			print("")
+		sf.get_Score(CONF)
