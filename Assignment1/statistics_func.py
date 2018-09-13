@@ -110,3 +110,21 @@ def get_Inverse(Matrix):
 	return Inv
 def get_Product(A,B):
 	return A[0]*A[0]*B[0][0]+(B[1][0]+B[0][1])*A[0]*A[1]+B[1][1]*A[1]*A[1]
+def plot_gx(g_x,RANGE,val):
+	temp=[[],[],[]]
+	i=RANGE[0][0]
+	while i<=RANGE[0][1]:
+		j=RANGE[1][0]
+		while j<=RANGE[1][1]:
+			Max=-100000000000.0
+			index=-1
+			for k in range(3):
+				if(Max<((g_x[k][0]*i)+(g_x[k][1]*j)+g_x[k][2])):
+					Max=(g_x[k][0]*i)+(g_x[k][1]*j)+g_x[k][2]
+					index=k
+			temp[index].append([i,j])
+			j=j+val
+		i=i+val
+	plot(temp[0],'r')
+	plot(temp[1],'b')
+	plot(temp[2],'g')
