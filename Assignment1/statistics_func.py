@@ -40,7 +40,7 @@ def plot_fourth(class1, class2, class3):
 	plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='indigo',alpha=0.5)
 	plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='green',alpha=0.5)
 	plt.scatter(np.asarray(class3)[:,0],np.asarray(class3)[:,1],color='b',alpha=0.5)
-	plt.show()
+	# plt.show()
 
 def plot_quadritic(des,flag=False,start=0,end=0,index=0):
 	x, y = symbols('x y')
@@ -118,3 +118,21 @@ def get_Inverse(Matrix):
 	return Inv
 def get_Product(A,B):
 	return A[0]*A[0]*B[0][0]+(B[1][0]+B[0][1])*A[0]*A[1]+B[1][1]*A[1]*A[1]
+def plot_gx(g_x,RANGE,val):
+	temp=[[],[],[]]
+	i=RANGE[0][0]
+	while i<=RANGE[0][1]:
+		j=RANGE[1][0]
+		while j<=RANGE[1][1]:
+			Max=-100000000000.0
+			index=-1
+			for k in range(3):
+				if(Max<((g_x[k][0]*i)+(g_x[k][1]*j)+g_x[k][2])):
+					Max=(g_x[k][0]*i)+(g_x[k][1]*j)+g_x[k][2]
+					index=k
+			temp[index].append([i,j])
+			j=j+val
+		i=i+val
+	plot(temp[0],'r')
+	plot(temp[1],'b')
+	plot(temp[2],'g')
