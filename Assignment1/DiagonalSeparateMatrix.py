@@ -119,6 +119,9 @@ class Model():
 		self.des[2][2] = -0.5*(inv_class1[1][0] + inv_class1[0][1] - inv_class3[1][0] - inv_class3[0][1])
 	def plot_model(self):
 		sf.plot_fourth(self.class1, self.class2, self.class3)
+		sf.plot(self.DATA[0],'mo')
+		sf.plot(self.DATA[1],'yo')
+		sf.plot(self.DATA[2],'co')
 	def get_ConfMatrix(self,TESTSET):
 		CONF=[[0,0,0],[0,0,0],[0,0,0]]
 		self.Class1_test_Matrix=sf.get_Matrix(TESTSET[0])
