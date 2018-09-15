@@ -39,26 +39,11 @@ class Model():
 			self.g_x[i][0]=(X[0]*Inv[0][0]+X[1]*Inv[1][0])
 			self.g_x[i][1]=(X[0]*Inv[0][1]+X[1]*Inv[1][1])
 			self.g_x[i][2]=math.log(len(self.DATA[i]))-0.5*((self.mew[i][0]*(self.mew[i][0]*Inv[0][0]+self.mew[i][1]*Inv[0][1])+self.mew[i][1]*(self.mew[i][0]*Inv[0][1]+self.mew[i][1]*Inv[1][1])))
-		# X=[0,0]
-		# print (len(self.g_x))
-		# self.des[0][0]=2*(X[0]*Inv[0][0]+X[1]*Inv[1][0])
-		# self.des[0][1]=2*(X[0]*Inv[0][1]+X[1]*Inv[1][1])
-		# self.des[0][2]=-2*math.log((float)(len(self.DATA[0]))/(float)(len(self.DATA[1])))+(self.mew[0][0]*(self.mew[0][0]*Inv[0][0]+self.mew[0][1]*Inv[0][1])+self.mew[0][1]*(self.mew[0][0]*Inv[0][1]+self.mew[0][1]*Inv[1][1]))-(self.mew[1][0]*(self.mew[1][0]*Inv[0][0]+self.mew[1][1]*Inv[0][1])+self.mew[1][1]*(self.mew[1][0]*Inv[0][1]+self.mew[1][1]*Inv[1][1]))
-		# for i in range(len(self.mew[1])):
-		# 	X[i]=(self.mew[2][i]-self.mew[1][i])
-		# self.des[1][0]=2*(X[0]*Inv[0][0]+X[1]*Inv[1][0])
-		# self.des[1][1]=2*(X[0]*Inv[0][1]+X[1]*Inv[1][1])
-		# self.des[1][2]=-2*math.log((float)(len(self.DATA[1]))/(float)(len(self.DATA[2])))+(self.mew[1][0]*(self.mew[1][0]*Inv[1][0]+self.mew[1][1]*Inv[0][1])+self.mew[1][1]*(self.mew[1][0]*Inv[0][1]+self.mew[1][1]*Inv[1][1]))-(self.mew[2][0]*(self.mew[2][0]*Inv[0][0]+self.mew[2][1]*Inv[0][1])+self.mew[2][1]*(self.mew[2][0]*Inv[0][1]+self.mew[2][1]*Inv[1][1]))
-		# for i in range(len(self.mew[2])):
-		# 	X[i]=(self.mew[0][i]-self.mew[2][i])
-		# self.des[2][0]=2*(X[0]*Inv[0][0]+X[1]*Inv[1][0])
-		# self.des[2][1]=2*(X[0]*Inv[0][1]+X[1]*Inv[1][1])
-		# self.des[2][2]=-2*math.log((float)(len(self.DATA[2]))/(float)(len(self.DATA[0])))+(self.mew[2][0]*(self.mew[2][0]*Inv[0][0]+self.mew[2][1]*Inv[0][1])+self.mew[2][1]*(self.mew[2][0]*Inv[0][1]+self.mew[2][1]*Inv[1][1]))-(self.mew[0][0]*(self.mew[0][0]*Inv[0][0]+self.mew[0][1]*Inv[0][1])+self.mew[0][1]*(self.mew[0][0]*Inv[0][1]+self.mew[0][1]*Inv[1][1]))
 	def plot_model(self,val):
 		sf.plot_gx(self.g_x,self.RANGE,val)
-		sf.plot(self.DATA[0],'mo',True,True,self.mew[0],self.Matrix)
-		sf.plot(self.DATA[1],'yo',True,True,self.mew[1],self.Matrix)
-		sf.plot(self.DATA[2],'co',True,True,self.mew[2],self.Matrix)
+		sf.plot(self.DATA[0],'mo',"Class1",True,self.mew[0],self.Matrix)
+		sf.plot(self.DATA[1],'yo',"Class2",True,self.mew[1],self.Matrix)
+		sf.plot(self.DATA[2],'co',"Class3",True,self.mew[2],self.Matrix)
 	def plot_classes(self,val):
 		i=self.RANGE[0][0]
 		temp=[[],[]]
@@ -76,8 +61,8 @@ class Model():
 			i=i+val
 		sf.plot(temp[0],'r')
 		sf.plot(temp[1],'b')
-		sf.plot(self.DATA[0],'go',True,True,self.mew[0],self.Matrix)
-		sf.plot(self.DATA[1],'yo',True,True,self.mew[1],self.Matrix)
+		sf.plot(self.DATA[0],'go',"Class1",True,self.mew[0],self.Matrix)
+		sf.plot(self.DATA[1],'yo',"Class2",True,self.mew[1],self.Matrix)
 		plt.show()
 		i=self.RANGE[0][0]
 		temp=[[],[]]
@@ -95,8 +80,8 @@ class Model():
 			i=i+val
 		sf.plot(temp[0],'r')
 		sf.plot(temp[1],'b')
-		sf.plot(self.DATA[1],'go',True,True,self.mew[1],self.Matrix)
-		sf.plot(self.DATA[2],'yo',True,True,self.mew[2],self.Matrix)
+		sf.plot(self.DATA[1],'go',"Class2",True,self.mew[1],self.Matrix)
+		sf.plot(self.DATA[2],'yo',"Class3",True,self.mew[2],self.Matrix)
 		plt.show()
 		i=self.RANGE[0][0]
 		temp=[[],[]]
@@ -113,8 +98,8 @@ class Model():
 			i=i+val	
 		sf.plot(temp[0],'r')
 		sf.plot(temp[1],'b')
-		sf.plot(self.DATA[0],'go',True,True,self.mew[0],self.Matrix)
-		sf.plot(self.DATA[2],'yo',True,True,self.mew[2],self.Matrix)
+		sf.plot(self.DATA[0],'go',"Class1",True,self.mew[0],self.Matrix)
+		sf.plot(self.DATA[2],'yo',"Class3",True,self.mew[2],self.Matrix)
 		plt.show()
 	def get_ConfMatrix(self,TESTSET):
 		CONF=[[0,0,0],[0,0,0],[0,0,0]]

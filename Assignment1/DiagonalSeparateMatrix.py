@@ -124,7 +124,7 @@ class Model():
 		self.Class1_test_Matrix=sf.get_Matrix(TESTSET[0])
 		self.Class2_test_Matrix=sf.get_Matrix(TESTSET[1])
 		self.Class3_test_Matrix=sf.get_Matrix(TESTSET[2])
-		self.mew = []
+		self.mew = []		
 		for i in range(len(TESTSET)):
 			self.mew.append(sf.Mean(TESTSET[i]))
 

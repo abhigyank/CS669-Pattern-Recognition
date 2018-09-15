@@ -22,36 +22,19 @@ def move_sympyplot_to_axes(p, ax):
     plt.close(backend.fig)
 def f(x, y,mx,my):
     return (x-mx)**2+(y-my)**2
-def plot(Class_train,color,label=False,cont=False,mu=[],Sigma=[]):
+def plot(Class_train,color,label="",cont=False,mu=[],Sigma=[]):
 	A=[]
-	B=[]
+	B=[]	
 	for i in Class_train:
 		A.append(i[0])
 		B.append(i[1])
 	if(label):
 		plt.plot(A,B,color, label=label)
 	else:
-		plt.plot(A,B,color,color)
+		plt.plot(A,B,color)
 	if(cont==True):
 		contour.plot_contour(mu,Sigma,A,B)
-	ax.legend()
-	# print (X)
-	# Z1 = mlab.bivariate_normal(X, Y, 1.0, 1.0, 0.0, 0.0)
-	# Z2 = mlab.bivariate_normal(X, Y, 1.5, 0.5, 1, 1)
-	# # difference of Gaussians
-	# Z = 10.0 * (Z2 - Z1)
-	# plt.contour(X, Y, Z)
-	# plt.show()	
-def plot_lines(des,flag=False,start=0,end=0,index=0):
-	if flag==False:
-		for i in range(len(des)):
-			if(i!=(len(des)-1)):
-				label="Des B/W Classes "+str(i+1)+" and "+str(i+2)
-				plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)
-			else:
-				label="Des B/W Classes "+str(i+1)+" and "+str(0)	
-				plt.plot(x,((-1*(des[i][2]/des[i][1]))+((-1*(des[i][0]/des[i][1]))*x)),label=label)	
-
+	plt.legend()	
 def plot_fourth(class1, class2, class3):
 	# print (np.asarray(class3))
 	plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='indigo',alpha=0.5)
@@ -63,25 +46,6 @@ def plot_fourth_pair(class1, class2):
 	plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='indigo',alpha=0.5)
 	plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='green',alpha=0.5)
 	plt.show()
-
-
-def plot_quadritic(des,flag=False,start=0,end=0,index=0):
-	x, y = symbols('x y')
-	p = []
-	color = ['r','b','g']
-	for i in range(len(des)):
-		if(i!=(len(des)-1)):
-			p1 = plot_implicit(Eq(des[i][0]*x**2 + des[i][1]*y**2 + des[i][2]*x*y + des[i][3]*x + des[i][4]*y + des[i][5], 0),(x, -10, 25),(y, -10, 25), show=False, line_color=color[i], legend=True)
-			p.append(p1)
-		else:
-			p1 = plot_implicit(Eq(des[i][0]*x**2 + des[i][1]*y**2 + des[i][2]*x*y + des[i][3]*x + des[i][4]*y + des[i][5], 0), (x, -10, 25),(y, -10, 25), show=False, line_color=color[i])
-			p1.append(p[0][0])
-			p1.append(p[1][0])
-	move_sympyplot_to_axes(p1, ax)
-	red_line = mlines.Line2D([], [], color='red',label='Des B/W Classes 1 and 2')
-	blue_line = mlines.Line2D([], [], color='blue',label='Des B/W Classes 2 and 3')
-	green_line = mlines.Line2D([], [], color='green',label='Des B/W Classes 1 and 3')
-	plt.legend(handles=[blue_line,green_line,red_line])
 def get_data(file):
 	train=[]
 	test=[]
@@ -156,9 +120,9 @@ def plot_gx(g_x,RANGE,val):
 			temp[index].append([i,j])
 			j=j+val
 		i=i+val
-	plot(temp[0],'r', label=False)
-	plot(temp[1],'b', label=False)
-	plot(temp[2],'g', label=False)
+	plot(temp[0],'r')
+	plot(temp[1],'b')
+	plot(temp[2],'g')
 def get_Score(Conf_Matrix):
 	total=0.0
 	True_val=0.0
