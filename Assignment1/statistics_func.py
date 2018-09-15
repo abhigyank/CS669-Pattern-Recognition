@@ -8,10 +8,10 @@ from sympy import plot_implicit
 from sympy import *
 import contour
 import matplotlib.mlab as mlab
-# plt.figure(figsize=(10,10))
 fig, (ax) = plt.subplots(ncols=1)
 x=np.linspace(-3000,3000) 
 plt.axis('equal')
+# plt.figure(figsize=(10,10))
 def move_sympyplot_to_axes(p, ax):
     backend = p.backend(p)
     backend.ax = ax
@@ -22,15 +22,19 @@ def move_sympyplot_to_axes(p, ax):
     plt.close(backend.fig)
 def f(x, y,mx,my):
     return (x-mx)**2+(y-my)**2
-def plot(Class_train,color,label=True,cont=False,mu=[],Sigma=[]):
+def plot(Class_train,color,label=False,cont=False,mu=[],Sigma=[]):
 	A=[]
 	B=[]
 	for i in Class_train:
 		A.append(i[0])
 		B.append(i[1])
+	if(label):
+		plt.plot(A,B,color, label=label)
+	else:
+		plt.plot(A,B,color,color)
 	if(cont==True):
 		contour.plot_contour(mu,Sigma,A,B)
-	plt.plot(A,B,color)
+	ax.legend()
 	# print (X)
 	# Z1 = mlab.bivariate_normal(X, Y, 1.0, 1.0, 0.0, 0.0)
 	# Z2 = mlab.bivariate_normal(X, Y, 1.5, 0.5, 1, 1)
@@ -152,9 +156,9 @@ def plot_gx(g_x,RANGE,val):
 			temp[index].append([i,j])
 			j=j+val
 		i=i+val
-	plot(temp[0],'r')
-	plot(temp[1],'b')
-	plot(temp[2],'g')
+	plot(temp[0],'r', label=False)
+	plot(temp[1],'b', label=False)
+	plot(temp[2],'g', label=False)
 def get_Score(Conf_Matrix):
 	total=0.0
 	True_val=0.0
