@@ -2,7 +2,7 @@ from __future__ import print_function
 import statistics_func as sf
 import math
 import matplotlib.pyplot as plt
-
+import contour 
 class Model():
 	Matrix=[[0,0],[0,0]]
 	mew=[]
@@ -44,6 +44,9 @@ class Model():
 			self.g_x[i][2]=-1*((self.mew[i][0]*self.mew[i][0])+(self.mew[i][1]*self.mew[i][1]))/(2*self.var)-1*math.log(len(self.DATA[i]))
 	def plot_model(self,val):
 		sf.plot_gx(self.g_x,self.RANGE,val)
+		sf.plot(self.DATA[0],'mo',True,True,self.mew[0],self.Matrix)
+		sf.plot(self.DATA[1],'yo',True,True,self.mew[1],self.Matrix)
+		sf.plot(self.DATA[2],'co',True,True,self.mew[2],self.Matrix)
 	def plot_classes(self,val):
 		i=self.RANGE[0][0]
 		temp=[[],[]]
@@ -61,8 +64,8 @@ class Model():
 			i=i+val
 		sf.plot(temp[0],'r')
 		sf.plot(temp[1],'b')
-		sf.plot(self.DATA[0],'go')
-		sf.plot(self.DATA[1],'ko')
+		sf.plot(self.DATA[0],'go',True,True,self.mew[0],self.Matrix)
+		sf.plot(self.DATA[1],'yo',True,True,self.mew[1],self.Matrix)
 		plt.show()
 		i=self.RANGE[0][0]
 		temp=[[],[]]
@@ -80,8 +83,8 @@ class Model():
 			i=i+val
 		sf.plot(temp[0],'r')
 		sf.plot(temp[1],'b')
-		sf.plot(self.DATA[1],'go')
-		sf.plot(self.DATA[2],'ko')
+		sf.plot(self.DATA[1],'go',True,True,self.mew[1],self.Matrix)
+		sf.plot(self.DATA[2],'yo',True,True,self.mew[2],self.Matrix)
 		plt.show()
 		i=self.RANGE[0][0]
 		temp=[[],[]]
@@ -98,8 +101,8 @@ class Model():
 			i=i+val	
 		sf.plot(temp[0],'r')
 		sf.plot(temp[1],'b')
-		sf.plot(self.DATA[0],'go')
-		sf.plot(self.DATA[2],'ko')
+		sf.plot(self.DATA[0],'go',True,True,self.mew[0],self.Matrix)
+		sf.plot(self.DATA[2],'yo',True,True,self.mew[2],self.Matrix)
 		plt.show()
 	def get_ConfMatrix(self,TESTSET):
 		CONF=[[0,0,0],[0,0,0],[0,0,0]]

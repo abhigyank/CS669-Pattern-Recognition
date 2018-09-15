@@ -2,7 +2,8 @@ from __future__ import print_function
 import statistics_func as sf
 import math
 import matplotlib.pyplot as plt
-
+import contour
+import numpy as np
 class Model():
 	Matrix=[[0,0],[0,0]]
 	mew=[]
@@ -30,14 +31,14 @@ class Model():
 				print (self.Matrix[i][j], end= ' ')
 			print ("")
 	def get_lines(self):
-		Inv=sf.get_Inverse(self.Matrix)
+		Inv=np.linalg.inv(self.Matrix)	
 		X=[0,0]
 		for i in range(3):
 			for j in range(2):
 				X[j]=(self.mew[i][j])
-			self.g_x[i][0]=-1*(X[0]*Inv[0][0]+X[1]*Inv[1][0])
-			self.g_x[i][1]=-1*(X[0]*Inv[0][1]+X[1]*Inv[1][1])
-			self.g_x[i][2]=-1*math.log(len(self.DATA[i]))+0.5*((self.mew[i][0]*(self.mew[i][0]*Inv[0][0]+self.mew[i][1]*Inv[0][1])+self.mew[i][1]*(self.mew[i][0]*Inv[0][1]+self.mew[i][1]*Inv[1][1])))
+			self.g_x[i][0]=(X[0]*Inv[0][0]+X[1]*Inv[1][0])
+			self.g_x[i][1]=(X[0]*Inv[0][1]+X[1]*Inv[1][1])
+			self.g_x[i][2]=math.log(len(self.DATA[i]))-0.5*((self.mew[i][0]*(self.mew[i][0]*Inv[0][0]+self.mew[i][1]*Inv[0][1])+self.mew[i][1]*(self.mew[i][0]*Inv[0][1]+self.mew[i][1]*Inv[1][1])))
 		# X=[0,0]
 		# print (len(self.g_x))
 		# self.des[0][0]=2*(X[0]*Inv[0][0]+X[1]*Inv[1][0])
@@ -55,6 +56,9 @@ class Model():
 		# self.des[2][2]=-2*math.log((float)(len(self.DATA[2]))/(float)(len(self.DATA[0])))+(self.mew[2][0]*(self.mew[2][0]*Inv[0][0]+self.mew[2][1]*Inv[0][1])+self.mew[2][1]*(self.mew[2][0]*Inv[0][1]+self.mew[2][1]*Inv[1][1]))-(self.mew[0][0]*(self.mew[0][0]*Inv[0][0]+self.mew[0][1]*Inv[0][1])+self.mew[0][1]*(self.mew[0][0]*Inv[0][1]+self.mew[0][1]*Inv[1][1]))
 	def plot_model(self,val):
 		sf.plot_gx(self.g_x,self.RANGE,val)
+		sf.plot(self.DATA[0],'mo',True,True,self.mew[0],self.Matrix)
+		sf.plot(self.DATA[1],'yo',True,True,self.mew[1],self.Matrix)
+		sf.plot(self.DATA[2],'co',True,True,self.mew[2],self.Matrix)
 	def plot_classes(self,val):
 		i=self.RANGE[0][0]
 		temp=[[],[]]
@@ -72,8 +76,8 @@ class Model():
 			i=i+val
 		sf.plot(temp[0],'r')
 		sf.plot(temp[1],'b')
-		sf.plot(self.DATA[0],'go')
-		sf.plot(self.DATA[1],'ko')
+		sf.plot(self.DATA[0],'go',True,True,self.mew[0],self.Matrix)
+		sf.plot(self.DATA[1],'yo',True,True,self.mew[1],self.Matrix)
 		plt.show()
 		i=self.RANGE[0][0]
 		temp=[[],[]]
@@ -91,8 +95,8 @@ class Model():
 			i=i+val
 		sf.plot(temp[0],'r')
 		sf.plot(temp[1],'b')
-		sf.plot(self.DATA[1],'go')
-		sf.plot(self.DATA[2],'ko')
+		sf.plot(self.DATA[1],'go',True,True,self.mew[1],self.Matrix)
+		sf.plot(self.DATA[2],'yo',True,True,self.mew[2],self.Matrix)
 		plt.show()
 		i=self.RANGE[0][0]
 		temp=[[],[]]
@@ -109,8 +113,8 @@ class Model():
 			i=i+val	
 		sf.plot(temp[0],'r')
 		sf.plot(temp[1],'b')
-		sf.plot(self.DATA[0],'go')
-		sf.plot(self.DATA[2],'ko')
+		sf.plot(self.DATA[0],'go',True,True,self.mew[0],self.Matrix)
+		sf.plot(self.DATA[2],'yo',True,True,self.mew[2],self.Matrix)
 		plt.show()
 	def get_ConfMatrix(self,TESTSET):
 		CONF=[[0,0,0],[0,0,0],[0,0,0]]

@@ -6,6 +6,8 @@ import matplotlib.lines as mlines
 import math
 from sympy import plot_implicit
 from sympy import *
+import contour
+import matplotlib.mlab as mlab
 # plt.figure(figsize=(10,10))
 fig, (ax) = plt.subplots(ncols=1)
 x=np.linspace(-3000,3000) 
@@ -18,13 +20,24 @@ def move_sympyplot_to_axes(p, ax):
     backend.ax.spines['bottom'].set_position('zero')
     backend.ax.spines['top'].set_color('none')
     plt.close(backend.fig)
-def plot(Class_train,color,label=True):
+def f(x, y,mx,my):
+    return (x-mx)**2+(y-my)**2
+def plot(Class_train,color,label=True,cont=False,mu=[],Sigma=[]):
 	A=[]
 	B=[]
 	for i in Class_train:
 		A.append(i[0])
 		B.append(i[1])
+	if(cont==True):
+		contour.plot_contour(mu,Sigma,A,B)
 	plt.plot(A,B,color)
+	# print (X)
+	# Z1 = mlab.bivariate_normal(X, Y, 1.0, 1.0, 0.0, 0.0)
+	# Z2 = mlab.bivariate_normal(X, Y, 1.5, 0.5, 1, 1)
+	# # difference of Gaussians
+	# Z = 10.0 * (Z2 - Z1)
+	# plt.contour(X, Y, Z)
+	# plt.show()	
 def plot_lines(des,flag=False,start=0,end=0,index=0):
 	if flag==False:
 		for i in range(len(des)):
@@ -120,7 +133,7 @@ def get_Inverse(Matrix):
 	det=(Matrix[0][0]*Matrix[1][1])-(Matrix[1][0]*Matrix[0][1])
 	for i in range(2):
 		for j in range(2):
-			Inv[i][j]=Inv[i][j]/det
+			Inv[i][j]=Inv[i][j]/det#(it should be -1*Inv[i][j] remove the -ve sign where u have added it)
 	return Inv
 def get_Product(A,B):
 	return A[0]*A[0]*B[0][0]+(B[1][0]+B[0][1])*A[0]*A[1]+B[1][1]*A[1]*A[1]
