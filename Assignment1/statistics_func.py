@@ -34,14 +34,23 @@ def plot(Class_train,color,label="",cont=False,mu=[],Sigma=[]):
 		plt.plot(A,B,color)
 	if(cont==True):
 		contour.plot_contour(mu,Sigma,A,B)
-	plt.legend()	
-def plot_fourth(class1, class2, class3):
-	plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='indigo',alpha=0.5)
-	plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='green',alpha=0.5)
-	plt.scatter(np.asarray(class3)[:,0],np.asarray(class3)[:,1],color='b',alpha=0.5)
-def plot_fourth_pair(class1, class2):
-	plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='indigo',alpha=0.5)
-	plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='green',alpha=0.5)
+	plt.legend()
+def plot_fourth(class1, class2, class3,Data):
+	plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='indigo',label="class1",alpha=0.5)
+	plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='green',label="class2",alpha=0.5)
+	plt.scatter(np.asarray(class3)[:,0],np.asarray(class3)[:,1],color='b',label="class3",alpha=0.5)
+	plot(Data[0],'mo')
+	plot(Data[1],'yo')
+	plot(Data[2],'co')
+	plt.show()
+def plot_fourth_pair(class1, class2,ind1,ind2,Data):
+	ind1=ind1-1
+	ind2=ind2-1
+	labels=["class1","class2","class3"]
+	plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='indigo',label=labels[ind1],alpha=0.5)
+	plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='green',label=labels[ind2],alpha=0.5)
+	plot(Data[ind1],'mo')
+	plot(Data[ind2],'yo')
 	plt.show()
 def get_data(file):
 	train=[]

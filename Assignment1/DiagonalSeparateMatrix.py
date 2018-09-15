@@ -117,11 +117,73 @@ class Model():
 		self.des[2][0] = -0.5*(inv_class1[0][0] - inv_class3[0][0])
 		self.des[2][1] = -0.5*(inv_class1[1][1] - inv_class3[1][1])
 		self.des[2][2] = -0.5*(inv_class1[1][0] + inv_class1[0][1] - inv_class3[1][0] - inv_class3[0][1])
+		
+	def get_pair(self, data_id, DATASET):
+		step = 1
+		left_margin, right_margin, top_margin, bottom_margin = 0,0,0,0
+		if (data_id == 1):
+			step = 0.2
+			left_margin, right_margin, top_margin, bottom_margin = -10,25,-15,20
+		elif( data_id == 2):
+			step = 0.05
+			left_margin, right_margin, top_margin, bottom_margin = -3,3,-3,3
+		elif( data_id == 3):
+			step = 20
+			left_margin, right_margin, top_margin, bottom_margin = -500,2100,0,3000
+
+		self.Class1_train_Matrix=sf.get_Matrix(DATASET[0])
+		self.Class2_train_Matrix=sf.get_Matrix(DATASET[1])
+		self.Class3_train_Matrix=sf.get_Matrix(DATASET[2])
+
+
+		inv_class1=sf.get_Inverse(self.Class1_train_Matrix)
+		inv_class2=sf.get_Inverse(self.Class2_train_Matrix)
+		inv_class3=sf.get_Inverse(self.Class3_train_Matrix)
+		
+		classA,classB = [],[]
+		i = left_margin
+		while(i<right_margin+1):
+			j = top_margin
+			while(j<bottom_margin+1):
+				val1 = self.getGx(i,j,inv_class1,self.mew[0], self.Class1_train_Matrix,len(self.DATA[0]))
+				val2 = self.getGx(i,j,inv_class2,self.mew[1], self.Class2_train_Matrix,len(self.DATA[1]))
+				if(val1>val2): classA.append([i,j])
+				else: classB.append([i,j])
+				j+=step
+			i+=step
+		sf.plot_fourth_pair(classA, classB,1,2,self.DATA)
+		
+		classB,classC = [],[]
+		i = left_margin
+		while(i<right_margin+1):
+			j = top_margin
+			while(j<bottom_margin+1):
+				val2 = self.getGx(i,j,inv_class2,self.mew[1], self.Class2_train_Matrix,len(self.DATA[1]))
+				val3 = self.getGx(i,j,inv_class3,self.mew[2], self.Class3_train_Matrix,len(self.DATA[2]))
+				if(val3>val2): classC.append([i,j])
+				else: classB.append([i,j])
+
+				j+=step
+			i+=step
+		sf.plot_fourth_pair(classB, classC,2,3,self.DATA)
+		
+		classA,classC = [],[]
+		i = left_margin
+		while(i<right_margin+1):
+			j = top_margin
+			while(j<bottom_margin+1):
+				val1 = self.getGx(i,j,inv_class1,self.mew[0], self.Class1_train_Matrix,len(self.DATA[0]))
+				val3 = self.getGx(i,j,inv_class3,self.mew[2], self.Class3_train_Matrix,len(self.DATA[2]))
+				if(val3>val1): classC.append([i,j])
+				else: classA.append([i,j])
+
+				j+=step
+			i+=step
+		sf.plot_fourth_pair(classA, classC,1,3,self.DATA)
+		return
+	
 	def plot_model(self):
-		sf.plot_fourth(self.class1, self.class2, self.class3)
-		sf.plot(self.DATA[0],'mo')
-		sf.plot(self.DATA[1],'yo')
-		sf.plot(self.DATA[2],'co')
+		sf.plot_fourth(self.class1,self.class2,self.class3,self.DATA)
 	def get_ConfMatrix(self,TESTSET):
 		CONF=[[0,0,0],[0,0,0],[0,0,0]]
 		self.Class1_test_Matrix=sf.get_Matrix(TESTSET[0])
