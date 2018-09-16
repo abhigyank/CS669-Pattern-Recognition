@@ -31,6 +31,7 @@ if sys.argv[1]=='1':
 	model.get_lines()
 	model.plot_classes(val)
 	model.plot_model(val)
+	model.get_ConfMatrix_pair(TESTSET)
 	model.get_ConfMatrix(TESTSET)
 if sys.argv[1]=='2':
 	model=LinearlySeperableWithNonDiagonalMatrix.Model(DATASET,RANGE)
@@ -38,6 +39,7 @@ if sys.argv[1]=='2':
 	model.plot_classes(val)
 	model.print_Matrix()
 	model.plot_model(val)
+	model.get_ConfMatrix_pair(TESTSET)
 	model.get_ConfMatrix(TESTSET)
 if sys.argv[1]=='3':
 	model=DiagonalSeparateMatrix.Model(DATASET)

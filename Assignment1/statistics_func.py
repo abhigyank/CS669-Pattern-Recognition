@@ -33,10 +33,11 @@ def plot(Class_train,color,label="",cont=False,mu=[],Sigma=[]):
 		plt.plot(A,B,color,markersize=3, label=label)
 	else:
 		plt.plot(A,B,color)
-
 	if(cont==True):
 		contour.plot_contour(mu,Sigma,A,B)
-	plt.legend()
+	leg=plt.legend()
+	for line in leg.get_lines():
+		line.set_linewidth(4.0) 
 def plot_fourth(class1, class2, class3,Data,Matrix1,Matrix2,Matrix3,mean):
 	if(len(class1)>0):
 		plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='r',label="class1",alpha=0.5)
@@ -140,9 +141,9 @@ def plot_gx(g_x,RANGE,val):
 			temp[index].append([i,j])
 			j=j+val
 		i=i+val
-	plot(temp[0],'b')
-	plot(temp[1],'g')
-	plot(temp[2],'r')
+	plot(temp[0],'b',"Class1")
+	plot(temp[1],'g',"Class2")
+	plot(temp[2],'r',"Class3")
 def get_Score(Conf_Matrix):
 	total=0.0
 	True_val=0.0
