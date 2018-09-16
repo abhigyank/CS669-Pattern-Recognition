@@ -44,10 +44,12 @@ if sys.argv[1]=='3':
 	model.get_lines(int(sys.argv[2]))
 	model.get_pair(int(sys.argv[2]),DATASET)
 	model.plot_model()
+	model.get_ConfMatrix_pair(TESTSET)
 	model.get_ConfMatrix(TESTSET)
 if sys.argv[1]=='4':
 	model=ArbitraryMatrix.Model(DATASET)
 	model.get_lines(int(sys.argv[2]))
 	model.get_pair(int(sys.argv[2]), DATASET)
 	model.plot_model()
+	model.get_ConfMatrix_pair(TESTSET)
 	model.get_ConfMatrix(TESTSET)
