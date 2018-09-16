@@ -11,7 +11,6 @@ import matplotlib.mlab as mlab
 fig, (ax) = plt.subplots(ncols=1)
 x=np.linspace(-3000,3000) 
 plt.axis('equal')
-# plt.figure(figsize=(10,10))
 def move_sympyplot_to_axes(p, ax):
     backend = p.backend(p)
     backend.ax = ax
