@@ -29,9 +29,9 @@ def plot(Class_train,color,label="",cont=False,mu=[],Sigma=[]):
 		A.append(i[0])
 		B.append(i[1])
 	if(label):
-		plt.plot(A,B,color,markersize=3)
+		plt.plot(A,B,color,markersize=3, label=label)
 	elif(cont==True):
-		plt.plot(A,B,color,markersize=3)
+		plt.plot(A,B,color,markersize=3, label=label)
 	else:
 		plt.plot(A,B,color)
 	if(cont==True):
