@@ -44,6 +44,11 @@ class Model():
 		sf.plot(self.DATA[0],'mo',"Class1",True,self.mew[0],self.Matrix)
 		sf.plot(self.DATA[1],'yo',"Class2",True,self.mew[1],self.Matrix)
 		sf.plot(self.DATA[2],'co',"Class3",True,self.mew[2],self.Matrix)
+		sf.plot([sf.Mean(self.DATA[0])],'ko')
+		sf.plot([sf.Mean(self.DATA[1])],'ko')
+		sf.plot([sf.Mean(self.DATA[2])],'ko')
+		plt.legend()
+		plt.show()
 	def plot_classes(self,val):
 		i=self.RANGE[0][0]
 		temp=[[],[]]

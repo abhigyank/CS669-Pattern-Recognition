@@ -36,6 +36,7 @@ if sys.argv[1]=='2':
 	model=LinearlySeperableWithNonDiagonalMatrix.Model(DATASET,RANGE)
 	model.get_lines()
 	model.plot_classes(val)
+	model.print_Matrix()
 	model.plot_model(val)
 	model.get_ConfMatrix(TESTSET)
 if sys.argv[1]=='3':

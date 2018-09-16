@@ -2,6 +2,7 @@ from __future__ import print_function
 import statistics_func as sf
 import math
 import numpy as np
+import matplotlib.pyplot as plt
 class Model():
 	Class1_train_Matrix=[[0,0],[0,0]]
 	Class2_train_Matrix=[[0,0],[0,0]]
@@ -49,12 +50,10 @@ class Model():
 			left_margin, right_margin, top_margin, bottom_margin = -3,3,-3,3
 		elif( data_id == 3):
 			step = 20
-			left_margin, right_margin, top_margin, bottom_margin = -500,2100,0,3000
-
+			left_margin, right_margin, top_margin, bottom_margin = -10,1000,0,2500
 		inv_class1=sf.get_Inverse(self.Class1_train_Matrix)
 		inv_class2=sf.get_Inverse(self.Class2_train_Matrix)
 		inv_class3=sf.get_Inverse(self.Class3_train_Matrix)
-		
 		i = left_margin
 		while(i<right_margin+1):
 			j = top_margin
@@ -68,6 +67,9 @@ class Model():
 				else: self.class3.append([i,j])
 				j+=step
 			i+=step
+		print(len(self.class1))
+		print(len(self.class2))
+		print(len(self.class3))
 		return
 		# 1 and 2
 		c = -0.5 * sf.get_Product(self.mew[0], inv_class1)
@@ -117,7 +119,6 @@ class Model():
 		self.des[2][0] = -0.5*(inv_class1[0][0] - inv_class3[0][0])
 		self.des[2][1] = -0.5*(inv_class1[1][1] - inv_class3[1][1])
 		self.des[2][2] = -0.5*(inv_class1[1][0] + inv_class1[0][1] - inv_class3[1][0] - inv_class3[0][1])
-		
 	def get_pair(self, data_id, DATASET):
 		step = 1
 		left_margin, right_margin, top_margin, bottom_margin = 0,0,0,0
@@ -151,7 +152,7 @@ class Model():
 				else: classB.append([i,j])
 				j+=step
 			i+=step
-		sf.plot_fourth_pair(classA, classB,1,2,self.DATA)
+		sf.plot_fourth_pair(classA, classB,1,2,self.DATA,self.Class1_train_Matrix,self.Class2_train_Matrix,self.mew)
 		
 		classB,classC = [],[]
 		i = left_margin
@@ -165,7 +166,7 @@ class Model():
 
 				j+=step
 			i+=step
-		sf.plot_fourth_pair(classB, classC,2,3,self.DATA)
+		sf.plot_fourth_pair(classB, classC,2,3,self.DATA,self.Class2_train_Matrix,self.Class3_train_Matrix,self.mew)
 		
 		classA,classC = [],[]
 		i = left_margin
@@ -179,11 +180,10 @@ class Model():
 
 				j+=step
 			i+=step
-		sf.plot_fourth_pair(classA, classC,1,3,self.DATA)
+		sf.plot_fourth_pair(classA, classC,1,3,self.DATA,self.Class1_train_Matrix,self.Class3_train_Matrix,self.mew)
 		return
-	
 	def plot_model(self):
-		sf.plot_fourth(self.class1,self.class2,self.class3,self.DATA)
+		sf.plot_fourth(self.class1,self.class2,self.class3,self.DATA,self.Class1_train_Matrix,self.Class2_train_Matrix,self.Class3_train_Matrix,self.mew)
 	def get_ConfMatrix(self,TESTSET):
 		CONF=[[0,0,0],[0,0,0],[0,0,0]]
 		self.Class1_test_Matrix=sf.get_Matrix(TESTSET[0])

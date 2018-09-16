@@ -35,22 +35,30 @@ def plot(Class_train,color,label="",cont=False,mu=[],Sigma=[]):
 	if(cont==True):
 		contour.plot_contour(mu,Sigma,A,B)
 	plt.legend()
-def plot_fourth(class1, class2, class3,Data):
-	plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='indigo',label="class1",alpha=0.5)
-	plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='green',label="class2",alpha=0.5)
-	plt.scatter(np.asarray(class3)[:,0],np.asarray(class3)[:,1],color='b',label="class3",alpha=0.5)
-	plot(Data[0],'mo')
-	plot(Data[1],'yo')
-	plot(Data[2],'co')
+def plot_fourth(class1, class2, class3,Data,Matrix1,Matrix2,Matrix3,mean):
+	if(len(class1)>0):
+		plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='r',label="class1",alpha=0.5)
+	if(len(class2)>0):
+		plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='b',label="class2",alpha=0.5)
+	if(len(class3)>0):
+		plt.scatter(np.asarray(class3)[:,0],np.asarray(class3)[:,1],color='g',label="class3",alpha=0.5)
+	plot(Data[0],'mo',"",True,mean[0],Matrix1)
+	plot(Data[1],'yo',"",True,mean[1],Matrix2)
+	plot(Data[2],'co',"",True,mean[2],Matrix3)
+	plot([Mean(Data[0])],'ko')
+	plot([Mean(Data[1])],'ko')
+	plot([Mean(Data[2])],'ko')
 	plt.show()
-def plot_fourth_pair(class1, class2,ind1,ind2,Data):
+def plot_fourth_pair(class1, class2,ind1,ind2,Data,Matrix1,Matrix2,mean):
 	ind1=ind1-1
 	ind2=ind2-1
 	labels=["class1","class2","class3"]
-	plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='indigo',label=labels[ind1],alpha=0.5)
-	plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='green',label=labels[ind2],alpha=0.5)
-	plot(Data[ind1],'mo')
-	plot(Data[ind2],'yo')
+	if(len(class1)>0):
+		plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='r',label=labels[ind1],alpha=0.5)
+	if(len(class2)>0):
+		plt.scatter(np.asarray(class2)[:,0],np.asarray(class2)[:,1],color='b',label=labels[ind2],alpha=0.5)
+	plot(Data[ind1],'mo',"",True,mean[ind1],Matrix1)
+	plot(Data[ind2],'yo',"",True,mean[ind2],Matrix2)
 	plt.show()
 def get_data(file):
 	train=[]
@@ -99,7 +107,10 @@ def dot_product(A,B):
 		val=val+(A[i]*B[i])
 	return val
 def get_Inverse(Matrix):
-	Inv=Matrix
+	Inv=[[0,0],[0,0]]
+	for i in range(2):
+		for j in range(2):
+			Inv[i][j]=Matrix[i][j]
 	temp1=-1*Matrix[0][0]
 	temp2=-1*Matrix[1][1]
 	Inv[0][0]=temp2

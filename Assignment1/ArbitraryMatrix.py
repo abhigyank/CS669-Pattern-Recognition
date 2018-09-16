@@ -94,7 +94,7 @@ class Model():
 				else: classB.append([i,j])
 				j+=step
 			i+=step
-		sf.plot_fourth_pair(classA, classB,1,2,self.DATA)
+		sf.plot_fourth_pair(classA, classB,1,2,self.DATA,self.Class1_train_Matrix,self.Class2_train_Matrix,self.mew)
 		
 		classB,classC = [],[]
 		i = left_margin
@@ -108,7 +108,7 @@ class Model():
 
 				j+=step
 			i+=step
-		sf.plot_fourth_pair(classB, classC,2,3,self.DATA)
+		sf.plot_fourth_pair(classB, classC,2,3,self.DATA,self.Class2_train_Matrix,self.Class3_train_Matrix,self.mew)
 		
 		classA,classC = [],[]
 		i = left_margin
@@ -122,11 +122,11 @@ class Model():
 
 				j+=step
 			i+=step
-		sf.plot_fourth_pair(classA, classC,1,3,self.DATA)
+		sf.plot_fourth_pair(classA, classC,1,3,self.DATA,self.Class1_train_Matrix,self.Class3_train_Matrix,self.mew)
 		return
 
 	def plot_model(self):
-		sf.plot_fourth(self.class1, self.class2, self.class3,self.DATA)
+		sf.plot_fourth(self.class1,self.class2,self.class3,self.DATA,self.Class1_train_Matrix,self.Class2_train_Matrix,self.Class3_train_Matrix,self.mew)
 		# sf.plot_quadritic(self.des)
 
 	def get_ConfMatrix(self,TESTSET):

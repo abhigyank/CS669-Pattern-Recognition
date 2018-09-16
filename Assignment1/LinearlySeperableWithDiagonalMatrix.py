@@ -15,6 +15,7 @@ class Model():
 		self.DATA=DATASET
 		self.RANGE=RANGE
 		Class1_train_Matrix=sf.get_Matrix(DATASET[0])
+		print(Class1_train_Matrix)
 		Class2_train_Matrix=sf.get_Matrix(DATASET[1])
 		Class3_train_Matrix=sf.get_Matrix(DATASET[2])
 		self.mew.append(sf.Mean(DATASET[0]))
@@ -47,6 +48,11 @@ class Model():
 		sf.plot(self.DATA[0],'mo',"Class1",True,self.mew[0],self.Matrix)
 		sf.plot(self.DATA[1],'yo',"Class2",True,self.mew[1],self.Matrix)
 		sf.plot(self.DATA[2],'co',"Class3",True,self.mew[2],self.Matrix)
+		sf.plot([sf.Mean(self.DATA[0])],'ko')
+		sf.plot([sf.Mean(self.DATA[1])],'ko')
+		sf.plot([sf.Mean(self.DATA[2])],'ko')
+		plt.legend()
+		plt.show()
 	def plot_classes(self,val):
 		i=self.RANGE[0][0]
 		temp=[[],[]]
@@ -78,7 +84,6 @@ class Model():
 					temp[0].append([i,j])
 				else:
 					temp[1].append([i,j])
-				# temp[index].append([i,j])
 				j=j+val
 			i=i+val
 		sf.plot(temp[0],'r')
