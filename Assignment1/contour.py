@@ -27,8 +27,8 @@ def plot_contour(mu,Sigma,x,y):
         max_x=max(max_x,x[i])
         max_y=max(max_y,y[i])
     # print min_x,max_x,min_y,max_y
-    X=np.linspace(min_x-1,max_x+1,N)
-    Y=np.linspace(min_y-1,max_y+1,N)
+    X=np.linspace(min_x-3,max_x+3,N)
+    Y=np.linspace(min_y-3,max_y+3,N)
     X, Y = np.meshgrid(X, Y)
     # Mean vector and covariance matrix
     # mu = np.array([0., 1.])

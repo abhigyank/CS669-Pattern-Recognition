@@ -7,7 +7,7 @@ import ArbitraryMatrix
 import statistics_func as sf	
 import matplotlib.pyplot as plt
 RANGE=[]
-val=0.1
+val=0.05
 if sys.argv[2]=='1':
 	RANGE=[[-10,25],[-15,20]]
 	Class1_train,Class1_test=sf.get_data("Data1/Class1.txt")
