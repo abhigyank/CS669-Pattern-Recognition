@@ -107,10 +107,11 @@ def dot_product(A,B):
 		val=val+(A[i]*B[i])
 	return val
 def get_Inverse(Matrix):
-	Inv=[[0,0],[0,0]]
-	for i in range(2):
-		for j in range(2):
-			Inv[i][j]=Matrix[i][j]
+	Inv = Matrix
+	# Inv=[[0,0],[0,0]]
+	# for i in range(2):
+	# 	for j in range(2):
+	# 		Inv[i][j]=Matrix[i][j]
 	temp1=-1*Matrix[0][0]
 	temp2=-1*Matrix[1][1]
 	Inv[0][0]=temp2

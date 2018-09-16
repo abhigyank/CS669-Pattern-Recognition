@@ -141,6 +141,11 @@ class Model():
 		inv_class2=sf.get_Inverse(self.Class2_train_Matrix)
 		inv_class3=sf.get_Inverse(self.Class3_train_Matrix)
 		
+
+		temp1=sf.get_Matrix(DATASET[0])
+		temp2=sf.get_Matrix(DATASET[1])
+		temp3=sf.get_Matrix(DATASET[2])
+
 		classA,classB = [],[]
 		i = left_margin
 		while(i<right_margin+1):
@@ -152,7 +157,8 @@ class Model():
 				else: classB.append([i,j])
 				j+=step
 			i+=step
-		sf.plot_fourth_pair(classA, classB,1,2,self.DATA,self.Class1_train_Matrix,self.Class2_train_Matrix,self.mew)
+		# sf.plot_fourth_pair(classA, classB,1,2,self.DATA,self.Class1_train_Matrix,self.Class2_train_Matrix,self.mew)
+		sf.plot_fourth_pair(classA, classB,1,2,self.DATA,temp1,temp2,self.mew)
 		
 		classB,classC = [],[]
 		i = left_margin
@@ -166,7 +172,8 @@ class Model():
 
 				j+=step
 			i+=step
-		sf.plot_fourth_pair(classB, classC,2,3,self.DATA,self.Class2_train_Matrix,self.Class3_train_Matrix,self.mew)
+		# sf.plot_fourth_pair(classB, classC,2,3,self.DATA,self.Class2_train_Matrix,self.Class3_train_Matrix,self.mew)
+		sf.plot_fourth_pair(classB, classC,2,3,self.DATA,temp2,temp3,self.mew)
 		
 		classA,classC = [],[]
 		i = left_margin
@@ -180,9 +187,13 @@ class Model():
 
 				j+=step
 			i+=step
-		sf.plot_fourth_pair(classA, classC,1,3,self.DATA,self.Class1_train_Matrix,self.Class3_train_Matrix,self.mew)
+		# sf.plot_fourth_pair(classA, classC,1,3,self.DATA,self.Class1_train_Matrix,self.Class3_train_Matrix,self.mew)
+		sf.plot_fourth_pair(classA, classC,1,3,self.DATA,temp1,temp3,self.mew)
 		return
 	def plot_model(self):
+		self.Class1_train_Matrix=sf.get_Matrix(self.DATA[0])
+		self.Class2_train_Matrix=sf.get_Matrix(self.DATA[1])
+		self.Class3_train_Matrix=sf.get_Matrix(self.DATA[2])
 		sf.plot_fourth(self.class1,self.class2,self.class3,self.DATA,self.Class1_train_Matrix,self.Class2_train_Matrix,self.Class3_train_Matrix,self.mew)
 	def get_ConfMatrix(self,TESTSET):
 		CONF=[[0,0,0],[0,0,0],[0,0,0]]
