@@ -33,6 +33,7 @@ def plot(Class_train,color,label="",cont=False,mu=[],Sigma=[]):
 		plt.plot(A,B,color,markersize=3)
 	else:
 		plt.plot(A,B,color)
+
 	if(cont==True):
 		contour.plot_contour(mu,Sigma,A,B)
 	plt.legend()
