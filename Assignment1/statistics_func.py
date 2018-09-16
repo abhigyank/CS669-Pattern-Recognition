@@ -28,9 +28,9 @@ def plot(Class_train,color,label="",cont=False,mu=[],Sigma=[]):
 		A.append(i[0])
 		B.append(i[1])
 	if(label):
-		plt.plot(A,B,color,markersize=2)
+		plt.plot(A,B,color,markersize=3)
 	elif(cont==True):
-		plt.plot(A,B,color,markersize=2)
+		plt.plot(A,B,color,markersize=3)
 	else:
 		plt.plot(A,B,color)
 	if(cont==True):
@@ -108,10 +108,11 @@ def dot_product(A,B):
 		val=val+(A[i]*B[i])
 	return val
 def get_Inverse(Matrix):
-	Inv=[[0,0],[0,0]]
-	for i in range(2):
-		for j in range(2):
-			Inv[i][j]=Matrix[i][j]
+	Inv = Matrix
+	# Inv=[[0,0],[0,0]]
+	# for i in range(2):
+	# 	for j in range(2):
+	# 		Inv[i][j]=Matrix[i][j]
 	temp1=-1*Matrix[0][0]
 	temp2=-1*Matrix[1][1]
 	Inv[0][0]=temp2
@@ -157,11 +158,14 @@ def get_Score(Conf_Matrix):
 		for j in range(len(Conf_Matrix)):
 			Sum=Sum+Conf_Matrix[i][j]
 		Recall.append(Conf_Matrix[i][i]/Sum)
-	for i in range(3):
+	for i in range(len(Conf_Matrix)):
 		Sum=0.0
-		for j in range(3):
+		for j in range(len(Conf_Matrix)):
 			Sum=Sum+Conf_Matrix[j][i]
-		Precision.append(Conf_Matrix[i][i]/Sum)
+		if(Sum==0):
+			Precision.append(0)
+		else:
+			Precision.append(Conf_Matrix[i][i]/Sum)
 	print ("Accuracy of Classifier:- ",Accuracy)
 	for i in range(len(Conf_Matrix)):
 		print("Precision of Class",(i+1),":-",Precision[i])
@@ -169,8 +173,11 @@ def get_Score(Conf_Matrix):
 		print("Recall of Class",(i+1),":-",Recall[i])
 	Sum=0.0
 	for i in range(len(Conf_Matrix)):
-		print("F Measure of Class",(i+1),":-",(Recall[i]*Precision[i])/(Recall[i]+Precision[i]))
-		Sum=Sum+(Recall[i]*Precision[i])/(Recall[i]+Precision[i])
+		if ((Recall[i]+Precision[i]) == 0):
+			print("F Measure of Class",(i+1),":- 0")
+		else:
+			print("F Measure of Class",(i+1),":-",(Recall[i]*Precision[i])/(Recall[i]+Precision[i]))
+			Sum=Sum+(Recall[i]*Precision[i])/(Recall[i]+Precision[i])
 	print("Mean Precision :-",(sum(Precision)/len(Conf_Matrix)))	
 	print("Mean Recall :-",(sum(Recall)/len(Conf_Matrix)))
 	print("Mean F Measure :-",(Sum)/len(Conf_Matrix))
