@@ -178,7 +178,7 @@ def get_Score(Conf_Matrix):
 		if ((Recall[i]+Precision[i]) == 0):
 			print("F Measure of Class",(i+1),":- 0")
 		else:
-			print("F Measure of Class",(i+1),":-",(Recall[i]*Precision[i])/(Recall[i]+Precision[i]))
+			print("F Measure of Class",(i+1),":-",(2*Recall[i]*Precision[i])/(Recall[i]+Precision[i]))
 			Sum=Sum+(Recall[i]*Precision[i])/(Recall[i]+Precision[i])
 	print("Mean Precision :-",(sum(Precision)/len(Conf_Matrix)))	
 	print("Mean Recall :-",(sum(Recall)/len(Conf_Matrix)))

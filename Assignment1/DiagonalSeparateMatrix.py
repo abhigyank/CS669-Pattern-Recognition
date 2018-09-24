@@ -250,9 +250,27 @@ class Model():
 		self.mew = []
 		for i in range(len(TESTSET)):
 			self.mew.append(sf.Mean(TESTSET[i]))
-		inv_class1=sf.get_Inverse(self.Class1_test_Matrix)
-		inv_class2=sf.get_Inverse(self.Class2_test_Matrix)
-		inv_class3=sf.get_Inverse(self.Class3_test_Matrix)
+		temp1=sf.get_Matrix(TESTSET[0])
+		temp2=sf.get_Matrix(TESTSET[1])
+		temp3=sf.get_Matrix(TESTSET[2])
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					temp1[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					temp2[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					temp3[i][j]=0
+		inv_class1=sf.get_Inverse(temp1)
+		inv_class2=sf.get_Inverse(temp2)
+		inv_class3=sf.get_Inverse(temp3)
+		# inv_class1=sf.get_Inverse(self.Class1_test_Matrix)
+		# inv_class2=sf.get_Inverse(self.Class2_test_Matrix)
+		# inv_class3=sf.get_Inverse(self.Class3_test_Matrix)
 
 		# for i in range(len(TESTSET)):
 		case = [0,1]
@@ -308,6 +326,24 @@ class Model():
 
 	def get_ConfMatrix(self,TESTSET):
 		CONF=[[0,0,0],[0,0,0],[0,0,0]]
+		temp1=sf.get_Matrix(TESTSET[0])
+		temp2=sf.get_Matrix(TESTSET[1])
+		temp3=sf.get_Matrix(TESTSET[2])
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					temp1[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					temp2[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					temp3[i][j]=0
+		inv_class1=sf.get_Inverse(temp1)
+		inv_class2=sf.get_Inverse(temp2)
+		inv_class3=sf.get_Inverse(temp3)
 		self.Class1_test_Matrix=sf.get_Matrix(TESTSET[0])
 		self.Class2_test_Matrix=sf.get_Matrix(TESTSET[1])
 		self.Class3_test_Matrix=sf.get_Matrix(TESTSET[2])
@@ -326,11 +362,6 @@ class Model():
 		self.mew = []		
 		for i in range(len(TESTSET)):
 			self.mew.append(sf.Mean(TESTSET[i]))
-
-		inv_class1=sf.get_Inverse(self.Class1_test_Matrix)
-		inv_class2=sf.get_Inverse(self.Class2_test_Matrix)
-		inv_class3=sf.get_Inverse(self.Class3_test_Matrix)
-
 		for i in range(len(TESTSET)):
 			for j in range(len(TESTSET[i])):
 				temp=[0,0,0]
