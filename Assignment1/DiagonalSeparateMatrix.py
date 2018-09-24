@@ -135,7 +135,18 @@ class Model():
 		self.Class1_train_Matrix=sf.get_Matrix(DATASET[0])
 		self.Class2_train_Matrix=sf.get_Matrix(DATASET[1])
 		self.Class3_train_Matrix=sf.get_Matrix(DATASET[2])
-
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class1_train_Matrix[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class2_train_Matrix[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class3_train_Matrix[i][j]=0
 
 		inv_class1=sf.get_Inverse(self.Class1_train_Matrix)
 		inv_class2=sf.get_Inverse(self.Class2_train_Matrix)
@@ -145,7 +156,18 @@ class Model():
 		temp1=sf.get_Matrix(DATASET[0])
 		temp2=sf.get_Matrix(DATASET[1])
 		temp3=sf.get_Matrix(DATASET[2])
-
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					temp1[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					temp2[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					temp3[i][j]=0
 		classA,classB = [],[]
 		i = left_margin
 		while(i<right_margin+1):
@@ -194,6 +216,18 @@ class Model():
 		self.Class1_train_Matrix=sf.get_Matrix(self.DATA[0])
 		self.Class2_train_Matrix=sf.get_Matrix(self.DATA[1])
 		self.Class3_train_Matrix=sf.get_Matrix(self.DATA[2])
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class1_train_Matrix[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class2_train_Matrix[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class3_train_Matrix[i][j]=0
 		sf.plot_fourth(self.class1,self.class2,self.class3,self.DATA,self.Class1_train_Matrix,self.Class2_train_Matrix,self.Class3_train_Matrix,self.mew)
 	
 	def get_ConfMatrix_pair(self, TESTSET):
@@ -201,10 +235,21 @@ class Model():
 		self.Class1_test_Matrix=sf.get_Matrix(TESTSET[0])
 		self.Class2_test_Matrix=sf.get_Matrix(TESTSET[1])
 		self.Class3_test_Matrix=sf.get_Matrix(TESTSET[2])
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class1_test_Matrix[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class2_test_Matrix[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class3_test_Matrix[i][j]=0
 		self.mew = []
 		for i in range(len(TESTSET)):
 			self.mew.append(sf.Mean(TESTSET[i]))
-
 		inv_class1=sf.get_Inverse(self.Class1_test_Matrix)
 		inv_class2=sf.get_Inverse(self.Class2_test_Matrix)
 		inv_class3=sf.get_Inverse(self.Class3_test_Matrix)
@@ -266,6 +311,18 @@ class Model():
 		self.Class1_test_Matrix=sf.get_Matrix(TESTSET[0])
 		self.Class2_test_Matrix=sf.get_Matrix(TESTSET[1])
 		self.Class3_test_Matrix=sf.get_Matrix(TESTSET[2])
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class1_test_Matrix[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class2_test_Matrix[i][j]=0
+		for i in range(2):
+			for j in range(2):
+				if(i!=j):
+					self.Class3_test_Matrix[i][j]=0
 		self.mew = []		
 		for i in range(len(TESTSET)):
 			self.mew.append(sf.Mean(TESTSET[i]))
