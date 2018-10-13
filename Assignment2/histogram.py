@@ -19,3 +19,21 @@ def get_histogram(image):
 		i+=32
 	colour_histogram = np.asarray(colour_histogram)
 	return colour_histogram
+
+def main():
+	base_dir = "Data"
+	dirs = ["Data 2(b)/test/stadium_football", "Data 2(b)/test/forest_broadleaf", "Data 2(b)/test/candy_store", \
+		"Data 2(b)/train/stadium_football", "Data 2(b)/train/forest_broadleaf", "Data 2(b)/train/candy_store"]
+	for i in dirs:
+		for image in os.listdir(os.path.join(base_dir, i)):
+			if(image=="histograms"): continue
+			img = Image.open(os.path.join(base_dir, i, image))
+			img.load()
+			data = np.asarray(img, dtype="int32")
+			hist = histogram.get_histogram(data)
+			np.save(os.path.join(base_dir, i, "histograms", image[:-3] + "npy"),hist)
+
+
+
+if __name__ == '__main__':
+	main()
