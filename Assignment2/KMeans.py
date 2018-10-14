@@ -37,3 +37,9 @@ def KMeans(DATA,K):
 				mean[j]=mean[j]/len(Clusters[j])
 			cluster_centres[i]=mean
 	return cluster_centres,Clusters
+
+def getCluster(cluster_centres, x):
+	cluster_dist = []
+	for i in cluster_centres:
+		cluster_dist.append(dist(x,i))
+	return cluster_dist.index(min(cluster_dist))
