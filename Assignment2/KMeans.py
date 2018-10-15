@@ -1,15 +1,21 @@
 import random
 import math
+import statistics_func as sf
 def dist(A,B):
 	ans=0.0
 	for i in range(len(A)):
 		ans=ans+(A[i]-B[i])*(A[i]-B[i])
 	return math.sqrt(ans)
 def KMeans(DATA,K):
-	cluster_centres=random.sample(DATA, K)#initial random points
+	temp=[]
+	for i in DATA:
+		temp.append(tuple(i.tolist()))
+	temp=list(set(temp))
+	cluster_centres=random.sample(temp, K)#	initial random points
 	dimentions=len(DATA[0])
 	D=[]
-	thresh=0.0001
+	thresh=0.001
+	print "Hello"
 	while(len(D)<2 or abs(D[len(D)-1]-D[len(D)-2])>thresh):
 		distortion=0.0
 		Clusters=[]
@@ -29,15 +35,13 @@ def KMeans(DATA,K):
 		for i in range(K):
 			mean=[]	
 			for j in range(dimentions):
-				mean.append(0.0)
+				mean.append(0.00)
 			for j in range(len(Clusters[i])):
 				mean=[mean[k]+Clusters[i][j][k] for k in range(dimentions)]
-				# mean=map(mean,zip(mean,Clusters[i][j]))
 			for j in range(dimentions):
-				mean[j]=mean[j]/len(Clusters[j])
+				mean[j]=mean[j]/len(Clusters[i])
 			cluster_centres[i]=mean
 	return cluster_centres,Clusters
-
 def getCluster(cluster_centres, x):
 	cluster_dist = []
 	for i in cluster_centres:

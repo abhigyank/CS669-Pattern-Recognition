@@ -4,8 +4,7 @@ import os
 
 base_dir = "./Data"
 def main(data):
-	dirs = ["Data 2(b)/test/stadium_football", "Data 2(b)/test/forest_broadleaf", "Data 2(b)/test/candy_store", \
-		"Data 2(b)/train/stadium_football", "Data 2(b)/train/forest_broadleaf", "Data 2(b)/train/candy_store"]
+	dirs = ["Data 2(b)/train/stadium_football", "Data 2(b)/train/forest_broadleaf", "Data 2(b)/train/candy_store"]
 	for i in dirs:
 		for file in os.listdir(os.path.join(base_dir, i, 'histograms')):
 			histogram = np.load(os.path.join(base_dir, i, 'histograms', file))
@@ -17,9 +16,9 @@ def main(data):
 
 def KMeans_train(data):
 	cluster_number =32
-	cluster_centres,Clusters = KMeans.KMeans(data.tolist(),cluster_number)
+	data.tolist()
+	cluster_centres,Clusters = KMeans.KMeans(data,cluster_number)
 	return cluster_centres,Clusters
-
 def getBOVW(cluster_centres):
 	dirs = ["Data 2(b)/test/stadium_football", "Data 2(b)/test/forest_broadleaf", "Data 2(b)/test/candy_store", \
 		"Data 2(b)/train/stadium_football", "Data 2(b)/train/forest_broadleaf", "Data 2(b)/train/candy_store"]
