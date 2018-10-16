@@ -9,7 +9,7 @@ def dist(A,B):
 def KMeans(DATA,K):
 	temp=[]
 	for i in DATA:
-		temp.append(tuple(i.tolist()))
+		temp.append(tuple(i))
 	temp=list(set(temp))
 	cluster_centres=random.sample(temp, K)#	initial random points
 	dimentions=len(DATA[0])
@@ -32,6 +32,7 @@ def KMeans(DATA,K):
 			distortion=distortion+dist(DATA[i],cluster_centres[index])
 			Clusters[index].append(DATA[i])
 		D.append(distortion)
+		print distortion
 		for i in range(K):
 			mean=[]	
 			for j in range(dimentions):
@@ -42,6 +43,8 @@ def KMeans(DATA,K):
 				mean[j]=mean[j]/len(Clusters[i])
 			cluster_centres[i]=mean
 	return cluster_centres,Clusters
+# data,test=sf.get_data("Class2.txt")
+# KMeans(data,32)
 def getCluster(cluster_centres, x):
 	cluster_dist = []
 	for i in cluster_centres:
