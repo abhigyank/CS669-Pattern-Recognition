@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import sys
 from PIL import Image
 
 def get_7by7(image):
@@ -33,11 +34,14 @@ def main():
 		print i
 		for image in os.listdir(os.path.join(base_dir, i)):
 			if(image == "7by7"): continue
+			print image,
+			sys.stdout.flush()
 			img = Image.open(os.path.join(base_dir, i, image))
 			img.load()
 			data = np.asarray(img, dtype="int32")
 			patch_stacks = get_7by7(data)
 			print patch_stacks.shape
+			sys.stdout.flush()
 			np.save(os.path.join(base_dir, i, "7by7", image[:-3] + "npy"),patch_stacks)
 if __name__ == '__main__':
 	main()
