@@ -6,7 +6,7 @@ import matplotlib.lines as mlines
 import math
 from sympy import plot_implicit
 from sympy import *
-import contour
+# import contour
 import matplotlib.mlab as mlab
 fig, (ax) = plt.subplots(ncols=1)
 x=np.linspace(-3000,3000) 

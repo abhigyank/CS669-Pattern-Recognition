@@ -42,6 +42,7 @@ def GMMCluster(DATA,Num_of_Clusters):#data for class not the entire dataset
 	Distortion=[]
 	thresh=0.1
 	while(len(Distortion)<2 or abs(Distortion[len(Distortion)-1]-Distortion[len(Distortion)-2])>thresh):
+	# while(1>2):
 		# Finding Gamma(n,k)
 		Gamma=[]
 		Clusters=[]
@@ -95,6 +96,7 @@ def GMMCluster(DATA,Num_of_Clusters):#data for class not the entire dataset
 				count+=Gamma[j][i]
 				temp_sigma=np.add(temp_sigma,Gamma[j][i]*np.outer(np.array(DATA[j])-np.array(means[i]),np.array(DATA[j])-np.array(means[i]))) 		
 			temp_sigma=temp_sigma/count	
+			Sigma[i]=temp_sigma
 		# print Sigma
 		#       Pi
 		for i in range(Num_of_Clusters):
@@ -103,15 +105,11 @@ def GMMCluster(DATA,Num_of_Clusters):#data for class not the entire dataset
 				count+=Gamma[j][i]
 			pi[i]=count/len(DATA)
 		# print pi
-	return means,Clusters
-DATA,test=sf.get_data("Class2.txt")
-means,cluster=GMMCluster(DATA,8)
-# sf.plot(cluster[0],'ro')
-# sf.plot(cluster[1],'go')
-# sf.plot(cluster[2],'bo')
-# sf.plot(cluster[3],'yo')
-# sf.plot(cluster[4],'mo')
-# sf.plot(cluster[5],'ko')
-# sf.plot(cluster[6],'wo')
-# sf.plot(cluster[7],'g')
-# plt.show()
+		# sf.plot(Clusters[0],'bo',"",True,means[0],Sigma[0])
+		# sf.plot(Clusters[1],'co',"",True,means[1],Sigma[1])
+		# sf.plot(Clusters[2],'ro',"",True,means[2],Sigma[2])
+		# sf.plot(Clusters[3],'ko',"",True,means[3],Sigma[3])
+		# plt.show()
+	return means,Sigma,pi,Clusters
+DATA,test=sf.get_data("Class1.txt")
+GMMCluster(DATA,4)

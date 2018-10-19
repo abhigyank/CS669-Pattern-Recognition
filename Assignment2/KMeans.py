@@ -15,7 +15,7 @@ def KMeans(DATA,K):
 	dimentions=len(DATA[0])
 	D=[]
 	thresh=0.001
-	print "Hello"
+	# print "Hello"
 	while(len(D)<2 or abs(D[len(D)-1]-D[len(D)-2])>thresh):
 		distortion=0.0
 		Clusters=[]
@@ -32,7 +32,7 @@ def KMeans(DATA,K):
 			distortion=distortion+dist(DATA[i],cluster_centres[index])
 			Clusters[index].append(DATA[i])
 		D.append(distortion)
-		print distortion
+		# print distortion
 		for i in range(K):
 			mean=[]	
 			for j in range(dimentions):
