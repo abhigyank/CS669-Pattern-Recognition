@@ -16,7 +16,7 @@ def main(data):
 
 def KMeans_train(data):
 	cluster_number =32
-	data.tolist()
+	# data = data.tolist()
 	cluster_centres,Clusters = KMeans.KMeans(data,cluster_number)
 	return cluster_centres,Clusters
 def getBOVW(cluster_centres):
@@ -27,10 +27,10 @@ def getBOVW(cluster_centres):
 			histogram = np.load(os.path.join(base_dir, i, 'histograms', file))
 			histogram = histogram.tolist()
 			predict = np.zeros(32)
-			for i in histogram:
-				result = KMeans.getCluster(cluster_centres, i)
-				predict[i]+=1
-			np.save(os.path.join(base_dir, i, "bovg", file[:-3] + "npy"),predict)
+			for j in histogram:
+				result = KMeans.getCluster(cluster_centres, j)
+				predict[result]+=1
+			np.save(os.path.join(base_dir, i, "bovw", file[:-3] + "npy"),predict)
 	return
 
 if __name__ == '__main__':

@@ -1,6 +1,5 @@
 import random
 import math
-import statistics_func as sf
 def dist(A,B):
 	ans=0.0
 	for i in range(len(A)):
