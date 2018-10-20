@@ -25,6 +25,15 @@ class GMMClassifier(object):
 			print "For Class",i
 			m,s,p,c=GMM.GMMCluster(DATA[i],Num_of_Clusters,diagonal)
 			self.means.append(m)
+			for j in range(len(s)):
+				if(np.linalg.det(s[j])==0):
+					print "HOW?"
+					for a in range(len(s[j][0])):
+						for b in range(len(s[j][0])):
+							if a!=b:
+								s[j][a][b]=0
+							if a==b and s[j][a][b]==0.0:
+								s[j][a][b]=1.0
 			self.sigma.append(s)
 			self.pi.append(p)
 			self.clusters.append(c)
@@ -156,3 +165,28 @@ class GMMClassifier(object):
 				print "CONF MATRIX:-"
 				print mat
 				sf.get_Score(mat)
+	def classify_image_Hist(self):
+		conf=[[0,0,0],[0,0,0],[0,0,0]]
+		for i in range(len(self.test)):
+			print i
+			for j in range(len(self.test[i])):
+				print j
+				classify=[0,0,0]
+				for k in range(len(self.test[i][j])):
+					# classify TEST[i][j][k]
+					index=-1
+					MAX=-10000000000000000.0
+					for l in range((self.classes)):
+						SUM=0.0
+						for m in range(self.k):	 
+							SUM+=self.pi[l][m]*multivariate_normal.pdf(self.test[i][j][k],mean=self.means[l][m],cov=self.sigma[l][m])
+							# print j,m,i,self.pi[j][m],multivariate_normal.pdf(i,mean=self.means[j][m],cov=self.sigma[j][m]),self.means[j][m]
+						# print j,i,math.log(SUM),math.log((self.class_sizes[j]*1.0)/(self.total*1.0))
+						if(SUM!=0 and (math.log(SUM)+math.log((self.class_sizes[l]*1.0)/(self.total*1.0)))>MAX):
+							MAX=(math.log(SUM)+math.log((self.class_sizes[l]*1.0)/(self.total*1.0)))
+							index=l
+					classify[index]+=1
+				conf[i][classify.index(max(classify))]+=1
+		print "MATRIX:-",conf
+		sf.get_Score(conf)
+

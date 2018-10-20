@@ -21,7 +21,13 @@ def getCovMatrix(DATA,mean,diagonal=False):
 		for i in range(dim):
 			matrix[i][i]=get_Cov(DATA,mean[i],mean[j],i,i)
 	if np.linalg.det(matrix)==0:
-		print DATA,mean
+		# print "ASD"
+		# print matrix
+		for i in range(len(DATA[0])):
+			for j in range(len(DATA[0])):
+				if(matrix[i][j]==0 and i==j):
+					matrix[i][j]=1.0
+	# print np.linalg.det(matrix),"ASDdddddddddddddddddddddddddd"
 	return np.array(matrix)
 def prod(A,Sigma,B):
 	Sigma=np.array(Sigma)
@@ -48,8 +54,8 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the enti
 	print "INIT DONE"
 	#--------------------------------------------------------
 	Distortion=[]
-	thresh=0.1
-	while(len(Distortion)<2 or abs(Distortion[len(Distortion)-1]-Distortion[len(Distortion)-2])>thresh):
+	thresh=0.01
+	while(len(Distortion)<5 or abs(Distortion[len(Distortion)-1]-Distortion[len(Distortion)-2])>thresh):
 	# while(1>2):
 		# Finding Gamma(n,k)
 		Gamma=[]
@@ -62,6 +68,12 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the enti
 				vec.append(0.0)
 			SUM=0.000000000
 			for j in range(Num_of_Clusters):
+				print np.linalg.det(Sigma[j]),"asdddddddd"
+				prod=1
+				for k in range(len(Sigma[j])):
+					prod*=Sigma[j][k][k]
+					print Sigma[j][k][k]
+				print np.linalg.det(Sigma[j])
 				SUM=SUM+(pi[j]*multivariate_normal.pdf(DATA[i],mean=means[j],cov=Sigma[j]))
 			for j in range(Num_of_Clusters):
 				vec[j]=(pi[j]*multivariate_normal.pdf(DATA[i],mean=means[j],cov=Sigma[j]))/SUM
@@ -104,15 +116,16 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the enti
 				count+=Gamma[j][i]
 				temp_sigma=np.add(temp_sigma,Gamma[j][i]*np.outer(np.array(DATA[j])-np.array(means[i]),np.array(DATA[j])-np.array(means[i]))) 		
 			temp_sigma=temp_sigma/count	
-			if(np.linalg.det(temp_sigma)==0):
-				print len(temp_sigma),len(temp_sigma[0])
-				for a in range(len(temp_sigma)):
-					for b in range(len(temp_sigma[0])):
+			if(diagonal==True or np.linalg.det(temp_sigma)<(7.65502597261e-50)):
+				# print temp_sigma
+				for a in range(len(Sigma[0])):
+					for b in range(len(Sigma[0])):
 						if(a!=b):
 							temp_sigma[a][b]=0.0
-						if(a==b and temp_sigma[a][b]==0):
-							temp_sigma[a][b]=1
-							print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+						if(a==b and temp_sigma[a][b]<=1.0e-10):
+							temp_sigma[a][b]=1.0
+							# print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+				# print "APPLE is GREAT",np.linalg.det(temp_sigma)
 			Sigma[i]=temp_sigma
 		# print Sigma
 		#       Pi
