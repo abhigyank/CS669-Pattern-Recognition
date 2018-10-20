@@ -4,8 +4,6 @@ import random
 import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import math
-from sympy import plot_implicit
-from sympy import *
 import contour
 import matplotlib.mlab as mlab
 fig, (ax) = plt.subplots(ncols=1)
