@@ -13,7 +13,7 @@ def KMeans(DATA,K):
 	cluster_centres=random.sample(temp, K)#	initial random points
 	dimentions=len(DATA[0])
 	D=[]
-	thresh=0.001
+	thresh=1.0
 	# print "Hello"
 	while(len(D)<2 or abs(D[len(D)-1]-D[len(D)-2])>thresh):
 		distortion=0.0

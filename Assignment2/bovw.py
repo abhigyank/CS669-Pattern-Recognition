@@ -4,7 +4,7 @@ import os
 
 base_dir = "./Data"
 def main(data):
-	dirs = ["Data 2(b)/train/stadium_football", "Data 2(b)/train/forest_broadleaf", "Data 2(b)/train/candy_store"]
+	dirs = ["Data2b/train/stadium_football", "Data2b/train/forest_broadleaf", "Data2b/train/candy_store"]
 	for i in dirs:
 		for file in os.listdir(os.path.join(base_dir, i, 'histograms')):
 			histogram = np.load(os.path.join(base_dir, i, 'histograms', file))
@@ -20,8 +20,8 @@ def KMeans_train(data):
 	cluster_centres,Clusters = KMeans.KMeans(data,cluster_number)
 	return cluster_centres,Clusters
 def getBOVW(cluster_centres):
-	dirs = ["Data 2(b)/test/stadium_football", "Data 2(b)/test/forest_broadleaf", "Data 2(b)/test/candy_store", \
-		"Data 2(b)/train/stadium_football", "Data 2(b)/train/forest_broadleaf", "Data 2(b)/train/candy_store"]
+	dirs = ["Data2b/test/stadium_football", "Data2b/test/forest_broadleaf", "Data2b/test/candy_store", \
+		"Data2b/train/stadium_football", "Data2b/train/forest_broadleaf", "Data2b/train/candy_store"]
 	for i in dirs:
 		for file in os.listdir(os.path.join(base_dir, i, 'histograms')):
 			histogram = np.load(os.path.join(base_dir, i, 'histograms', file))
@@ -36,7 +36,9 @@ def getBOVW(cluster_centres):
 if __name__ == '__main__':
 	data = []
 	data = main(data)
+	print len(data)
 	cluster_centres,Clusters = KMeans_train(data)
-	print len(cluster_centres)
-	getBOVW(cluster_centres)
+	for i in range(len(Clusters)):
+		print len(Clusters[i])
+	# getBOVW(cluster_centres)
 		

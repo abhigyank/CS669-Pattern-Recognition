@@ -10,12 +10,12 @@ print " 2b :- Image Classification"
 print " 2c :- Cell Cluster"
 inp=raw_input()
 if inp=="1":
-	C1,t1=sf.get_data("Data1/Class1.txt")
-	C2,t2=sf.get_data("Data1/Class2.txt")
-	C3,t3=sf.get_data("Data1/Class3.txt")
+	C1,t1=sf.get_data("Data/Data1/Class1.txt")
+	C2,t2=sf.get_data("Data/Data1/Class2.txt")
+	C3,t3=sf.get_data("Data/Data1/Class3.txt")
 	DATA=[C1,C2,C3]
 	test=[t1,t2,t3]
-	model=GMMClassifier.GMMClassifier(DATA,4,[[-3.0,3.0],[-3.0,3.0]],test)
+	model=GMMClassifier.GMMClassifier(DATA,8,[[-3.0,3.0],[-3.0,3.0]],test)
 	model.plot_model()
 	# model.plot_classes()
 	model.get_conf_matrix()
@@ -32,81 +32,82 @@ if inp=="2a":
 	model.get_conf_matrix()
 	model.get_conf_pair()
 if inp=="2b":
-	# print "Using Histograms:- "
-	# arr=os.listdir("Data2b/train/candy_store/histograms/")
-	# C1=[]
-	# for i in arr:
-	# 	temp=np.load("Data2b/train/candy_store/histograms/"+i)
-	# 	for j in temp:
-	# 		C1.append(j.tolist())
-	# t1=[]
-	# arr=os.listdir("Data2b/test/candy_store/histograms/")
-	# for i in arr:
-	# 	temp=np.load("Data2b/test/candy_store/histograms/"+i)
-	# 	for j in temp:
-	# 		t1.append(j.tolist())
-	# arr=os.listdir("Data2b/train/forest_broadleaf/histograms")
-	# C2=[]
-	# for i in arr:
-	# 	temp=np.load("Data2b/train/forest_broadleaf/histograms/"+i)
-	# 	for j in temp:
-	# 		C2.append(j.tolist())
-	# t2=[]
-	# arr=os.listdir("Data2b/test/forest_broadleaf/histograms")
-	# for i in arr:
-	# 	temp=np.load("Data2b/test/forest_broadleaf/histograms/"+i)
-	# 	for j in temp:
-	# 		t2.append(j.tolist())
-	# arr=os.listdir("Data2b/train/stadium_football/histograms")
-	# C3=[]
-	# for i in arr:
-	# 	temp=np.load("Data2b/train/stadium_football/histograms/"+i)
-	# 	for j in temp:
-	# 		C3.append(j.tolist())
-	# t3=[]
-	# arr=os.listdir("Data2b/test/stadium_football/histograms")
-	# for i in arr:
-	# 	temp=np.load("Data2b/test/stadium_football/histograms/"+i)
-	# 	for j in temp:
-	# 		t3.append(j.tolist())
-	# DATA=[C1,C2,C3]
-	# TEST=[t1,t2,t3]
-	# model=GMMClassifier.GMMClassifier(DATA,4,[[-10,10],[-10,10]],TEST,True)
-	
-
-	print "Using BOVW:- "
-	# a=np.load("Data2b/train/candy_store/bovw/sun_aaaeveietyltaxxn.npy")
-	# print a
-	arr=os.listdir("Data2b/train/candy_store/bovw/")
+	print "Using Histograms:- "
+	arr=os.listdir("Data/Data2b/train/candy_store/histograms/")
 	C1=[]
 	for i in arr:
-		temp=np.load("Data2b/train/candy_store/bovw/"+i)
-		C1.append(temp.tolist())
+		temp=np.load("Data/Data2b/train/candy_store/histograms/"+i)
+		for j in temp:
+			C1.append(j.tolist())
 	t1=[]
-	arr=os.listdir("Data2b/test/candy_store/bovw/")
+	arr=os.listdir("Data/Data2b/test/candy_store/histograms/")
 	for i in arr:
-		temp=np.load("Data2b/test/candy_store/bovw/"+i)
-		t1.append(temp.tolist())
-	arr=os.listdir("Data2b/train/forest_broadleaf/bovw")
+		temp=np.load("Data/Data2b/test/candy_store/histograms/"+i)
+		for j in temp:
+			t1.append(j.tolist())
+	arr=os.listdir("Data/Data2b/train/forest_broadleaf/histograms")
 	C2=[]
 	for i in arr:
-		temp=np.load("Data2b/train/forest_broadleaf/bovw/"+i)
-		C2.append(temp.tolist())
+		temp=np.load("Data/Data2b/train/forest_broadleaf/histograms/"+i)
+		for j in temp:
+			C2.append(j.tolist())
 	t2=[]
-	arr=os.listdir("Data2b/test/forest_broadleaf/bovw")
+	arr=os.listdir("Data/Data2b/test/forest_broadleaf/histograms")
 	for i in arr:
-		temp=np.load("Data2b/test/forest_broadleaf/bovw/"+i)
-		t2.append(temp.tolist())
-	arr=os.listdir("Data2b/train/stadium_football/bovw")
+		temp=np.load("Data/Data2b/test/forest_broadleaf/histograms/"+i)
+		for j in temp:
+			t2.append(j.tolist())
+	arr=os.listdir("Data/Data2b/train/stadium_football/histograms")
 	C3=[]
 	for i in arr:
-		temp=np.load("Data2b/train/stadium_football/bovw/"+i)
-		C3.append(temp.tolist())
+		temp=np.load("Data/Data2b/train/stadium_football/histograms/"+i)
+		for j in temp:
+			C3.append(j.tolist())
 	t3=[]
-	arr=os.listdir("Data2b/test/stadium_football/bovw")
+	arr=os.listdir("Data/Data2b/test/stadium_football/histograms")
 	for i in arr:
-		temp=np.load("Data2b/test/stadium_football/bovw/"+i)
-		t3.append(temp.tolist())
+		temp=np.load("Data/Data2b/test/stadium_football/histograms/"+i)
+		for j in temp:
+			t3.append(j.tolist())
 	DATA=[C1,C2,C3]
 	TEST=[t1,t2,t3]
 	model=GMMClassifier.GMMClassifier(DATA,4,[[-10,10],[-10,10]],TEST,True)
+	
+
+	# print "Using BOVW:- "
+	# # a=np.load("Data2b/train/candy_store/bovw/sun_aaaeveietyltaxxn.npy")
+	# # print a
+	# arr=os.listdir("Data/Data2b/train/candy_store/bovw/")
+	# C1=[]
+	# for i in arr:
+	# 	temp=np.load("Data/Data2b/train/candy_store/bovw/"+i)
+	# 	C1.append(temp.tolist())
+	# t1=[]
+	# arr=os.listdir("Data/Data2b/test/candy_store/bovw/")
+	# for i in arr:
+	# 	temp=np.load("Data/Data2b/test/candy_store/bovw/"+i)
+	# 	t1.append(temp.tolist())
+	# arr=os.listdir("Data/Data2b/train/forest_broadleaf/bovw")
+	# C2=[]
+	# for i in arr:
+	# 	temp=np.load("Data/Data2b/train/forest_broadleaf/bovw/"+i)
+	# 	C2.append(temp.tolist())
+	# t2=[]
+	# arr=os.listdir("Data/Data2b/test/forest_broadleaf/bovw")
+	# for i in arr:
+	# 	temp=np.load("Data/Data2b/test/forest_broadleaf/bovw/"+i)
+	# 	t2.append(temp.tolist())
+	# arr=os.listdir("Data/Data2b/train/stadium_football/bovw")
+	# C3=[]
+	# for i in arr:
+	# 	temp=np.load("Data/Data2b/train/stadium_football/bovw/"+i)
+	# 	C3.append(temp.tolist())
+	# t3=[]
+	# arr=os.listdir("Data/Data2b/test/stadium_football/bovw")
+	# for i in arr:
+	# 	temp=np.load("Data/Data2b/test/stadium_football/bovw/"+i)
+	# 	t3.append(temp.tolist())
+	# DATA=[C1,C2,C3]
+	# TEST=[t1,t2,t3]
+	# print DATA
+	# model=GMMClassifier.GMMClassifier(DATA,4,[[-10,10],[-10,10]],TEST,True)

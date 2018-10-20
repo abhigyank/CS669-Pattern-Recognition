@@ -20,8 +20,8 @@ def getCovMatrix(DATA,mean,diagonal=False):
 	else:
 		for i in range(dim):
 			matrix[i][i]=get_Cov(DATA,mean[i],mean[j],i,i)
-	# if np.linalg.det(matrix)==0:
-	# 	print len(DATA),mean
+	if np.linalg.det(matrix)==0:
+		print DATA,mean
 	return np.array(matrix)
 def prod(A,Sigma,B):
 	Sigma=np.array(Sigma)
@@ -46,7 +46,6 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the enti
 	for i in range(Num_of_Clusters):
 		pi.append((1.0*len(Clusters[i]))/len(DATA))
 	print "INIT DONE"
-	print Sigma
 	#--------------------------------------------------------
 	Distortion=[]
 	thresh=0.1
@@ -105,12 +104,15 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the enti
 				count+=Gamma[j][i]
 				temp_sigma=np.add(temp_sigma,Gamma[j][i]*np.outer(np.array(DATA[j])-np.array(means[i]),np.array(DATA[j])-np.array(means[i]))) 		
 			temp_sigma=temp_sigma/count	
-			for a in range(len(temp_sigma)):
-				for b in range(len(temp_sigma[0])):
-					if(a!=b):
-						temp_sigma[a][b]=0.0
 			if(np.linalg.det(temp_sigma)==0):
-				print "BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+				print len(temp_sigma),len(temp_sigma[0])
+				for a in range(len(temp_sigma)):
+					for b in range(len(temp_sigma[0])):
+						if(a!=b):
+							temp_sigma[a][b]=0.0
+						if(a==b and temp_sigma[a][b]==0):
+							temp_sigma[a][b]=1
+							print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 			Sigma[i]=temp_sigma
 		# print Sigma
 		#       Pi
