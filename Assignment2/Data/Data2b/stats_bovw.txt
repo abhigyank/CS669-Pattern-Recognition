@@ -1,0 +1,126 @@
+K = 1
+CONF MATRIX FOR ALL CLASSES
+[[42.0, 3.0, 5.0], [16.0, 28.0, 6.0], [6.0, 8.0, 36.0]]
+Accuracy of Classifier:-  0.706666666667
+Precision of Class 1 :- 0.65625
+Precision of Class 2 :- 0.717948717949
+Precision of Class 3 :- 0.765957446809
+Recall of Class 1 :- 0.84
+Recall of Class 2 :- 0.56
+Recall of Class 3 :- 0.72
+F Measure of Class 1 :- 0.736842105263
+F Measure of Class 2 :- 0.629213483146
+F Measure of Class 3 :- 0.742268041237
+Mean Precision :- 0.713385388252
+Mean Recall :- 0.706666666667
+Mean F Measure :- 0.351387271608
+PLZZ check formula for F measure before reporting
+
+K=2
+CONF MATRIX FOR ALL CLASSES
+[[47.0, 1.0, 2.0], [26.0, 17.0, 7.0], [10.0, 7.0, 33.0]]
+Accuracy of Classifier:-  0.646666666667
+Precision of Class 1 :- 0.566265060241
+Precision of Class 2 :- 0.68
+Precision of Class 3 :- 0.785714285714
+Recall of Class 1 :- 0.94
+Recall of Class 2 :- 0.34
+Recall of Class 3 :- 0.66
+F Measure of Class 1 :- 0.706766917293
+F Measure of Class 2 :- 0.453333333333
+F Measure of Class 3 :- 0.717391304348
+Mean Precision :- 0.677326448652
+Mean Recall :- 0.646666666667
+Mean F Measure :- 0.312915259162
+PLZZ check formula for F measure before reporting
+
+K =  4
+CONF MATRIX FOR ALL CLASSES
+[[42.0, 1.0, 7.0], [28.0, 12.0, 10.0], [5.0, 7.0, 38.0]]
+Accuracy of Classifier:-  0.613333333333
+Precision of Class 1 :- 0.56
+Precision of Class 2 :- 0.6
+Precision of Class 3 :- 0.690909090909
+Recall of Class 1 :- 0.84
+Recall of Class 2 :- 0.24
+Recall of Class 3 :- 0.76
+F Measure of Class 1 :- 0.672
+F Measure of Class 2 :- 0.342857142857
+F Measure of Class 3 :- 0.72380952381
+Mean Precision :- 0.61696969697
+Mean Recall :- 0.613333333333
+Mean F Measure :- 0.289777777778
+PLZZ check formula for F measure before reporting
+
+K=8
+CONF MATRIX FOR ALL CLASSES
+[[33.0, 8.0, 9.0], [8.0, 31.0, 11.0], [6.0, 9.0, 35.0]]
+Accuracy of Classifier:-  0.66
+Precision of Class 1 :- 0.702127659574
+Precision of Class 2 :- 0.645833333333
+Precision of Class 3 :- 0.636363636364
+Recall of Class 1 :- 0.66
+Recall of Class 2 :- 0.62
+Recall of Class 3 :- 0.7
+F Measure of Class 1 :- 0.680412371134
+F Measure of Class 2 :- 0.632653061224
+F Measure of Class 3 :- 0.666666666667
+Mean Precision :- 0.66144154309
+Mean Recall :- 0.66
+Mean F Measure :- 0.329955349838
+PLZZ check formula for F measure before reporting
+
+K=16
+CONF MATRIX FOR ALL CLASSES
+[[45.0, 2.0, 3.0], [29.0, 13.0, 8.0], [11.0, 6.0, 33.0]]
+Accuracy of Classifier:-  0.606666666667
+Precision of Class 1 :- 0.529411764706
+Precision of Class 2 :- 0.619047619048
+Precision of Class 3 :- 0.75
+Recall of Class 1 :- 0.9
+Recall of Class 2 :- 0.26
+Recall of Class 3 :- 0.66
+F Measure of Class 1 :- 0.666666666667
+F Measure of Class 2 :- 0.366197183099
+F Measure of Class 3 :- 0.702127659574
+Mean Precision :- 0.632819794585
+Mean Recall :- 0.606666666667
+Mean F Measure :- 0.289165251557
+PLZZ check formula for F measure before reporting
+
+K=32
+CONF MATRIX FOR ALL CLASSES
+[[40.0, 6.0, 4.0], [13.0, 30.0, 7.0], [5.0, 9.0, 36.0]]
+Accuracy of Classifier:-  0.706666666667
+Precision of Class 1 :- 0.689655172414
+Precision of Class 2 :- 0.666666666667
+Precision of Class 3 :- 0.765957446809
+Recall of Class 1 :- 0.8
+Recall of Class 2 :- 0.6
+Recall of Class 3 :- 0.72
+F Measure of Class 1 :- 0.740740740741
+F Measure of Class 2 :- 0.631578947368
+F Measure of Class 3 :- 0.742268041237
+Mean Precision :- 0.70742642863
+Mean Recall :- 0.706666666667
+Mean F Measure :- 0.352431288224
+PLZZ check formula for F measure before reporting
+
+K=64
+CONF MATRIX FOR ALL CLASSES
+[[42.0, 3.0, 5.0], [16.0, 26.0, 8.0], [10.0, 8.0, 32.0]]
+Accuracy of Classifier:-  0.666666666667
+Precision of Class 1 :- 0.617647058824
+Precision of Class 2 :- 0.702702702703
+Precision of Class 3 :- 0.711111111111
+Recall of Class 1 :- 0.84
+Recall of Class 2 :- 0.52
+Recall of Class 3 :- 0.64
+F Measure of Class 1 :- 0.71186440678
+F Measure of Class 2 :- 0.597701149425
+F Measure of Class 3 :- 0.673684210526
+Mean Precision :- 0.677153624212
+Mean Recall :- 0.666666666667
+Mean F Measure :- 0.330541627789
+PLZZ check formula for F measure before reporting
+
