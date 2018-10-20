@@ -2,7 +2,6 @@ from PIL import Image
 import os
 import numpy as np
 import matplotlib.pyplot as plt 
-import statistics_func as sf
 import GMMClassifier
 import GMM
 import KMeans
@@ -12,13 +11,23 @@ print " 2a :- Real World Data"
 print " 2b :- Image Classification"
 print " 2c :- Cell Cluster"
 inp=raw_input()
+
+def plot(Class_train,color,label="",cont=False,mu=[],Sigma=[]):
+	A=[]
+	B=[]	
+	for i in Class_train:
+		A.append(i[0])
+		B.append(i[1])
+	plt.plot(A,B,color)
+
 if inp=="1":
+	import statistics_func as sf
 	C1,t1=sf.get_data("Data/Data1/Class1.txt")
 	C2,t2=sf.get_data("Data/Data1/Class2.txt")
 	C3,t3=sf.get_data("Data/Data1/Class3.txt")
 	DATA=[C1,C2,C3]
 	test=[t1,t2,t3]
-	k_value = [16]
+	k_value = [1, 2, 4, 8, 16, 32, 64]
 	for i in k_value:
 		print i
 		model=GMMClassifier.GMMClassifier(DATA,i,[[-4.0,4.0],[-3.0,3.0]],test)
@@ -27,6 +36,7 @@ if inp=="1":
 		model.get_conf_matrix()
 	# model.get_conf_pair()
 if inp=="2a":
+	import statistics_func as sf
 	C1,t1=sf.get_data("Data/Data2a/Class1.txt")
 	C2,t2=sf.get_data("Data/Data2a/Class2.txt")
 	C3,t3=sf.get_data("Data/Data2a/Class3.txt")
@@ -45,7 +55,7 @@ if inp=="2b":
 	tt=raw_input()
 	if tt=="hist":
 		print "Using Histograms:- "
-		k_value = [4, 8, 16, 32, 64]
+		k_value = [2, 4, 8, 16, 32, 64]
 		for i in k_value:
 			print "K = ", i
 
@@ -129,52 +139,64 @@ if inp=="2b":
 			model.get_conf_matrix()	
 if inp=="2c":
 	print "Cells"
-	files = os.listdir("Data/Data2c/Train/7by7/")
+	files = os.listdir("Data/Data2c/Train/7by7_1_try/")
 	data = []
 	for i in files:
-		image = np.load("Data/Data2c/Train/7by7/" + i)
+		image = np.load("Data/Data2c/Train/7by7_1_try/" + i)
 		if(data==[]):
 			data = image
 		else:
 			data = np.append(data, image, axis = 0)
-		# sf.plot(data.tolist(), "c,")
-		# plt.show()
-		# print len(data.tolist())
 	data = data.tolist()
 	print "Data Loaded"
 	cluster_centers, clusters = KMeans.KMeans(data, 3)
-	colors = ["c,", "b,", "r,"]
-	print "KMeans done"
+	colors = ["b,", "g,", "r,"]
+	# plt.figure(1, figsize = (8.5,11))
+	aPlot = plt.subplot(111)
 	for i in range(3):
-		sf.plot(clusters[i], colors[i])
+		plot(clusters[i], colors[i])
 	for i in range(3):
-		sf.plot([cluster_centers[i]], "c*")
+		plot([cluster_centers[i]], "y*")
 	plt.show()
+	print "KMeans done"
 	# print len(data.tolist())
-	files = os.listdir("Data/Data2c/Test/7by7/")
+	files = os.listdir("Data/Data2c/Test/7by7_1_try/")
 	TEST = []
 	for i in files:
-		image = np.load("Data/Data2c/Test/7by7/" + i)
+		image = np.load("Data/Data2c/Test/7by7_1_try/" + i)
 		TEST.append(image.tolist())
+	data_p = []
 	for i in range(len(TEST)):
+		c = 0
 		cluster1,cluster2,cluster3 = [],[],[]
+		print len(TEST[i])
 		for j in range(len(TEST[i])):
+			data_p.append(TEST[i][j])
 			cluster = KMeans.getCluster(cluster_centers, TEST[i][j])
 			if(cluster == 0):
-				cluster1.append([j/505, j%505])
+				for x in range(7):
+					for y in range(7):
+						cluster1.append([(j/73)*7 + x, (j%73)*7 + y])
 			if(cluster == 1):
-				cluster2.append([j/505, j%505])
+				c+=1
+				for x in range(7):
+					for y in range(7):
+						cluster2.append([(j/73)*7 + x, (j%73)*7 + y])
 			if(cluster == 2):
-				cluster3.append([j/505, j%505])
-		sf.plot(cluster1,"bo")
-		sf.plot(cluster2,"ro")
-		sf.plot(cluster3,"go")
+				for x in range(7):
+					for y in range(7):
+						cluster3.append([(j/73)*7 + x, (j%73)*7 + y])
+		print len(cluster1), len(cluster2), len(cluster3)
+		plot(cluster1,"b.")
+		plot(cluster2,"g.")
+		plot(cluster3,"r.")
 		plt.show()
+	# plt.show()	
 	GMM_center, GMM_sigma,GMM_pi, GMM_clusters = GMM.GMMCluster(data, 3, True, [cluster_centers, clusters])
 	for i in range(3):
-		sf.plot(GMM_clusters[i], colors[i])
+		plot(GMM_clusters[i], colors[i])
 	for i in range(3):
-		sf.plot([GMM_center[i]], "c*")
+		plot([GMM_center[i]], "c*")
 	cluster1,cluster2,cluster3=[],[],[]
 	for i in range(len(TEST)):
 		cluster1,cluster2,cluster3 = [],[],[]
@@ -185,14 +207,27 @@ if inp=="2c":
 				if(GMM_pi[l]*multivariate_normal.pdf(TEST[i][j],mean=GMM_center[l],cov=GMM_sigma[l],allow_singular=True)>MAX):
 					index=l
 					MAX=GMM_pi[l]*multivariate_normal.pdf(TEST[i][j],mean=GMM_center[l],cov=GMM_sigma[l],allow_singular=True)
-			if index==0:
-				cluster1.append([j/505, j%505])
-			if index==1:
-				cluster2.append([j/505, j%505])
-			if index==2:
-				cluster3.append([j/505, j%505])
-		sf.plot(cluster1,"bo")
-		sf.plot(cluster2,"ro")
-		sf.plot(cluster3,"go")
+			# if index==0:
+			# 	cluster1.append([j/505, j%505])
+			# if index==1:
+			# 	cluster2.append([j/505, j%505])
+			# if index==2:
+			# 	cluster3.append([j/505, j%505])
+			if(cluster == 0):
+				for x in range(7):
+					for y in range(7):
+						cluster1.append([(j%73)*7 + y, (j/73)*7 + x])
+			if(cluster == 1):
+				for x in range(7):
+					for y in range(7):
+						cluster2.append([(j%73)*7 + y, (j/73)*7 + x])
+			if(cluster == 2):
+				for x in range(7):
+					for y in range(7):
+						cluster3.append([(j%73)*7 + y, (j/73)*7 + x])
+
+		plot(cluster1,"bo")
+		plot(cluster2,"ro")
+		plot(cluster3,"go")
 		plt.show()
 	 

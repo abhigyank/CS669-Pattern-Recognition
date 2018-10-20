@@ -182,7 +182,7 @@ class GMMClassifier(object):
 					for l in range((self.classes)):
 						SUM=0.0
 						for m in range(self.k):	 
-							SUM+=self.pi[l][m]*multivariate_normal.pdf(self.test[i][j][k],mean=self.means[l][m],cov=self.sigma[l][m])
+							SUM+=self.pi[l][m]*multivariate_normal.pdf(self.test[i][j][k],mean=self.means[l][m],cov=self.sigma[l][m],allow_singular=True)
 							# print j,m,i,self.pi[j][m],multivariate_normal.pdf(i,mean=self.means[j][m],cov=self.sigma[j][m]),self.means[j][m]
 						# print j,i,math.log(SUM),math.log((self.class_sizes[j]*1.0)/(self.total*1.0))
 						if(SUM!=0 and (math.log(SUM)+math.log((self.class_sizes[l]*1.0)/(self.total*1.0)))>MAX):
