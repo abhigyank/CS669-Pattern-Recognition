@@ -54,7 +54,7 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the enti
 	print "INIT DONE"
 	#--------------------------------------------------------
 	Distortion=[]
-	thresh=0.01
+	thresh=0.1
 	while(len(Distortion)<5 or abs(Distortion[len(Distortion)-1]-Distortion[len(Distortion)-2])>thresh):
 	# while(1>2):
 		# Finding Gamma(n,k)
@@ -68,15 +68,15 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the enti
 				vec.append(0.0)
 			SUM=0.000000000
 			for j in range(Num_of_Clusters):
-				print np.linalg.det(Sigma[j]),"asdddddddd"
-				prod=1
-				for k in range(len(Sigma[j])):
-					prod*=Sigma[j][k][k]
-					print Sigma[j][k][k]
-				print np.linalg.det(Sigma[j])
-				SUM=SUM+(pi[j]*multivariate_normal.pdf(DATA[i],mean=means[j],cov=Sigma[j]))
+				# print np.linalg.det(Sigma[j]),"asdddddddd"
+				# prod=1
+				# for k in range(len(Sigma[j])):
+				# 	prod*=Sigma[j][k][k]
+					# print Sigma[j][k][k]
+				# print np.linalg.det(Sigma[j])
+				SUM=SUM+(pi[j]*multivariate_normal.pdf(DATA[i],mean=means[j],cov=Sigma[j],allow_singular=True))
 			for j in range(Num_of_Clusters):
-				vec[j]=(pi[j]*multivariate_normal.pdf(DATA[i],mean=means[j],cov=Sigma[j]))/SUM
+				vec[j]=(pi[j]*multivariate_normal.pdf(DATA[i],mean=means[j],cov=Sigma[j],allow_singular=True))/SUM
 			Gamma.append(vec)
 			# print vec,max(vec),vec.index(max(vec))
 			Clusters[vec.index(max(vec))].append(DATA[i])
@@ -84,7 +84,7 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the enti
 		num=0.0
 		for i in range(len(DATA)):
 			for k in range(Num_of_Clusters):
-				num=num+pi[k]*multivariate_normal.pdf(DATA[i],mean=means[k],cov=Sigma[k])
+				num=num+pi[k]*multivariate_normal.pdf(DATA[i],mean=means[k],cov=Sigma[k],allow_singular=True)
 		Distortion.append(num)
 		print num
 		#--------------------------------------------------------
@@ -123,7 +123,7 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the enti
 						if(a!=b):
 							temp_sigma[a][b]=0.0
 						if(a==b and temp_sigma[a][b]<=1.0e-10):
-							temp_sigma[a][b]=1.0
+							temp_sigma[a][b]=5.0
 							# print "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 				# print "APPLE is GREAT",np.linalg.det(temp_sigma)
 			Sigma[i]=temp_sigma

@@ -24,14 +24,14 @@ if inp=="1":
 		model.get_conf_matrix()
 	# model.get_conf_pair()
 if inp=="2a":
-	C1,t1=sf.get_data("Data2a/Class1.txt")
-	C2,t2=sf.get_data("Data2a/Class2.txt")
-	C3,t3=sf.get_data("Data2a/Class3.txt")
+	C1,t1=sf.get_data("Data/Data2a/Class1.txt")
+	C2,t2=sf.get_data("Data/Data2a/Class2.txt")
+	C3,t3=sf.get_data("Data/Data2a/Class3.txt")
 	DATA=[C1,C2,C3]
 	test=[t1,t2,t3]
-	k_value = [1, 2, 4, 8, 16, 32, 64]
+	k_value = [16, 32, 64]
 	for i in k_value:
-		model=GMMClassifier.GMMClassifier(DATA,i,[[-10.0,1000.0],[250.0,2550.0]],test)
+		model=GMMClassifier.GMMClassifier(DATA,i,[[-50.0,2000.0],[250.0,2800.0]],test)
 		model.plot_model(10.0)
 		# model.plot_classes(10.0)
 		model.get_conf_matrix()

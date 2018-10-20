@@ -1,0 +1,16 @@
+CONF MATRIX FOR ALL CLASSES
+[[581.0, 14.0, 2.0], [0.0, 406.0, 208.0], [0.0, 91.0, 531.0]]
+Accuracy of Classifier:-  0.828150572831
+Precision of Class 1 :- 1.0
+Precision of Class 2 :- 0.794520547945
+Precision of Class 3 :- 0.716599190283
+Recall of Class 1 :- 0.973199329983
+Recall of Class 2 :- 0.661237785016
+Recall of Class 3 :- 0.853697749196
+F Measure of Class 1 :- 0.986417657046
+F Measure of Class 2 :- 0.721777777778
+F Measure of Class 3 :- 0.779163609685
+Mean Precision :- 0.837039912743
+Mean Recall :- 0.829378288065
+Mean F Measure :- 0.414559840751
+PLZZ check formula for F measure before reporting

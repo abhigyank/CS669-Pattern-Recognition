@@ -36,7 +36,9 @@ def getBOVW(cluster_centres):
 if __name__ == '__main__':
 	data = []
 	data = main(data)
+	print np.array(data).shape
 	print len(data)
+	# exit()
 	cluster_centres,Clusters = KMeans_train(data)
 	for i in range(len(Clusters)):
 		print len(Clusters[i])
