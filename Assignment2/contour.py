@@ -1,3 +1,4 @@
+from scipy.stats import multivariate_normal
 import numpy as np
 import matplotlib.pyplot as plt
 import statistics_func as sf
@@ -37,7 +38,6 @@ def plot_contour(mu,Sigma,x,y):
     pos[:, :, 0] = X
     pos[:, :, 1] = Y
     # The distribution on the variables X, Y packed into pos.
-    Z = multivariate_gaussian(pos, mu, Sigma)
     # Create a surface plot and projected filled contour plot under it.
     plt.contour(X, Y, Z, colors='black',zorder=100,alpha=0.5)
     # print("hello")    
