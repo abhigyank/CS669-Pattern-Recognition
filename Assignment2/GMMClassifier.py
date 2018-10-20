@@ -4,7 +4,7 @@ import numpy as np
 import statistics_func as sf
 from scipy.stats import multivariate_normal
 import math
-colors=['co','yo','mo','ro','go','bo','ko','wo']
+colors=['c','y','m','r','g','b','k','w']
 class GMMClassifier(object):
 	"""docstring for GMMClassifier"""
 	def __init__(self,DATA,Num_of_Clusters,DATA_RANGE,TEST,diagonal=False):
@@ -74,14 +74,17 @@ class GMMClassifier(object):
 					index=j
 			n[index].append(i)
 		for i in range(len(n)):
-			sf.plot(n[i],colors[i])
+			sf.plot(n[i],colors[i]+"o")
 		for i in range(self.classes):
 			for j in range(self.k):
-				sf.plot(self.clusters[i][j],colors[i+len(n)],"",False,self.means[i][j],self.sigma[i][j])
+				sf.plot(self.clusters[i][j],colors[i+len(n)]+"o","",False,self.means[i][j],self.sigma[i][j])
 		plt.show()
 		for i in range(self.classes):
 			for j in range(self.k):
-				sf.plot(self.clusters[i][j],colors[i+len(n)],"",True,self.means[i][j],self.sigma[i][j])
+				if(len(self.clusters[i][j])>20):
+					sf.plot(self.clusters[i][j],colors[i+len(n)]+".","",True,self.means[i][j],self.sigma[i][j])
+				else:
+					sf.plot(self.clusters[i][j],colors[i+len(n)]+".","",False,self.means[i][j],self.sigma[i][j])
 		plt.show()
 	def plot_classes(self,update=0.1):
 		for i in range(self.classes):
@@ -105,12 +108,12 @@ class GMMClassifier(object):
 							n[1].append(dat)
 						l+=update
 					m+=update
-				sf.plot(n[0],colors[4])
-				sf.plot(n[1],colors[3])
+				sf.plot(n[0],colors[4]+"o")
+				sf.plot(n[1],colors[3]+"o")
 				for k in range(self.k):
-					sf.plot(self.clusters[i][k],colors[0],"",True,self.means[i][k],self.sigma[i][k])
+					sf.plot(self.clusters[i][k],colors[0]+".","",True,self.means[i][k],self.sigma[i][k])
 				for k in range(self.k):
-					sf.plot(self.clusters[j][k],colors[1],"",True,self.means[j][k],self.sigma[j][k])
+					sf.plot(self.clusters[j][k],colors[1]+".","",True,self.means[j][k],self.sigma[j][k])
 				plt.show()
 	def Diagonalisze(self):
 		for i in range(self.class_sizes):

@@ -37,7 +37,8 @@ def plot_contour(mu,Sigma,x,y):
     pos = np.empty(X.shape + (2,))
     pos[:, :, 0] = X
     pos[:, :, 1] = Y
+    Z = multivariate_gaussian(pos, mu, Sigma)
     # The distribution on the variables X, Y packed into pos.
     # Create a surface plot and projected filled contour plot under it.
-    plt.contour(X, Y, Z, colors='black',zorder=100,alpha=0.5)
+    plt.contour(X, Y, Z, cmap="RdBu_r",zorder=100,alpha=0.5)
     # print("hello")    
