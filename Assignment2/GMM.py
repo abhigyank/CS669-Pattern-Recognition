@@ -10,12 +10,18 @@ def get_Cov(Class_train,mean1,mean2,index1,index2):
 		var=var+(Class_train[i][index1]-mean1)*(Class_train[i][index2]-mean2)
 	var=var/len(Class_train)
 	return var
-def getCovMatrix(DATA,mean):
+def getCovMatrix(DATA,mean,diagonal=False):
 	dim=len(DATA[0])
 	matrix = [[0.0 for i in xrange(dim)] for j in xrange(dim)]
-	for i in range(dim):
-		for j in range(dim):
-			matrix[i][j]=get_Cov(DATA,mean[i],mean[j],i,j)
+	if diagonal==False:
+		for i in range(dim):
+			for j in range(dim):
+				matrix[i][j]=get_Cov(DATA,mean[i],mean[j],i,j)
+	else:
+		for i in range(dim):
+			matrix[i][i]=get_Cov(DATA,mean[i],mean[j],i,i)
+	# if np.linalg.det(matrix)==0:
+	# 	print len(DATA),mean
 	return np.array(matrix)
 def prod(A,Sigma,B):
 	Sigma=np.array(Sigma)
@@ -29,15 +35,18 @@ def Normal_fn(x,mean,Sigma):
 	for i in range(len(x)):
 		y.append(x[i]-mean[i])
 	return (1/(math.pow(2*3.14159265,(len(x)*1.0)/2.0))*(1.0/np.linalg.det(Sigma))*(math.pow(2.71828,-0.5*(prod(y,Sigma,y)))))
-def GMMCluster(DATA,Num_of_Clusters):#data for class not the entire dataset
+def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the entire dataset
 	#Initialise
 	means,Clusters=KMeans.KMeans(DATA,Num_of_Clusters)
 	Sigma=[]
+	print "KMeans Done"
 	for i in range(Num_of_Clusters):
-		Sigma.append(getCovMatrix(Clusters[i],means[i]))
+		Sigma.append(getCovMatrix(Clusters[i],means[i],diagonal))
 	pi=[]
 	for i in range(Num_of_Clusters):
 		pi.append((1.0*len(Clusters[i]))/len(DATA))
+	print "INIT DONE"
+	print Sigma
 	#--------------------------------------------------------
 	Distortion=[]
 	thresh=0.1
@@ -96,6 +105,12 @@ def GMMCluster(DATA,Num_of_Clusters):#data for class not the entire dataset
 				count+=Gamma[j][i]
 				temp_sigma=np.add(temp_sigma,Gamma[j][i]*np.outer(np.array(DATA[j])-np.array(means[i]),np.array(DATA[j])-np.array(means[i]))) 		
 			temp_sigma=temp_sigma/count	
+			for a in range(len(temp_sigma)):
+				for b in range(len(temp_sigma[0])):
+					if(a!=b):
+						temp_sigma[a][b]=0.0
+			if(np.linalg.det(temp_sigma)==0):
+				print "BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
 			Sigma[i]=temp_sigma
 		# print Sigma
 		#       Pi
@@ -111,5 +126,3 @@ def GMMCluster(DATA,Num_of_Clusters):#data for class not the entire dataset
 		# sf.plot(Clusters[3],'ko',"",True,means[3],Sigma[3])
 		# plt.show()
 	return means,Sigma,pi,Clusters
-DATA,test=sf.get_data("Class1.txt")
-GMMCluster(DATA,4)

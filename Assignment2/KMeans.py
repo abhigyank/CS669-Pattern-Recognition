@@ -31,7 +31,7 @@ def KMeans(DATA,K):
 			distortion=distortion+dist(DATA[i],cluster_centres[index])
 			Clusters[index].append(DATA[i])
 		D.append(distortion)
-		# print distortion
+		print distortion
 		for i in range(K):
 			mean=[]	
 			for j in range(dimentions):

@@ -180,3 +180,4 @@ def get_Score(Conf_Matrix):
 	print("Mean Precision :-",(sum(Precision)/len(Conf_Matrix)))	
 	print("Mean Recall :-",(sum(Recall)/len(Conf_Matrix)))
 	print("Mean F Measure :-",(Sum)/len(Conf_Matrix))
+	print("PLZZ check formula for F measure before reporting")

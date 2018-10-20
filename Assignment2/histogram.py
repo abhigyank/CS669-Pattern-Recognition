@@ -24,8 +24,8 @@ def get_histogram(image):
 
 def main():
 	base_dir = "Data"
-	dirs = ["Data 2(b)/test/stadium_football", "Data 2(b)/test/forest_broadleaf", "Data 2(b)/test/candy_store", \
-		"Data 2(b)/train/stadium_football", "Data 2(b)/train/forest_broadleaf", "Data 2(b)/train/candy_store"]
+	dirs = ["Data 2b/test/stadium_football", "Data 2b/test/forest_broadleaf", "Data 2b/test/candy_store", \
+		"Data 2b/train/stadium_football", "Data 2b/train/forest_broadleaf", "Data 2b/train/candy_store"]
 	for i in dirs:
 		for image in os.listdir(os.path.join(base_dir, i)):
 			if(image=="histograms" or image == "bovw"): continue
@@ -34,8 +34,5 @@ def main():
 			data = np.asarray(img, dtype="int32")
 			hist = get_histogram(data)
 			np.save(os.path.join(base_dir, i, "histograms", image[:-3] + "npy"),hist)
-
-
-
 if __name__ == '__main__':
 	main()
