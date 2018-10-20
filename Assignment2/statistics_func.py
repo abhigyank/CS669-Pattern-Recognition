@@ -22,9 +22,11 @@ def f(x, y,mx,my):
 def plot(Class_train,color,label="",cont=False,mu=[],Sigma=[]):
 	A=[]
 	B=[]	
+	c = 1
 	for i in Class_train:
 		A.append(i[0])
 		B.append(i[1])
+		c+=1
 	if(label):
 		plt.plot(A,B,color,markersize=3, label=label)
 	elif(cont==True):

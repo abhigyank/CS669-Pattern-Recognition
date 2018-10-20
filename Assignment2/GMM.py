@@ -41,9 +41,12 @@ def Normal_fn(x,mean,Sigma):
 	for i in range(len(x)):
 		y.append(x[i]-mean[i])
 	return (1/(math.pow(2*3.14159265,(len(x)*1.0)/2.0))*(1.0/np.linalg.det(Sigma))*(math.pow(2.71828,-0.5*(prod(y,Sigma,y)))))
-def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the entire dataset
+def GMMCluster(DATA,Num_of_Clusters,diagonal=False, kmeans=[]):#data for class not the entire dataset
 	#Initialise
-	means,Clusters=KMeans.KMeans(DATA,Num_of_Clusters)
+	if(kmeans==[]):
+		means,Clusters=KMeans.KMeans(DATA,Num_of_Clusters)
+	else:
+		means, Clusters = kmeans[0],kmeans[1]
 	Sigma=[]
 	print "KMeans Done"
 	for i in range(Num_of_Clusters):
@@ -54,7 +57,7 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False):#data for class not the enti
 	print "INIT DONE"
 	#--------------------------------------------------------
 	Distortion=[]
-	thresh=0.1
+	thresh=10000000000000
 	while(len(Distortion)<5 or abs(Distortion[len(Distortion)-1]-Distortion[len(Distortion)-2])>thresh):
 	# while(1>2):
 		# Finding Gamma(n,k)

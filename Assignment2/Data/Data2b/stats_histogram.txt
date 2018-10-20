@@ -1,0 +1,17 @@
+K = 1
+MATRIX:- [[17, 22, 11], [7, 35, 8], [2, 16, 32]]
+Accuracy of Classifier:-  0.56
+Precision of Class 1 :- 0.653846153846
+Precision of Class 2 :- 0.479452054795
+Precision of Class 3 :- 0.627450980392
+Recall of Class 1 :- 0.34
+Recall of Class 2 :- 0.7
+Recall of Class 3 :- 0.64
+F Measure of Class 1 :- 0.447368421053
+F Measure of Class 2 :- 0.569105691057
+F Measure of Class 3 :- 0.633663366337
+Mean Precision :- 0.586916396344
+Mean Recall :- 0.56
+Mean F Measure :- 0.275022913074
+PLZZ check formula for F measure before reporting
+
