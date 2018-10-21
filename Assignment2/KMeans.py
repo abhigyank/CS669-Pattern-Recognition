@@ -16,8 +16,8 @@ def KMeans(DATA,K):
 	# thresh=0.001
 	thresh=100
 	# print "Hello"
-	# while(len(D)<2 or abs(D[len(D)-1]-D[len(D)-2])>thresh ):
-	while len(D)<2 or (D[len(D)-1]-D[len(D)-2])>0:
+	while(len(D)<2 or abs(D[len(D)-1]-D[len(D)-2])>thresh ):
+	# while len(D)<2 or (D[len(D)-1]-D[len(D)-2])>0:
 		if(len(D)==50):
 			break
 		distortion=0.0

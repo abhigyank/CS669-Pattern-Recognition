@@ -145,6 +145,7 @@ if inp=="2c":
 	cluster_centers, clusters = KMeans.KMeans(data, 3)
 	colors = ["c,", "b,", "r,"]
 	print "KMeans done"
+	aPlot = plt.subplot(111)
 	for i in range(3):
 		sf.plot(clusters[i], colors[i])
 	for i in range(3):
@@ -166,6 +167,7 @@ if inp=="2c":
 				cluster2.append([j/505, j%505])
 			if(cluster == 2):
 				cluster3.append([j/505, j%505])
+		print len(cluster1),len(cluster2),len(cluster3)
 		sf.plot(cluster1,"bo")
 		sf.plot(cluster2,"ro")
 		sf.plot(cluster3,"go")
