@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import GMMClassifier
 import GMM
+from scipy.stats import multivariate_normal
 import KMeans
 from sklearn.cluster import KMeans as KM
 from scipy.stats import multivariate_normal
