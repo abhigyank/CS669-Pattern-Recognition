@@ -161,10 +161,10 @@ if inp=="2c":
 	plt.show()
 	print "KMeans done"
 	# print len(data.tolist())
-	files = os.listdir("Data/Data2c/Test/7by7_1_try/")
+	files = os.listdir("Data/Data2c/Test/7by7/")
 	TEST = []
 	for i in files:
-		image = np.load("Data/Data2c/Test/7by7_1_try/" + i)
+		image = np.load("Data/Data2c/Test/7by7/" + i)
 		TEST.append(image.tolist())
 	data_p = []
 	for i in range(len(TEST)):
@@ -174,19 +174,26 @@ if inp=="2c":
 		for j in range(len(TEST[i])):
 			data_p.append(TEST[i][j])
 			cluster = KMeans.getCluster(cluster_centers, TEST[i][j])
-			if(cluster == 0):
-				for x in range(7):
-					for y in range(7):
-						cluster1.append([(j/73)*7 + x, (j%73)*7 + y])
-			if(cluster == 1):
-				c+=1
-				for x in range(7):
-					for y in range(7):
-						cluster2.append([(j/73)*7 + x, (j%73)*7 + y])
-			if(cluster == 2):
-				for x in range(7):
-					for y in range(7):
-						cluster3.append([(j/73)*7 + x, (j%73)*7 + y])
+			if cluster==0:
+				cluster1.append([j/505, j%505])
+			if cluster==1:
+				cluster2.append([j/505, j%505])
+			if cluster==2:
+				cluster3.append([j/505, j%505])
+						
+			# if(cluster == 0):
+			# 	for x in range(7):
+			# 		for y in range(7):
+			# 			cluster1.append([(j/73)*7 + x, (j%73)*7 + y])
+			# if(cluster == 1):
+			# 	c+=1
+			# 	for x in range(7):
+			# 		for y in range(7):
+			# 			cluster2.append([(j/73)*7 + x, (j%73)*7 + y])
+			# if(cluster == 2):
+			# 	for x in range(7):
+			# 		for y in range(7):
+			# 			cluster3.append([(j/73)*7 + x, (j%73)*7 + y])
 		print len(cluster1), len(cluster2), len(cluster3)
 		plot(cluster1,"b.")
 		plot(cluster2,"g.")
@@ -198,6 +205,7 @@ if inp=="2c":
 		plot(GMM_clusters[i], colors[i])
 	for i in range(3):
 		plot([GMM_center[i]], "c*")
+	plt.show()
 	cluster1,cluster2,cluster3=[],[],[]
 	for i in range(len(TEST)):
 		cluster1,cluster2,cluster3 = [],[],[]
@@ -208,24 +216,24 @@ if inp=="2c":
 				if(GMM_pi[l]*multivariate_normal.pdf(TEST[i][j],mean=GMM_center[l],cov=GMM_sigma[l],allow_singular=True)>MAX):
 					index=l
 					MAX=GMM_pi[l]*multivariate_normal.pdf(TEST[i][j],mean=GMM_center[l],cov=GMM_sigma[l],allow_singular=True)
-			# if index==0:
-			# 	cluster1.append([j/505, j%505])
-			# if index==1:
-			# 	cluster2.append([j/505, j%505])
-			# if index==2:
-			# 	cluster3.append([j/505, j%505])
-			if(cluster == 0):
-				for x in range(7):
-					for y in range(7):
-						cluster1.append([(j%73)*7 + y, (j/73)*7 + x])
-			if(cluster == 1):
-				for x in range(7):
-					for y in range(7):
-						cluster2.append([(j%73)*7 + y, (j/73)*7 + x])
-			if(cluster == 2):
-				for x in range(7):
-					for y in range(7):
-						cluster3.append([(j%73)*7 + y, (j/73)*7 + x])
+			if index==0:
+				cluster1.append([j/505, j%505])
+			if index==1:
+				cluster2.append([j/505, j%505])
+			if index==2:
+				cluster3.append([j/505, j%505])
+			# if(cluster == 0):
+			# 	for x in range(7):
+			# 		for y in range(7):
+			# 			cluster1.append([(j%73)*7 + y, (j/73)*7 + x])
+			# if(cluster == 1):
+			# 	for x in range(7):
+			# 		for y in range(7):
+			# 			cluster2.append([(j%73)*7 + y, (j/73)*7 + x])
+			# if(cluster == 2):
+			# 	for x in range(7):
+			# 		for y in range(7):
+			# 			cluster3.append([(j%73)*7 + y, (j/73)*7 + x])
 
 		plot(cluster1,"bo")
 		plot(cluster2,"ro")
