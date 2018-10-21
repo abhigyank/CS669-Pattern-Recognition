@@ -14,9 +14,12 @@ def KMeans(DATA,K):
 	dimentions=len(DATA[0])
 	D=[]
 	# thresh=0.001
-	thresh=1.0
+	thresh=100
 	# print "Hello"
-	while(len(D)<2 or abs(D[len(D)-1]-D[len(D)-2])>thresh):
+	# while(len(D)<2 or abs(D[len(D)-1]-D[len(D)-2])>thresh ):
+	while len(D)<2 or (D[len(D)-1]-D[len(D)-2])>0:
+		if(len(D)==50):
+			break
 		distortion=0.0
 		Clusters=[]
 		for i in range(K):
