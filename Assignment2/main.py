@@ -90,7 +90,7 @@ if inp=="2b":
 		print "Using BOVW:- "
 		# a=np.load("Data2b/train/candy_store/bovw/sun_aaaeveietyltaxxn.npy")
 		# print a
-		k_value = [1, 2, 4, 8, 16, 32, 64]
+		k_value = [32, 64]
 		for i in k_value:
 			print "K = ", i
 			arr=os.listdir("Data/Data2b/train/candy_store/bovw/")
