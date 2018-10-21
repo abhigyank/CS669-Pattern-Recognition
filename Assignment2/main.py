@@ -32,7 +32,7 @@ if inp=="2a":
 	C3,t3=sf.get_data("Data/Data2a/Class3.txt")
 	DATA=[C1,C2,C3]
 	test=[t1,t2,t3]
-	k_value = [1,2,4,8,16]
+	k_value = [1,2,4,8,16,32, 64]
 	for i in k_value:
 		model=GMMClassifier.GMMClassifier(DATA,i,[[-50.0,2000.0],[250.0,2800.0]],test)
 		model.plot_model(10.0)
@@ -45,7 +45,7 @@ if inp=="2b":
 	tt=raw_input()
 	if tt=="hist":
 		print "Using Histograms:- "
-		k_value = [4, 8, 16, 32, 64]
+		k_value = [1,2, 4, 8, 16, 32, 64]
 		for i in k_value:
 			print "K = ", i
 
@@ -90,7 +90,7 @@ if inp=="2b":
 		print "Using BOVW:- "
 		# a=np.load("Data2b/train/candy_store/bovw/sun_aaaeveietyltaxxn.npy")
 		# print a
-		k_value = [1, 2, 4, 8, 16, 32, 64]
+		k_value = [32, 64]
 		for i in k_value:
 			print "K = ", i
 			arr=os.listdir("Data/Data2b/train/candy_store/bovw/")

@@ -166,7 +166,7 @@ if inp=="2c":
 	plt.show()
 	print "KMeans done"
 	# print len(data.tolist())
-	files = os.listdir("Data/Data2c/Test/7by7")
+	files = os.listdir("Data/Data2c/Test/7by7/")
 	TEST = []
 	for i in files:
 		image = np.load("Data/Data2c/Test/7by7/" + i)
@@ -245,5 +245,6 @@ if inp=="2c":
 		plot(cluster1,"b.")
 		plot(cluster2,"r.")
 		plot(cluster3,"g.")
+
 		plt.show()
 	 

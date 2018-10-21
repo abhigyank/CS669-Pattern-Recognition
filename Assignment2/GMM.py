@@ -59,8 +59,7 @@ def GMMCluster(DATA,Num_of_Clusters,diagonal=False, kmeans=[]):#data for class n
 	Distortion=[]
 	thresh=0.1
 	while(len(Distortion)<5 or abs(Distortion[len(Distortion)-1]-Distortion[len(Distortion)-2])>thresh):
-	# for i in range(1):
-		# Finding Gamma(n,k)
+	# for i in range(1):		# Finding Gamma(n,k)
 		Gamma=[]
 		Clusters=[]
 		for j in range(Num_of_Clusters):
