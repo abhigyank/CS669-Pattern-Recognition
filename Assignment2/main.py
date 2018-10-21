@@ -18,7 +18,7 @@ if inp=="1":
 	C3,t3=sf.get_data("Data/Data1/Class3.txt")
 	DATA=[C1,C2,C3]
 	test=[t1,t2,t3]
-	k_value = [16]
+	k_value = [1,2,4,8,16,32]
 	for i in k_value:
 		print i
 		model=GMMClassifier.GMMClassifier(DATA,i,[[-4.0,4.0],[-3.0,3.0]],test)
@@ -32,7 +32,7 @@ if inp=="2a":
 	C3,t3=sf.get_data("Data/Data2a/Class3.txt")
 	DATA=[C1,C2,C3]
 	test=[t1,t2,t3]
-	k_value = [32, 64]
+	k_value = [1,2,4,8,16]
 	for i in k_value:
 		model=GMMClassifier.GMMClassifier(DATA,i,[[-50.0,2000.0],[250.0,2800.0]],test)
 		model.plot_model(10.0)
