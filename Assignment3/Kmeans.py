@@ -14,8 +14,9 @@ def load_data(data_directory):
 		for f in file_names:
 			with open(f, "r") as t:
 				for line in t:
-					for x in line.split():
-						DATA.append([float(x)])
+					a=[float(x) for x in line.split()]
+					
+					DATA.append(a)
 clusters_n = 8
 iteration_n = 200
 load_data("Data/Train")
@@ -46,34 +47,22 @@ init = tf.initialize_all_variables()
 with tf.Session() as sess:
   sess.run(init)
   for step in range(iteration_n):
-    [_, centres, data, assignment_values] = sess.run([update_centroids, centroids, points, assignments])
-def store_data(data_directory):
-	file_names=[]
-	directories = [d for d in os.listdir(data_directory) if os.path.isdir(os.path.join(data_directory, d))]
-	for k in directories:
-		directories2=[d for d in os.listdir(data_directory+k+"/") if os.path.isdir(os.path.join(data_directory+k, d))]
-		for d in directories2:
-				label_directory = os.path.join(data_directory+k+"/", d)
-				temp = [os.path.join(label_directory,f) for f in os.listdir(label_directory) if f.endswith(".mfcc")]
-				for i in temp:
-					file_names.append(i)	
-	for f in file_names:
-		print(f)
-		# COMPLETE
-		# with open(f, "r") as t:
+    [_, centres, data, assignment_values] = sess.run([update_centroids, centroids, points, assignments])   
+# def store_data(data_directory):
+# 	file_names=[]
+# 	directories = [d for d in os.listdir(data_directory) if os.path.isdir(os.path.join(data_directory, d))]
+# 	for k in directories:
+# 		directories2=[d for d in os.listdir(data_directory+k+"/") if os.path.isdir(os.path.join(data_directory+k, d))]
+# 		for d in directories2:
+# 				label_directory = os.path.join(data_directory+k+"/", d)
+# 				temp = [os.path.join(label_directory,f) for f in os.listdir(label_directory) if f.endswith(".mfcc")]
+# 				for i in temp:
+# 					file_names.append(i)	
+# 	for f in file_names:
+# 		print(f)
+# 		# COMPLETE
+# 		# with open(f, "r") as t:
 
-		# 	for line in t:
-		# 		for x in line.split():
-		# 			print 			
-
-
-
-# A=[]	
-# for i in range(len(points_values)):
-# 	A.append(100)
-# B=[]
-# for i in range(len(centroid_values)):
-# 	B.append(100)
-# plt.scatter(points_values, A, c=assignment_values, s=50, alpha=0.5)
-# plt.plot(centroid_values, B, 'kx', markersize=15)
-# plt.show()
+# 		# 	for line in t:
+# 		# 		for x in line.split():
+# 		# 			print 			
