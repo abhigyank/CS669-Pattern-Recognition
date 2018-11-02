@@ -22,6 +22,6 @@ def dtw(x,y):
 			j_k = min(j+1,c-1)
 			min_list+=[D[i_k,j],D[i,j_k]]
 			D1[i,j]+=min(min_list)
-	print D
-	return D1[-1,-1]
+	# print D
+	return D1[-1,-1]/((D1.shape[0]*D1.shape[1])*1.0)
 

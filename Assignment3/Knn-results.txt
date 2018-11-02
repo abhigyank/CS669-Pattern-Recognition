@@ -1,0 +1,192 @@
+K =  1
+{'kha': 1, 'ka': 0, 'kA': 2}
+reading data complete
+[[46, 1, 49], [2, 3, 10], [14, 1, 112]]
+Accuracy of Classifier:-  0.676470588235
+Precision of Class 1 :- 0.741935483871
+Precision of Class 2 :- 0.6
+Precision of Class 3 :- 0.654970760234
+Recall of Class 1 :- 0.479166666667
+Recall of Class 2 :- 0.2
+Recall of Class 3 :- 0.88188976378
+F Measure of Class 1 :- 0.582278481013
+F Measure of Class 2 :- 0.3
+F Measure of Class 3 :- 0.751677852349
+Mean Precision :- 0.665635414702
+Mean Recall :- 0.520352143482
+Mean F Measure :- 0.544652111121
+PLZZ check formula for F measure before reporting
+
+k = 2
+class 1 - ka
+class 2 - kha
+class 3 - kA
+[64, 1, 31]
+[4, 5, 6]
+[20, 2, 105]
+Accuracy of Classifier:-  0.731092436975
+Precision of Class 1 :- 0.727272727273
+Precision of Class 2 :- 0.625
+Precision of Class 3 :- 0.739436619718
+Recall of Class 1 :- 0.666666666667
+Recall of Class 2 :- 0.333333333333
+Recall of Class 3 :- 0.826771653543
+F Measure of Class 1 :- 0.695652173913
+F Measure of Class 2 :- 0.434782608696
+F Measure of Class 3 :- 0.780669144981
+Mean Precision :- 0.697236448997
+Mean Recall :- 0.608923884514
+Mean F Measure :- 0.63703464253
+
+K =  4
+{'kha': 1, 'ka': 0, 'kA': 2}
+reading data complete
+[[61, 0, 35], [4, 3, 8], [13, 1, 113]]
+Accuracy of Classifier:-  0.743697478992
+Precision of Class 1 :- 0.782051282051
+Precision of Class 2 :- 0.75
+Precision of Class 3 :- 0.724358974359
+Recall of Class 1 :- 0.635416666667
+Recall of Class 2 :- 0.2
+Recall of Class 3 :- 0.889763779528
+F Measure of Class 1 :- 0.701149425287
+F Measure of Class 2 :- 0.315789473684
+F Measure of Class 3 :- 0.798586572438
+Mean Precision :- 0.752136752137
+Mean Recall :- 0.575060148731
+Mean F Measure :- 0.605175157137
+PLZZ check formula for F measure before reporting
+
+K =  8
+{'kha': 1, 'ka': 0, 'kA': 2}
+reading data complete
+[[49, 0, 47], [4, 4, 7], [10, 0, 117]]
+Accuracy of Classifier:-  0.714285714286
+Precision of Class 1 :- 0.777777777778
+Precision of Class 2 :- 1.0
+Precision of Class 3 :- 0.684210526316
+Recall of Class 1 :- 0.510416666667
+Recall of Class 2 :- 0.266666666667
+Recall of Class 3 :- 0.92125984252
+F Measure of Class 1 :- 0.616352201258
+F Measure of Class 2 :- 0.421052631579
+F Measure of Class 3 :- 0.785234899329
+Mean Precision :- 0.820662768031
+Mean Recall :- 0.566114391951
+Mean F Measure :- 0.607546577389
+PLZZ check formula for F measure before reporting
+
+K =  12
+{'kha': 1, 'ka': 0, 'kA': 2}
+reading data complete
+[[42, 0, 54], [4, 2, 9], [9, 0, 118]]
+Accuracy of Classifier:-  0.680672268908
+Precision of Class 1 :- 0.763636363636
+Precision of Class 2 :- 1.0
+Precision of Class 3 :- 0.651933701657
+Recall of Class 1 :- 0.4375
+Recall of Class 2 :- 0.133333333333
+Recall of Class 3 :- 0.929133858268
+F Measure of Class 1 :- 0.556291390728
+F Measure of Class 2 :- 0.235294117647
+F Measure of Class 3 :- 0.766233766234
+Mean Precision :- 0.805190021765
+Mean Recall :- 0.499989063867
+Mean F Measure :- 0.519273091536
+PLZZ check formula for F measure before reporting
+
+
+K =  16
+{'kha': 1, 'ka': 0, 'kA': 2}
+reading data complete
+[[38, 1, 57], [4, 2, 9], [7, 0, 120]]
+Accuracy of Classifier:-  0.672268907563
+Precision of Class 1 :- 0.775510204082
+Precision of Class 2 :- 0.666666666667
+Precision of Class 3 :- 0.645161290323
+Recall of Class 1 :- 0.395833333333
+Recall of Class 2 :- 0.133333333333
+Recall of Class 3 :- 0.944881889764
+F Measure of Class 1 :- 0.524137931034
+F Measure of Class 2 :- 0.222222222222
+F Measure of Class 3 :- 0.766773162939
+Mean Precision :- 0.695779387024
+Mean Recall :- 0.49134951881
+Mean F Measure :- 0.504377772065
+PLZZ check formula for F measure before reporting
+
+K =  24
+{'kha': 1, 'ka': 0, 'kA': 2}
+reading data complete
+[[33, 1, 62], [4, 1, 10], [6, 0, 121]]
+Accuracy of Classifier:-  0.651260504202
+Precision of Class 1 :- 0.767441860465
+Precision of Class 2 :- 0.5
+Precision of Class 3 :- 0.626943005181
+Recall of Class 1 :- 0.34375
+Recall of Class 2 :- 0.0666666666667
+Recall of Class 3 :- 0.952755905512
+F Measure of Class 1 :- 0.474820143885
+F Measure of Class 2 :- 0.117647058824
+F Measure of Class 3 :- 0.75625
+Mean Precision :- 0.631461621882
+Mean Recall :- 0.454390857393
+Mean F Measure :- 0.449572400903
+PLZZ check formula for F measure before reporting
+
+K =  32
+{'kha': 1, 'ka': 0, 'kA': 2}
+reading data complete
+[[29, 0, 67], [3, 0, 12], [5, 0, 122]]
+Accuracy of Classifier:-  0.634453781513
+Precision of Class 1 :- 0.783783783784
+Precision of Class 2 :- 0
+Precision of Class 3 :- 0.606965174129
+Recall of Class 1 :- 0.302083333333
+Recall of Class 2 :- 0.0
+Recall of Class 3 :- 0.96062992126
+F Measure of Class 1 :- 0.436090225564
+F Measure of Class 2 :- 0
+F Measure of Class 3 :- 0.743902439024
+Mean Precision :- 0.463582985971
+Mean Recall :- 0.420904418198
+Mean F Measure :- 0.393330888196
+PLZZ check formula for F measure before reporting
+
+K =  40
+{'kha': 1, 'ka': 0, 'kA': 2}
+reading data complete
+[[26, 0, 70], [2, 0, 13], [5, 0, 122]]
+Accuracy of Classifier:-  0.621848739496
+Precision of Class 1 :- 0.787878787879
+Precision of Class 2 :- 0
+Precision of Class 3 :- 0.59512195122
+Recall of Class 1 :- 0.270833333333
+Recall of Class 2 :- 0.0
+Recall of Class 3 :- 0.96062992126
+F Measure of Class 1 :- 0.403100775194
+F Measure of Class 2 :- 0
+F Measure of Class 3 :- 0.734939759036
+Mean Precision :- 0.461000246366
+Mean Recall :- 0.410487751531
+Mean F Measure :- 0.379346844743
+PLZZ check formula for F measure before reporting
+
+K =  50
+{'kha': 1, 'ka': 0, 'kA': 2}
+reading data complete
+[[25, 0, 71], [2, 0, 13], [5, 0, 122]]
+Accuracy of Classifier:-  0.617647058824
+Precision of Class 1 :- 0.78125
+Precision of Class 2 :- 0
+Precision of Class 3 :- 0.592233009709
+Recall of Class 1 :- 0.260416666667
+Recall of Class 2 :- 0.0
+Recall of Class 3 :- 0.96062992126
+F Measure of Class 1 :- 0.390625
+F Measure of Class 2 :- 0
+F Measure of Class 3 :- 0.732732732733
+Mean Precision :- 0.457827669903
+Mean Recall :- 0.407015529309
+Mean F Measure :- 0.374452577578
+PLZZ check formula for F measure before reporting
