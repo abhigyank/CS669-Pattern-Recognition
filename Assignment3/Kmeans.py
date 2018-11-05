@@ -28,7 +28,7 @@ def load_data(data_directory):
 				temp.append(c+k)
 				c+=k
 		Array.append(temp)
-clusters_n = 4
+clusters_n = 32
 iteration_n = 200
 load_data("Data/Train")
 load_data("Data/Test")
@@ -43,7 +43,7 @@ with tf.device('/cpu:0'):
 	distances = tf.reduce_sum(tf.square(tf.subtract(points_expanded, centroids_expanded)), 2)
 	assignments = tf.argmin(distances, 0)
 	assignments = tf.to_int32(assignments)
-	partitions = tf.dynamic_partition(points, assignments, 4)
+	partitions = tf.dynamic_partition(points, assignments, 32)
 	means = tf.concat([tf.expand_dims(tf.reduce_mean(partition, 0), 0) for partition in partitions], 0)
 	new_centroids = tf.concat( means,0)
 	update_centroids = tf.assign(centroids, new_centroids)
@@ -52,7 +52,7 @@ with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:
   sess.run(init)
   for step in range(iteration_n):
     [_, centres, data, assignment_values] = sess.run([update_centroids, centroids, points, assignments])   
-adr = ["Data/Train/kha/Kmeans4/","Data/Train/ka/Kmeans4/", "Data/Train/kA/Kmeans4/", "Data/Test/kha/Kmeans4/","Data/Test/ka/Kmeans4/", "Data/Test/kA/Kmeans"]
+adr = ["Data/Train/kha/Kmeans32/","Data/Train/ka/Kmeans32/", "Data/Train/kA/Kmeans32/", "Data/Test/kha/Kmeans32/","Data/Test/ka/Kmeans32/", "Data/Test/kA/Kmeans32/"]
 for i in range(len(Array)):
 	for j in range(1,len(Array[i])):
 		print (i,j)

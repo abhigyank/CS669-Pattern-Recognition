@@ -1,5 +1,45 @@
 import numpy as np
 import os
+def get_Score(Conf_Matrix):
+	total=0.0
+	True_val=0.0
+	for i in range(len(Conf_Matrix)):
+		for j in range(len(Conf_Matrix)):
+			if(i==j):
+				True_val=True_val+Conf_Matrix[i][j]
+			total=total+Conf_Matrix[i][j]
+	Accuracy=True_val/total
+	Recall=[]
+	Precision=[]
+	for i in range(len(Conf_Matrix)):
+		Sum=0.0
+		for j in range(len(Conf_Matrix)):
+			Sum=Sum+Conf_Matrix[i][j]
+		Recall.append(Conf_Matrix[i][i]/Sum)
+	for i in range(len(Conf_Matrix)):
+		Sum=0.0
+		for j in range(len(Conf_Matrix)):
+			Sum=Sum+Conf_Matrix[j][i]
+		if(Sum==0):
+			Precision.append(0)
+		else:
+			Precision.append(Conf_Matrix[i][i]/Sum)
+	print ("Accuracy of Classifier:- ",Accuracy)
+	for i in range(len(Conf_Matrix)):
+		print("Precision of Class",(i+1),":-",Precision[i])
+	for i in range(len(Conf_Matrix)):
+		print("Recall of Class",(i+1),":-",Recall[i])
+	Sum=0.0
+	for i in range(len(Conf_Matrix)):
+		if ((Recall[i]+Precision[i]) == 0):
+			print("F Measure of Class",(i+1),":- 0")
+		else:
+			print("F Measure of Class",(i+1),":-",(2*Recall[i]*Precision[i])/(Recall[i]+Precision[i]))
+			Sum=Sum+(Recall[i]*Precision[i])/(Recall[i]+Precision[i])
+	print("Mean Precision :-",(sum(Precision)/len(Conf_Matrix)))	
+	print("Mean Recall :-",(sum(Recall)/len(Conf_Matrix)))
+	print("Mean F Measure :-",(2*Sum)/len(Conf_Matrix))
+	print("PLZZ check formula for F measure before reporting")
 def get_numpy_from_file(label_directory):
 	np_array = []
 	file_names = [os.path.join(label_directory,f) for f in os.listdir(label_directory) if f.endswith(".npy")]
@@ -8,12 +48,15 @@ def get_numpy_from_file(label_directory):
 		np_array.append(temp)
 	return np_array 
 Data=[]
-paths=["Data/Train/ka/Kmeans4/","Data/Train/kA/Kmeans4","Data/Train/kha/Kmeans4"]
+paths=["Data/Train/ka/Kmeans32/","Data/Train/kA/Kmeans32","Data/Train/kha/Kmeans32"]
 for i in paths:
 	Data.append(get_numpy_from_file(i))
 # Data
-N=2 #Num_of_states
-M=4
+N=5 #Num_of_states
+M=32
+T=[]
+for i in range(len(Data)):
+	T.append([])
 # Initialize state symbols for each Data
 States=[]
 for i in range(len(Data)):
@@ -101,4 +144,159 @@ for i in range(len(Data)):
 			Class_B[i][x][y]/=len(Data[i])
 	# for x in range(len(C))
 
-# init of parameters done :)	
+# init of parameters done :)
+for zz in range(20):
+	#calculation of alpha and beta
+	Class_Alpha=[]
+	for i in range(len(Data)):
+		Class_Alpha.append([])
+	Class_Beta=[]
+	for i in range(len(Data)):
+		Class_Beta.append([])
+	for c in range(len(Data)):
+		for l in range(len(Data[c])):
+			alpha=[]
+			beta=[]
+			for k in range(len(Data[c][l])):
+				temp=[]
+				for x in range(N):
+					temp.append(0.0)
+				alpha.append(temp)		
+			for k in range(len(Data[c][l])):
+				temp=[]
+				for x in range(N):
+					temp.append(0.0)
+				beta.append(temp)
+			# Alpha-----------------Induction------------------------------------------------------------------------
+			# INIT Step
+			for j in range(N):
+				alpha[0][j]=Class_Pi[c][j]*Class_B[c][j][Data[c][l][0]]
+			# Induction Step
+			for t in range(1,len(Data[c][l])):
+				for j in range(N):
+					alpha[t][j]=0.0
+					for n in range(N):#i
+						alpha[t][j]+=alpha[t-1][n]*Class_A[c][n][j]*Class_B[c][j][Data[c][l][t]]
+			# Beta-----------------Induction---------------------------------------------------------------------
+			for k in range(N):
+				beta[len(Data[c][l])-1][k]=1
+			for t in range(len(Data[c][l])-2,-1,-1):
+				for i in range(N):
+					beta[t][i]=0.0
+					for j in range(N):
+						beta[t][i]+=Class_A[c][i][j]*Class_B[c][j][Data[c][l][t+1]]*beta[t+1][j]
+			Class_Alpha[c].append(alpha)
+			Class_Beta[c].append(beta)
+	# E Step
+	Class_Zeta=[]
+	Class_Gamma=[]
+	for c in range(len(Data)):
+		Total_Prob=0.0
+		class_zeta=[]
+		class_gamma=[]
+		for l in range(len(Data[c])):
+			observation_zeta=[]
+			observation_gamma=[]
+			prob=0.0
+			for i in range(N):
+				prob+=Class_Alpha[c][l][len(Data[c][l])-1][i]
+			Total_Prob+=prob
+			for t in range(len(Data[c][l])):
+				if(t!=(len(Data[c][l])-1)):
+					Matrix=[]
+					for i in range(N):
+						temp=[]
+						for j in range(N):
+							temp.append(0.0)
+						Matrix.append(temp)
+					for i in range(N):
+						for j in range(N):
+							Matrix[i][j]=(Class_Alpha[c][l][t][i]*Class_A[c][i][j]*Class_B[c][j][Data[c][l][t+1]]*Class_Beta[c][l][t+1][j])/prob
+					observation_zeta.append(Matrix)
+				array=[]
+				for i in range(N):
+					array.append(0.0)
+				for i in range(N):
+					array[i]=(Class_Alpha[c][l][t][i]*Class_Beta[c][l][t][i])/prob
+				observation_gamma.append(array)
+			class_zeta.append(observation_zeta)
+			class_gamma.append(observation_gamma)	
+		# print Total_Prob,c		
+		T[c].append(Total_Prob)
+		Class_Zeta.append(class_zeta)
+		Class_Gamma.append(class_gamma)
+	# M Step	
+	for c in range(len(Data)):
+		for i in range(N):
+			Class_Pi[c][i]=0.0
+			for l in range(len(Data[c])):
+				Class_Pi[c][i]+=Class_Gamma[c][l][0][i]
+			Class_Pi[c][i]/=len(Data[c])
+	for c in range(len(Data)):
+		for i in range(N):
+			for j in range(N):
+				Class_A[c][i][j]=0.0
+				total=0.0
+				for l in range(len(Data[c])):
+					zeta_sum=0.0
+					gamma_sum=0.0
+					for t in range(len(Data[c][l])-1):
+						zeta_sum+=Class_Zeta[c][l][t][i][j]
+						gamma_sum+=Class_Gamma[c][l][t][i]
+					total+=zeta_sum/gamma_sum
+				Class_A[c][i][j]=total/len(Data[c])
+	# Beta
+	for c in range(len(Data)):
+		for i in range(N):
+			for j in range(M):
+				Class_B[c][i][j]=0.0
+				total_sum=0.0
+				for l in range(len(Data[c])):
+					Numerator=0.0
+					Denominator=0.0
+					for t in range(len(Data[c][l])):
+						Denominator+=Class_Gamma[c][l][t][i]
+						if Data[c][l][t]==j:
+							Numerator+=Class_Gamma[c][l][t][i]
+					total_sum+=(Numerator/Denominator)
+				Class_B[c][i][j]=total_sum/len(Data[c])
+# getting Class_label
+Test=[]
+paths=["Data/Test/ka/Kmeans32/","Data/Test/kA/Kmeans32","Data/Test/kha/Kmeans32"]
+for i in paths:
+	Test.append(get_numpy_from_file(i))
+Conf_Matrix=[]
+for i in range(len(Test)):
+	temp=[]
+	for j in range(len(Test)):
+		temp.append(0)
+	Conf_Matrix.append(temp)
+for C in range(len(Test)):
+	for j in range(len(Test[C])):
+		Dec=[]
+		for i in range(len(Test)):
+			Dec.append(0.0)
+		for c in range(len(Test)):
+			alpha=[]
+			for k in range(len(Test[C][j])):
+				temp=[]
+				for l in range(N):
+					temp.append(0.0)
+				alpha.append(temp)		
+			# Alpha-----------------Induction------------------------------------------------------------------------
+			# INIT Step
+			for k in range(N):
+				alpha[0][k]=Class_Pi[c][k]*Class_B[c][k][Test[C][j][0]]
+			# Induction Step
+			for k in range(1,len(Test[C][j])):
+				for m in range(N):
+					alpha[k][m]=0.0
+					for n in range(N):#i
+						alpha[k][m]+=alpha[k-1][n]*Class_A[c][n][m]*Class_B[c][m][Test[C][j][k]]	
+			prob=0.0
+			for x in range(N):
+				prob+=alpha[len(Test[C][j])-1][x]
+			Dec[c]=prob
+		Conf_Matrix[C][Dec.index(max(Dec))]+=1
+print Conf_Matrix
+get_Score(Conf_Matrix)
