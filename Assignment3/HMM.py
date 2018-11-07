@@ -56,7 +56,7 @@ for i in paths:
 	Data.append(get_numpy_from_file(i))
 # Data
 N=5 #Num_of_states
-M=32
+M=16
 T=[]
 for i in range(len(Data)):
 	T.append([])
@@ -277,6 +277,9 @@ for i in range(len(Test)):
 	for j in range(len(Test)):
 		temp.append(0)
 	Conf_Matrix.append(temp)
+total = 0
+for i in range(len(Test)):
+	total+=len(Test[i])
 for C in range(len(Test)):
 	for j in range(len(Test[C])):
 		Dec=[]
@@ -302,7 +305,7 @@ for C in range(len(Test)):
 			prob=0.0
 			for x in range(N):
 				prob+=alpha[len(Test[C][j])-1][x]
-			Dec[c]=prob*(len(Data[c])/(1.0*total))
+			Dec[c]=prob* (len(Test[c])/(1. * total))
 		Conf_Matrix[C][Dec.index(max(Dec))]+=1
 get_Score(Conf_Matrix)
 print 
