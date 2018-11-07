@@ -1,5 +1,6 @@
 import numpy as np
 import os
+# np.set_printoptions(precision=3)
 def get_Score(Conf_Matrix):
 	total=0.0
 	True_val=0.0
@@ -24,22 +25,24 @@ def get_Score(Conf_Matrix):
 			Precision.append(0)
 		else:
 			Precision.append(Conf_Matrix[i][i]/Sum)
-	print ("Accuracy of Classifier:- ",Accuracy)
+	print "%0.3f" % (Accuracy*100)
 	for i in range(len(Conf_Matrix)):
-		print("Precision of Class",(i+1),":-",Precision[i])
+		print "%0.3f" % Precision[i]
+	print "%0.3f" % (sum(Precision)/len(Conf_Matrix))
 	for i in range(len(Conf_Matrix)):
-		print("Recall of Class",(i+1),":-",Recall[i])
+		print "%0.3f" % Recall[i]
+	print "%0.3f" % (sum(Recall)/len(Conf_Matrix))
 	Sum=0.0
 	for i in range(len(Conf_Matrix)):
 		if ((Recall[i]+Precision[i]) == 0):
-			print("F Measure of Class",(i+1),":- 0")
+			print 0
+			# print("F Measure of Class",(i+1),":- 0")
 		else:
-			print("F Measure of Class",(i+1),":-",(2*Recall[i]*Precision[i])/(Recall[i]+Precision[i]))
+			print (2.0*Recall[i]*Precision[i])/(Recall[i]+Precision[i])
 			Sum=Sum+(Recall[i]*Precision[i])/(Recall[i]+Precision[i])
-	print("Mean Precision :-",(sum(Precision)/len(Conf_Matrix)))	
-	print("Mean Recall :-",(sum(Recall)/len(Conf_Matrix)))
-	print("Mean F Measure :-",(2*Sum)/len(Conf_Matrix))
-	print("PLZZ check formula for F measure before reporting")
+	print (2.0*Sum)/(1.0*len(Conf_Matrix))
+	# print("Mean F Measure :-",(2*Sum)/len(Conf_Matrix))
+	# print("PLZZ check formula for F measure before reporting")
 def get_numpy_from_file(label_directory):
 	np_array = []
 	file_names = [os.path.join(label_directory,f) for f in os.listdir(label_directory) if f.endswith(".npy")]
@@ -48,7 +51,7 @@ def get_numpy_from_file(label_directory):
 		np_array.append(temp)
 	return np_array 
 Data=[]
-paths=["Data/Train/ka/Kmeans32/","Data/Train/kA/Kmeans32","Data/Train/kha/Kmeans32"]
+paths=["Data/Train/ka/Kmeans32/","Data/Train/kA/Kmeans32/","Data/Train/kha/Kmeans32/"]
 for i in paths:
 	Data.append(get_numpy_from_file(i))
 # Data
@@ -262,7 +265,10 @@ for zz in range(20):
 				Class_B[c][i][j]=total_sum/len(Data[c])
 # getting Class_label
 Test=[]
-paths=["Data/Test/ka/Kmeans32/","Data/Test/kA/Kmeans32","Data/Test/kha/Kmeans32"]
+total=0
+for i in range(len(Data)):
+	total+=len(Data[i])
+paths=["Data/Test/ka/Kmeans32/","Data/Test/kA/Kmeans32/","Data/Test/kha/Kmeans32/"]
 for i in paths:
 	Test.append(get_numpy_from_file(i))
 Conf_Matrix=[]
@@ -296,7 +302,21 @@ for C in range(len(Test)):
 			prob=0.0
 			for x in range(N):
 				prob+=alpha[len(Test[C][j])-1][x]
-			Dec[c]=prob
+			Dec[c]=prob*(len(Data[c])/(1.0*total))
 		Conf_Matrix[C][Dec.index(max(Dec))]+=1
-print Conf_Matrix
 get_Score(Conf_Matrix)
+print 
+print 
+print 
+print
+print
+print "matrix {",
+for i in range(3):
+	for j in range(3):
+		if j!=2 or i==2:
+			print Conf_Matrix[i][j],"#",
+		elif i!=2:
+			print Conf_Matrix[i][j],"##",
+print "}"
+# print Conf_Matrix
+# matrix {25 # 0 # 71 ## 2 # 0 # 13 ## 5 # 0 # 122}
