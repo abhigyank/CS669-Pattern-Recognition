@@ -35,6 +35,7 @@ def plot(Class_train,color,label="",cont=False,mu=[],Sigma=[]):
 		plt.plot(A,B,color)
 	if(cont==True):
 		contour.plot_contour(mu,Sigma,A,B)
+	plt.legend()
 def plot_fourth(class1, class2, class3,Data,Matrix1,Matrix2,Matrix3,mean):
 	if(len(class1)>0):
 		plt.scatter(np.asarray(class1)[:,0],np.asarray(class1)[:,1],color='r',label="class1",alpha=0.5)
