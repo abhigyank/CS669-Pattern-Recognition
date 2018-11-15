@@ -30,7 +30,7 @@ def get_Matrix(Class_train):
 			A[i][j]=get_Cov(Class_train,mew[i],mew[j],i,j)
 	return A
 paths=["Data/Train/BOVW/bovw_CandyStore/","Data/Train/BOVW/bovw_FootBallStadium/","Data/Train/BOVW/bovw_ForestBroadLeaf/"]
-l=10
+l=20
 Data=[]
 for i in paths:
 	arr=os.listdir(i)
@@ -59,7 +59,7 @@ for j in range(l):
 paths.append("Data/Test/BOVW/bovw_CandyStore/")
 paths.append("Data/Test/BOVW/bovw_FootBallStadium/")
 paths.append("Data/Test/BOVW/bovw_ForestBroadLeaf/")
-save_paths=["Data/Train/l=10/CandyStore/","Data/Train/l=10/FootballStatium/","Data/Train/l=10/ForestBroadLeaf/","Data/Test/l=10/CandyStore/","Data/Test/l=10/FootballStatium/","Data/Test/l=10/ForestBroadLeaf/"]
+save_paths=["Data/Train/l=20/CandyStore/","Data/Train/l=20/FootballStatium/","Data/Train/l=20/ForestBroadLeaf/","Data/Test/l=20/CandyStore/","Data/Test/l=20/FootballStatium/","Data/Test/l=20/ForestBroadLeaf/"]
 for i in range(len(paths)):
 	arr=os.listdir(paths[i])
 	for j in arr:

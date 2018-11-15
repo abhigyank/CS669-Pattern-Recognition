@@ -3,10 +3,13 @@ import statistics_func as sf
 import os
 import GMMClassifier
 import matplotlib.pyplot as plt
-l=[1,2,3,4,10]
-K=[1,2,4,8]
+from mpl_toolkits.mplot3d import Axes3D	
+l=[20]
+K=[1,2,4]
+fig = plt.figure()
+ax = Axes3D(fig)
 classes=["CandyStore/","FootballStatium/","ForestBroadLeaf/"]
-for i in range(5):
+for i in range(1):
 	base_train_dir="Data/Train/l="+str(l[i])+"/"
 	base_test_dir="Data/Test/l="+str(l[i])+"/"
 	Train_DATA=[]
@@ -24,16 +27,28 @@ for i in range(5):
 			T.append(temp)
 		Train_DATA.append(C)
 		Test_DATA.append(T)
-	# print Train_DATA[0][0]
-	# # if i==1:
-	# # 	plt.plot(Train_DATA[0],'ro')
-	# # 	plt.plot(Train_DATA[1],'bo')
-	# # 	plt.plot(Train_DATA[2],'go')
-	# # 	plt.show()
-	diag=False
-	for j in range(4):
+	print Train_DATA[0][0]
+	# if i==1:
+	# 	sf.plot(Train_DATA[0],'ro')
+	# 	sf.plot(Train_DATA[1],'bo')
+	# 	sf.plot(Train_DATA[2],'go')
+	# 	plt.show()
+	# if i==2:
+	# 	colr=['r','b','g']
+	# 	for i in range(3):
+	# 		x=[]
+	# 		y=[]
+	# 		z=[]
+	# 		for j in range(len(Train_DATA[i])):
+	# 			x.append(Train_DATA[i][j][0])
+	# 			y.append(Train_DATA[i][j][1])
+	# 			z.append(Train_DATA[i][j][2])
+	# 			ax.scatter(x,y,z,c=colr[i],marker='o')
+			# plt.show()
+	# diag=False
+	for j in range(3):
 		print l[i],K[j],"  --------------------------------------------------------------------"
-		if j==4 or j==8:
-			diag=True
-		model=GMMClassifier.GMMClassifier(Train_DATA,K[j],[[-4.0,4.0],[-3.0,3.0]],Test_DATA,diag)
+		# if (K[j]==4 or K[j]==8):
+		# 	diag=True
+		model=GMMClassifier.GMMClassifier(Train_DATA,K[j],[[-4.0,4.0],[-3.0,3.0]],Test_DATA,True)
 		model.get_conf_matrix()
