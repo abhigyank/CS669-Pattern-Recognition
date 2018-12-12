@@ -96,7 +96,12 @@ def print_Matrix(Matrix):
 			print (Matrix[i][j], end=' ')
 		print ("")
 def get_Matrix(Class_train):
-	A=[[0,0],[0,0]]
+	A=[]
+	for i in range(len(Class_train[0])):
+		B=[]
+		for j in range(len(Class_train[0])):
+			B.append(0)
+		A.append(B)
 	mew=Mean(Class_train)
 	for i in range(len(Class_train[0])):
 		for j in range(len(Class_train[0])):
@@ -180,5 +185,5 @@ def get_Score(Conf_Matrix):
 			Sum=Sum+(Recall[i]*Precision[i])/(Recall[i]+Precision[i])
 	print("Mean Precision :-",(sum(Precision)/len(Conf_Matrix)))	
 	print("Mean Recall :-",(sum(Recall)/len(Conf_Matrix)))
-	print("Mean F Measure :-",(Sum)/len(Conf_Matrix))
-	print("PLZZ check formula for F measure before reporting")
+	print("Mean F Measure :-",2*(Sum)/len(Conf_Matrix))
+	# print("PLZZ check formula for F measure before reporting")

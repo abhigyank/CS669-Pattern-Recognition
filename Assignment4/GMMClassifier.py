@@ -26,15 +26,6 @@ class GMMClassifier(object):
 			# print len(DATA[i]),Num_of_Clusters
 			m,s,p,c=GMM.GMMCluster(DATA[i],Num_of_Clusters,diagonal)
 			self.means.append(m)
-			# for j in range(len(s)):
-			# 	if(np.linalg.det(s[j])==0):
-			# 		print "HOW?"
-			# 		for a in range(len(s[j][0])):
-			# 			for b in range(len(s[j][0])):
-			# 				if a!=b:
-			# 					s[j][a][b]=0
-			# 				if a==b and s[j][a][b]==0.0:
-			# 					s[j][a][b]=1.0
 			self.sigma.append(s)
 			self.pi.append(p)
 			self.clusters.append(c)
@@ -122,6 +113,20 @@ class GMMClassifier(object):
 				for k in range(len(self.Sigma[0][0])):
 					if(j==k):
 						self.Sigma[i][j][k]=0.0
+	def predict(self,data_point,class_label1,class_label2):
+		index=-1
+		MAX=-100000000000000000.0
+		for j in range(2):
+			SUM=0.0
+			for m in range(self.k):
+				SUM+=self.pi[j][m]*multivariate_normal.pdf(data_point,mean=self.means[j][m],cov=self.sigma[j][m],allow_singular=True)
+			if(SUM!=0 and (math.log(SUM)+math.log((self.class_sizes[j]*1.0)/(self.total*1.0)))>MAX):
+				MAX=(math.log(SUM)+math.log((self.class_sizes[j]*1.0)/(self.total*1.0)))
+				index=j
+		if index==0:
+			return class_label1
+		else:
+			return class_label2
 	def get_conf_matrix(self):
 		mat = [[0.0 for i in xrange(self.classes)] for j in xrange(self.classes)]
 		for i in range(self.classes):
