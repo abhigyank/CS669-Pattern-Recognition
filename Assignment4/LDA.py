@@ -4,6 +4,8 @@ import os
 import matplotlib.pyplot as plt
 import GMMClassifier
 k=8
+def get_y(W,x):
+	return (x*W[0]*1.0)/(W[1]*1.0) 
 def most_common (lst):
     return max(((item, lst.count(item)) for item in set(lst)), key=lambda a: a[1])[0]
 # linearly seperable
@@ -84,14 +86,35 @@ model13=GMMClassifier.GMMClassifier(A13,k,[],[])
 # plt.plot(A12[0],np.zeros_like(A12[0]),'r.')
 # plt.plot(A12[1],np.zeros_like(A12[1]),'b.')
 # plt.show()
-# plt.plot(A23[0],np.zeros_like(A23[0]),'r.')
-# plt.plot(A23[1],np.zeros_like(A23[1]),'b.')
+
+
+
+# sf.plot(Train[0],'r.')
+# sf.plot(Train[1],'b.')
+# plt.plot([-3,-1,1,3],[get_y(w12,-3),get_y(w12,-1),get_y(w12,1),get_y(w12,3)])
 # plt.show()
+
+
+# plt.plot(A23[0],np.zeros_like(A23[0]),'b.')
+# plt.plot(A23[1],np.zeros_like(A23[1]),'g.')
+# plt.show()
+
+
+# sf.plot(Train[1],'b.')
+# sf.plot(Train[2],'g.')
+# plt.plot([-3,-1,1,3],[get_y(w23,-3),get_y(w23,-1),get_y(w23,1),get_y(w23,3)])
+# plt.show()
+
+
+
 # plt.plot(A13[0],np.zeros_like(A13[0]),'r.')
-# plt.plot(A13[1],np.zeros_like(A13[1]),'b.')
+# plt.plot(A13[1],np.zeros_like(A13[1]),'g.')
 # plt.show()
 
-
+# sf.plot(Train[0],'r.')
+# sf.plot(Train[2],'g.')
+# plt.plot([-3,-1,1,3],[get_y(w13,-3),get_y(w13,-1),get_y(w13,1),get_y(w13,3)])
+# plt.show()
 
 paths=["Data/Test/BOVW/bovw_CandyStore/","Data/Test/BOVW/bovw_FootBallStadium/","Data/Test/BOVW/bovw_ForestBroadLeaf/"]
 Test=[]
@@ -117,5 +140,5 @@ for i in range(len(Test)):
 		a.append(model23.predict([w23.dot(Test[i][j])],1,2))
 		a.append(model13.predict([w13.dot(Test[i][j])],0,2))
 		conf[i][most_common(a)]+=1
-print conf
+print "matrix {",conf[0][0],"#",conf[0][1],'#',conf[0][2],'##',conf[1][0],"#",conf[1][1],'#',conf[1][2],'##',conf[2][0],"#",conf[2][1],'#',conf[2][2],"}"
 sf.get_Score(conf)

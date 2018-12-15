@@ -54,9 +54,23 @@ while len(Dm[0])>0 or len(Dm[1])>0:
 		W12+=alpha*np.array(i)
 	for i in Dm[1]:
 		W12-=alpha*np.array(i)
+a=[]
+b=[]
+x=-15.0
+while(x<20):
+	y=-20.0
+	while(y<20):
+		if (W12[0])+(W12[1]*x)+(W12[2]*y)>=0:
+			a.append([x,y])
+		else:
+			b.append([x,y])
+		y=y+0.1
+	x=x+0.1
+sf.plot(a,'c.',"Class1")
+sf.plot(b,'y.',"Class2")
 sf.plot(plot_Train[0],"r.")
-sf.plot(plot_Train[1],"c.")
-plt.plot([-20,-10,10,20],[get_y(W12,-20),get_y(W12,-10),get_y(W12,10),get_y(W12,20)])
+sf.plot(plot_Train[1],"b.")
+# plt.plot([-20,-10,10,20],[get_y(W12,-20),get_y(W12,-10),get_y(W12,10),get_y(W12,20)])
 plt.show()
 
 
@@ -88,9 +102,23 @@ while len(Dm[0])>0 or len(Dm[1])>0:
 	for i in Dm[1]:
 		W23-=alpha*np.array(i)
 
+a=[]
+b=[]
+x=-15.0
+while(x<30):
+	y=-20.0
+	while(y<20):
+		if (W23[0])+(W23[1]*x)+(W23[2]*y)>=0:
+			a.append([x,y])
+		else:
+			b.append([x,y])
+		y=y+0.1
+	x=x+0.1
+sf.plot(a,'c.',"Class2")
+sf.plot(b,'y.',"Class3")
 sf.plot(plot_Train[1],"r.")
-sf.plot(plot_Train[2],"c.")
-plt.plot([-20,-10,10,20],[get_y(W23,-20),get_y(W23,-10),get_y(W23,10),get_y(W23,20)])
+sf.plot(plot_Train[2],"b.")
+# plt.plot([-20,-10,10,20],[get_y(W23,-20),get_y(W23,-10),get_y(W23,10),get_y(W23,20)])
 plt.show()
 
 
@@ -121,9 +149,51 @@ while len(Dm[0])>0 or len(Dm[1])>0:
 	for i in Dm[1]:
 		W13-=alpha*np.array(i)
 		
+a=[]
+b=[]
+x=-15.0
+while(x<30):
+	y=-20.0
+	while(y<20):
+		if (W13[0])+(W13[1]*x)+(W13[2]*y)>=0:
+			a.append([x,y])
+		else:
+			b.append([x,y])
+		y=y+0.1
+	x=x+0.1
+sf.plot(a,'c.',"Class1")
+sf.plot(b,'y.',"Class3")
 sf.plot(plot_Train[0],"r.")
-sf.plot(plot_Train[2],"c.")
-plt.plot([-20,-10,10,20],[get_y(W13,-20),get_y(W13,-10),get_y(W13,10),get_y(W13,20)])
+sf.plot(plot_Train[2],"b.")
+# plt.plot([-20,-10,10,20],[get_y(W13,-20),get_y(W13,-10),get_y(W13,10),get_y(W13,20)])
+plt.show()
+ans=[[],[],[]]
+x=-15.0
+while(x<30):
+	y=-20.0
+	while(y<20):
+		a=[]
+		if(np.array([1,x,y]).dot(W12)>0):
+			a.append(0)
+		else:
+			a.append(1)
+		if(np.array([1,x,y]).dot(W23)>0):
+			a.append(1)
+		else:
+			a.append(2)
+		if(np.array([1,x,y]).dot(W13)>0):
+			a.append(0)
+		else:
+			a.append(2)
+		ans[most_common(a)].append([x,y])
+		y=y+0.1
+	x=x+0.1
+sf.plot(ans[0],'c.',"Class1")
+sf.plot(ans[1],'y.',"Class2")
+sf.plot(ans[2],'g.',"Class3")
+sf.plot(plot_Train[0],'r.')
+sf.plot(plot_Train[1],'b.')
+sf.plot(plot_Train[2],'m.')
 plt.show()
 conf=[[0,0,0],[0,0,0],[0,0,0]]
 for i in range(len(Test)):
